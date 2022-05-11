@@ -11,6 +11,7 @@ var opponentMeshes;
 var opponentMaterials;
 /** @type {BABYLON.Engine} */
 var engine;
+/** @type {BABYLON.ShadowGenerator} */
 var shadowGenerator;
 var tanksAIReady;
 var inMenu = true;
@@ -403,6 +404,10 @@ class Scene {
     shadowGenerator.useBlurExponentialShadowMap = true;
     shadowGenerator.blurScale = 1;
     shadowGenerator.setDarkness(0.1);
+
+    shadowGenerator.refreshRate = BABYLON.
+      RenderTargetTexture.
+      REFRESHRATE_RENDER_ONEVERYTWOFRAMES;
   }
 
   setFog() {

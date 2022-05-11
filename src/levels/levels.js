@@ -96,7 +96,7 @@ const level_map = [
                 "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
             ],
         minHeightMap: -0.1,
-        lvlObjective: levelObjectives.getAllBonuses,
+        lvlObjective: levelObjectives.labyrinth,
         biome: "Earth",
     }),
     new Level({
@@ -436,6 +436,14 @@ function draw_level_map(progress) {
 function setCurrentLevelDico() {
     current_level_dico = level_map[level]
     chronoLvl = (current_level_dico.lvlObjective == levelObjectives.chronoMission ? new Chrono(50000) : null)
+
+    if (current_level_dico.lvlObjective == levelObjectives.labyrinth) {
+        shadowGenerator.getShadowMap().refreshRate = 0;
+        light1.autoUpdateExtends = false;
+    } else {
+        shadowGenerator.getShadowMap().refreshRate = 3;
+        light1.autoUpdateExtends = true;
+    }
 
     level_map.forEach(e => e.resetValues())
     if (current_level_dico) {

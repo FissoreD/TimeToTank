@@ -37,6 +37,18 @@ let levelObjectives = {
       "You must collect bonuses to<br> go to next level !"
     ]
   },
+  labyrinth: {
+    description:
+      `Complete the next stage by picking up all bonus supplied`,
+    goToNextLevel: (e) => {
+      return bonuses.length == 0
+    },
+    tip: [["Bonus collected", () => current_level_dico.getBonusObtained(),
+      () => bonuses.length + current_level_dico.getBonusObtained()]],
+    msg: [
+      "You must collect bonuses to<br> go to next level !"
+    ]
+  },
   getBonusesAndKillTanks: {
     description:
       `Complete the next stage by collecting all of the bonus supplied 
@@ -85,7 +97,7 @@ let levelObjectives = {
       "Push batteries into water to disable tanks shield !",
       "Remember : batteries are not baloons<br>But sometimes..."
     ]
-  },getAllRelicsAndTanks: {
+  }, getAllRelicsAndTanks: {
     description:
       `Complete the next stage by collecting all of the Egyptian relics
       and destroying every enemy tank`,

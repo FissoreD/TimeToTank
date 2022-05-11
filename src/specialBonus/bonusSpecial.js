@@ -254,6 +254,6 @@ class SpecialBonus {
       new BullCharge(tank),
       new Grenade(tank),
       new Allies(tank),
-    ].filter(e => !tank.specialBonuses.includes(e.name));
+    ].filter(e => !tank.specialBonuses.map(e => e.name).includes(e.name));
   }
 }
