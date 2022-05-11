@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Tank 3D</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/timer.css">
+    <link rel="stylesheet" href="css/gameBars.css">
+    <link rel="stylesheet" href="css/levelStat.css">
+
+    <script src="../lib/ammo.js"></script>
+    <script src="../lib/cannon.js"></script>
+    <script src="../lib/Oimo.js"></script>
+    <script src="../lib/earcut.min.js"></script>
+    <script src="../lib/babylon.js"></script>
+    <script src="../lib/babylonjs.materials.min.js"></script>
+    <script src="../lib/babylonjs.proceduralTextures.min.js"></script>
+    <script src="../lib/babylonjs.postProcess.min.js"></script>
+    <script src="../lib/babylonjs.loaders.js"></script>
+    <script src="../lib/babylonjs.serializers.min.js"></script>
+    <script src="../lib/babylon.gui.min.js"></script>
+    <script src="../lib/babylon.inspector.bundle.js"></script>
+    <script src="../lib/dat.gui.min.js"></script>
+
+    <script src="babylon_start/tool_babylon.js"></script>
+    <script src="main/global_vars.js"></script>
+    <script src="levels/levelObjectives.js"></script>
+    <script src="levels/level.js"></script>
+    <script src="levels/levels.js"></script>
+    <script src="babylon_start/particles.js"></script>
+    <script src="babylon_start/GUI.js"></script>
+
+
+    <script src="game_objects/objectPos.js"></script>
+    <script src="game_objects/objectEnum.js"></script>
+    <script src="game_objects/char.js"></script>
+    <script src="game_objects/bullet.js"></script>
+    <script src="game_objects/bonus.js"></script>
+    <script src="game_objects/bonusEnum.js"></script>
+    <script src="game_objects/barrel.js"></script>
+    <script src="game_objects/battery.js"></script>
+    <script src="game_objects/tree.js"></script>
+    <script src="game_objects/rock.js"></script>
+    <script src="game_objects/egyptianRelic.js"></script>
+    <script src="game_objects/house.js"></script>
+    <script src="game_objects/healthBar.js"></script>
+    <script src="game_objects/grenadeObj.js"></script>
+    <script src="tools/utils.js"></script>
+    <script src="game_objects/wall.js"></script>
+    <script src="game_objects/delimiterMesh.js"></script>
+    <script src="main/main.js"></script>
+
+    <script src="game_IA/shootAI.js"></script>
+    <script src="game_IA/moveAI.js"></script>
+    <script src="game_IA/guaranteedAI.js"></script>
+    <script src="game_IA/noStrategy.js"></script>
+    <script src="tools/minimap.js"></script>
+    <script src="tools/counter.js"></script>
+    <script src="tools/chrono.js"></script>
+
+
+    <!-- SPECIAL BONUSES -->
+    <script src="specialBonus/bonusSpecial.js"></script>
+    <script src="specialBonus/crossHair.js"></script>
+    <script src="specialBonus/dome.js"></script>
+    <script src="specialBonus/machineGun.js"></script>
+    <script src="specialBonus/speedTurbo.js"></script>
+    <script src="specialBonus/mindControl.js"></script>
+    <script src="specialBonus/teleport.js"></script>
+    <script src="specialBonus/bullCharge.js"></script>
+    <script src="specialBonus/grenade.js"></script>
+    <script src="specialBonus/allies.js"></script>
+
+    <link rel="shortcut icon" href="images/tankGreen.png">
+</head>
+
+<body>
+
+    <body>
+        <canvas id="myCanvas"></canvas>
+
+        <div class="box gameBars gameBarsClass">
+            <div> Level : <span id="level">1/10</span></div>
+            <div>
+                <canvas id="healthBar"></canvas>
+                <img src="images/life.png" alt="NoLifeImg" class="logo">
+                <span id="healthPlayer"></span>
+            </div>
+            <div>
+                Speed : <span id="speed">0</span> km/h
+            </div>
+        </div>
+
+        <div class="top-right-panel gameBarsClass">
+            <div id="tips_container" class="box tips">
+                <div id="tips">
+
+                </div>
+            </div>
+            <canvas id="minimap"></canvas>
+        </div>
+        <div id="src"></div>
+
+        <div id="bonusPanel" class="box divb hide">
+        </div>
+
+        <div id="main" class="box divb">
+            <div id="adventure" class='button main' onclick="isAdventure = true; scene.menu.show(false); pointerLock();"
+                onmouseenter="scene.menu.soundHover()">
+                <span>Adventure Mode</span>
+            </div>
+            <div id="roguelike" class='button main'
+                onclick="isAdventure = false; scene.menu.show(false); pointerLock();"
+                onmouseenter="scene.menu.soundHover()">
+                <span>Roguelike Mode</span>
+            </div>
+            <div id="continue" class='button hide'
+                onclick="if (pointerLockChange != null && Date.now() - pointerLockChange < 1400) { console.log('exit pointer lock too fast!')} else {scene.menu.show(false); pointerLock();}"
+                onmouseenter="scene.menu.soundHover()">
+                <span>Continue</span>
+            </div>
+            <div id="goToLevels" class='button' onmouseenter="scene.menu.soundHover()">
+                <span>Levels</span>
+            </div>
+            <div id="restart" class="button hide" onclick="scene.menu.restart()" onmouseenter="scene.menu.soundHover()">
+                <span>Main menu</span>
+            </div>
+        </div>
+
+        <div class="divb hide" id="endLevelStat">
+            <table id="tableStat"></table>
+        </div>
+
+        <div id="timer" style="display: none;"></div>
+
+        <div class="loadingBarMain">
+            <div class="loadingBarChild" style="width:0%"></div>
+        </div>
+        <br>
+
+        <div class="box bonusPanel gameBarsClass">
+            <div class="hide">Special Bonus</div>
+            <div class="specialBonus hide">
+                <!-- <div class="bg" style="--img: url('../images/gunaims.png')">
+                    <div class="pie animate no-round" style="--p:50"> 80%</div>
+                    <div class="shortcut">9</div>
+                </div> -->
+            </div>
+            <div>Normal Bonus</div>
+            <div id="normalBonus" class="normalBonus">
+                <!-- <div class="bg" style="--img: url('../images/speed_tank.png')">
+                    <div id="speedT" class="shortcut">0</div>
+                </div>
+                <div class="bg" style="--img: url('../images/reload_bullet.png')">
+                    <div id="reloadB" class="shortcut">0</div>
+                </div>
+                <div class="bg" style="--img: url('../images/speed_bullet.png')">
+                    <div id="speedB" class="shortcut">0</div>
+                </div> -->
+            </div>
+        </div>
+
+        <div id="fps" class="box gameBarsClass hide">0</div>
+
+        <div class="box currentMission gameBarsClass">
+            <!-- <div><span>Char a tuer</span><span>1/2</span></div>
+            <div><span>Plante a brule</span><span>2/3</span></div> -->
+        </div>
+
+        <script src="babylon_start/scene.js"></script>
+
+        <div class="full-screen hide">
+            <div class="story box">
+                <div>
+                    <div id="text-mission">
+                    </div>
+                    <div class="hover" onclick="scene.menu.displayScenario(false)">Space</div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            window.onresize = function () {
+                if (engine) engine.resize();
+            }
+            window.onresize()
+
+            // setInterval(() => {
+            //     if (Date.now() - dateLastMessageTip > 3000) {
+            //         console.log(123);
+            //         let tips = document.getElementById('tips')
+            //         if (counter >= msg.length) counter = 0
+            //         tips.innerHTML = msg[counter++]
+            //         dateLastMessageTip = Date.now()
+            //     }
+            // }, 1000 / 60)
+
+            // let m = new Menu()
+            new Scene();
+
+            // hb = new Healthbar()
+            // hb.updatePartition()
+        </script>
+
+        <div id="levelBox" class="box levelsBox hide">
+            <div class="levels">
+            </div>
+            <div id="backButton" class="backButton">Back</div>
+        </div>
+
+        <script>
+            let mainDiv = document.getElementById('main')
+            let levelBox = document.getElementById('levelBox')
+
+            {
+                let levelDiv = document.getElementsByClassName('levels')[0]
+                level_map.forEach((e, pos) => {
+                    let child = document.createElement('div')
+                    child.classList.add('level', 'blocked')
+                    child.innerHTML = pos + 1
+                    levelDiv.appendChild(child)
+                })
+            }
+            document.getElementById('backButton').onclick = () => {
+                mainDiv.classList.remove('hide')
+                levelBox.classList.add('hide')
+            }
+
+            document.getElementById('goToLevels').onclick = () => {
+                levelBox.classList.remove('hide')
+                mainDiv.classList.add('hide')
+            }
+
+            Array.from(document.getElementsByClassName('level')).forEach((e, pos) => {
+                e.onclick = () => {
+                    if (!e.classList.contains('blocked') || true) {
+                        level = pos;
+                        remove_all_objects();
+                        setCurrentLevelDico();
+                        init();
+                        scene.menu.show(false);
+                        scene.menu.displayScenario(false)
+                        levelBox.classList.add('hide')
+                    }
+                }
+            })
+        </script>
+    </body>
+
+</html>

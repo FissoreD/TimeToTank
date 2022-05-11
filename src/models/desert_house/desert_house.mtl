@@ -1,0 +1,50 @@
+# Blender 3.1.0 MTL File: 'None'
+# www.blender.org
+
+newmtl House_Lil
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  House_Lil_baseColor.png
+map_d  House_Lil_baseColor.png
+map_Bump  -bm 1.000000 House_Lil_normal.png
+
+newmtl Leak_Decal
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  Leak_Decal_baseColor.png
+
+newmtl Poor_Door
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  Poor_Door_baseColor.png
+map_Bump  -bm 1.000000 Poor_Door_normal.png
+
+newmtl Window_Poor
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  Window_Poor_baseColor.png
+map_Bump  -bm 1.000000 Window_Poor_normal.png

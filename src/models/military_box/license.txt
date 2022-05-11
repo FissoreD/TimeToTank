@@ -1,0 +1,11 @@
+Model Information:
+* title:	AMMO BOX
+* source:	https://sketchfab.com/3d-models/ammo-box-69e948afac224745a943db329407d746
+* author:	miskinrahul (https://sketchfab.com/miskinrahul)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "AMMO BOX" (https://sketchfab.com/3d-models/ammo-box-69e948afac224745a943db329407d746) by miskinrahul (https://sketchfab.com/miskinrahul) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -1,0 +1,27 @@
+# Blender 3.1.0 MTL File: 'None'
+# www.blender.org
+
+newmtl date_palm_leaf
+Ns 249.715836
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  date_palm_leaf_baseColor.png
+map_d  date_palm_leaf_baseColor.png
+map_Bump  -bm 1.000000 date_palm_leaf_normal.png
+
+newmtl palm02
+Ns 1.031112
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  palm02_baseColor.png
+map_Bump  -bm 1.000000 palm02_normal.png

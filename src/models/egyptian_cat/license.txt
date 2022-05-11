@@ -1,0 +1,11 @@
+Model Information:
+* title:	Egyptian sculpture cat photogrammetry
+* source:	https://sketchfab.com/3d-models/egyptian-sculpture-cat-photogrammetry-f1c2824a271e4a9d8c587fdc7e9eaa0a
+* author:	vicente betoret ferrero (https://sketchfab.com/deathcow)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Egyptian sculpture cat photogrammetry" (https://sketchfab.com/3d-models/egyptian-sculpture-cat-photogrammetry-f1c2824a271e4a9d8c587fdc7e9eaa0a) by vicente betoret ferrero (https://sketchfab.com/deathcow) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

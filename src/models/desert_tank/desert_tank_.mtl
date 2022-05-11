@@ -1,0 +1,122 @@
+# Blender 3.1.0 MTL File: 'None'
+# www.blender.org
+
+newmtl Applique_176
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  Applique_176_baseColor.jpeg
+map_Bump  -bm 1.000000 Applique_176_normal.png
+
+newmtl Cannon_13
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  Cannon_13_baseColor.jpeg
+map_Bump  -bm 1.000000 Cannon_13_normal.png
+
+newmtl Gear_24
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  Gear_24_baseColor.jpeg
+map_Bump  -bm 1.000000 Gear_24_normal.png
+
+newmtl Gear_980
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  Gear_980_baseColor.jpeg
+map_Bump  -bm 1.000000 Gear_980_normal.png
+
+newmtl Glass_13
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  Glass_13_baseColor.jpeg
+map_Bump  -bm 1.000000 Glass_13_normal.png
+
+newmtl Hull_477
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  Hull_477_baseColor.jpeg
+map_Bump  -bm 1.000000 Hull_477_normal.png
+
+newmtl SideSkirts_477
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  SideSkirts_477_baseColor.jpeg
+map_Bump  -bm 1.000000 SideSkirts_477_normal.png
+
+newmtl Tracks_420
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  Tracks_420_baseColor.jpeg
+map_Bump  -bm 1.000000 Tracks_420_normal.png
+
+newmtl Turret_229
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  Turret_229_baseColor.jpeg
+map_Bump  -bm 1.000000 Turret_229_normal.png
+
+newmtl Wheels_334
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  Wheels_334_baseColor.jpeg
+map_Bump  -bm 1.000000 Wheels_334_normal.png

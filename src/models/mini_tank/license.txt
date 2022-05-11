@@ -1,0 +1,11 @@
+Model Information:
+* title:	Tank Tiger
+* source:	https://sketchfab.com/3d-models/tank-tiger-c23b94ebfb2c47d1980716ad3183fdee
+* author:	imp16s (https://sketchfab.com/loguntsova)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Tank Tiger" (https://sketchfab.com/3d-models/tank-tiger-c23b94ebfb2c47d1980716ad3183fdee) by imp16s (https://sketchfab.com/loguntsova) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

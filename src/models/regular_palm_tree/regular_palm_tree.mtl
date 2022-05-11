@@ -1,0 +1,60 @@
+# Blender 3.1.0 MTL File: 'None'
+# www.blender.org
+
+newmtl M_bark_hair_inst
+Ns 159.999985
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  M_bark_hair_inst_baseColor.png
+map_Bump  -bm 1.000000 M_bark_hair_inst_normal.png
+
+newmtl M_frond_01_inst
+Ns 159.999985
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  M_frond_01_inst_baseColor.png
+map_d  M_frond_01_inst_baseColor.png
+
+newmtl M_frond_02_inst_Inst
+Ns 159.999985
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  M_frond_02_inst_Inst_baseColor.png
+map_d  M_frond_02_inst_Inst_baseColor.png
+
+newmtl M_palm_bark_01
+Ns 159.999985
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd  M_palm_bark_01_baseColor.png
+map_Bump  -bm 1.000000 M_palm_bark_01_normal.png
+
+newmtl M_palm_bark_02
+Ns 159.999985
+Ka 1.000000 1.000000 1.000000
+Kd 0.588000 0.588000 0.588000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2

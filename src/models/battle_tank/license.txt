@@ -1,0 +1,11 @@
+Model Information:
+* title:	Battle Tank
+* source:	https://sketchfab.com/3d-models/battle-tank-5fcc302b89414348811eaa1ad4dc435f
+* author:	_Alexandr (https://sketchfab.com/a_l_e_x_a_n_d_e_r)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Battle Tank" (https://sketchfab.com/3d-models/battle-tank-5fcc302b89414348811eaa1ad4dc435f) by _Alexandr (https://sketchfab.com/a_l_e_x_a_n_d_e_r) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

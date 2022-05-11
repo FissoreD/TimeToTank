@@ -1,0 +1,96 @@
+#endLevelStat {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* padding: 5%; */
+  width: 240px;
+}
+
+#tableStat span {
+  text-align: center;
+  display: block;
+  color: white;
+  font-family: "Roboto",
+    sans-serif;
+  opacity: 0.7;
+  width: auto;
+  padding: 10px;
+}
+
+#tableStat {
+  display: table-cell;
+}
+
+#tableStat td {
+  display: table-cell;
+}
+
+#tableStat td:nth-child(2n) {
+  text-align: right;
+}
+
+#tableStat tr:last-child td {
+  animation: blinker 1s linear infinite;
+}
+
+#tableStat tr:last-child td:hover {
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+@keyframes blinker {
+  10% {
+    background-color: #0b65bd19
+  }
+
+  ;
+
+  20% {
+    background-color: #0b65bd33
+  }
+
+  ;
+
+  30% {
+    background-color: #0b65bd4c
+  }
+
+  ;
+
+  40% {
+    background-color: #0b65bd66
+  }
+
+  ;
+
+  50% {
+    background-color: #0b65bd7f
+  }
+
+  ;
+
+  60% {
+    background-color: #0b65bd99
+  }
+
+  ;
+
+  70% {
+    background-color: #0b65bdb2
+  }
+
+  ;
+
+  80% {
+    background-color: #0b65bdcc
+  }
+
+  ;
+
+  90% {
+    background-color: #0b65bde5
+  }
+
+  ;
+}
