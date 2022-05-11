@@ -55,10 +55,9 @@ class Menu {
             this.hideMenu()
             if (this.toDisplayScenario) {
                 let text = [
-                    `The firm "<they>X</they>" has discovered how to time travel and wants to
-                        use it to <they> modify</they > past events to gain money. <br>
-                <we>You</we> have succeeded in stealing one of their
-                        gear and <we> You</we> are the only one able to avoid terrible things to happen.`,
+                    `You are in the second world war and try to stop <they>insanous villain</they> <br>
+                    from change the course of the war etc... <br>
+                    This is your first mission ! Be <we> brave</we>`,
                     `You have passed the first stage of <we>your</we> journey and now <we>you</we> enter the Egyptian world, <br> where <we>you</we> have to collect the Egyptian tablets away from <they>enemies</they>.<br> <we>Good Luck!</we>`,
                     `This is the last stage of you mission, there are still some <they>bad tank</they> went in Antarctica wanting to melt the ice and build chemical weapon with old virus blocked in the Ice. <br>
                     <we>Win</we> this last mission and the world will be a <we>better place</we>.`
@@ -265,7 +264,8 @@ class Menu {
 
     displayScenario(display) {
         console.log("To display", display);
-        let elt = document.getElementsByClassName('full-screen')[0]
+        document.getElementById('intro').classList.add('hide')
+        let elt = document.getElementById('storyFullScreen')
         if (display) {
             this.toggleNotMenuElement(true)
             elt.classList.remove('hide')
@@ -278,5 +278,13 @@ class Menu {
             return true
         }
         return false;
+    }
+
+    displayIntro(display) {
+        if (display)
+            document.getElementById('intro').classList.remove('hide')
+        else
+            document.getElementById('intro').classList.add('hide')
+
     }
 }

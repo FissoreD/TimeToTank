@@ -472,7 +472,7 @@ function setCurrentLevelDico() {
         scene.menu.toDisplayScenario = true;
         if (level != 0) scene.menu.show(false)
     } else {
-        document.getElementsByClassName('full-screen')[0].classList.add('hide')
+        document.getElementById('storyFullScreen').classList.add('hide')
     }
 
     document.getElementsByClassName('level')[level].classList.remove('blocked')

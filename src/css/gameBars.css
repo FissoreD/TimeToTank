@@ -319,6 +319,12 @@
   backdrop-filter: blur(1px);
 }
 
+.intro {
+  background-image: url(time_travel.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .story>div {
   display: flex;
   width: 100%;

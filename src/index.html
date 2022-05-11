@@ -106,12 +106,11 @@
         </div>
 
         <div id="main" class="box divb">
-            <div id="adventure" class='button main' onclick="isAdventure = true; scene.menu.show(false); pointerLock();"
+            <div id="adventure" class='button main' onclick="isAdventure = true; scene.menu.displayIntro(true);"
                 onmouseenter="scene.menu.soundHover()">
                 <span>Adventure Mode</span>
             </div>
-            <div id="roguelike" class='button main'
-                onclick="isAdventure = false; scene.menu.show(false); pointerLock();"
+            <div id="roguelike" class='button main' onclick="isAdventure = false; scene.menu.displayIntro(true);"
                 onmouseenter="scene.menu.soundHover()">
                 <span>Roguelike Mode</span>
             </div>
@@ -170,7 +169,22 @@
 
         <script src="babylon_start/scene.js"></script>
 
-        <div class="full-screen hide">
+        <div id='intro' class="intro full-screen hide">
+            <div class="story box" style="--img: ''">
+                <div>
+                    <div>
+                        The firm "<they>X</they>" has discovered how to time travel and wants to
+                        use it to <they> modify</they> past events to gain money. <br>
+                        <we>You</we> have succeeded in stealing one of their
+                        gear and <we> You</we> are the only one able to avoid terrible things to happen.
+                    </div>
+                    <div class="hover" onclick="scene.menu.show(false); scene.menu.displayIntro(false); pointerLock()">
+                        Click Me</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="storyFullScreen" class="full-screen hide">
             <div id="storyId" class="story box" style="--img: url(time_travel.jpg)">
                 <div>
                     <div id="text-mission">
