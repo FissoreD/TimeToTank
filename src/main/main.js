@@ -276,6 +276,8 @@ function startgame(level, progress = true) {
     grenades = new Array();
     mines = new Array();
 
+    console.log("This is level", level);
+
     bonuses = new Array();
 
     if (level < level_map.length) {

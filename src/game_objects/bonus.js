@@ -10,6 +10,7 @@ class Bonus extends ObjectPos {
      */
     constructor(posX, posY, isSpecial = false) {
         super(isSpecial ? ObjectEnum.SpecialBonus : ObjectEnum.Bonus, -width / 2 + posX, Bonus.diameter / 2, -height / 2 + posY, 0, 0, 1);
+        this.id = posX + "" + posY
         this.physicsImpostor = new BABYLON.PhysicsImpostor(this.shape, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 50000, restitution: 0.5 });
         this.createCollider()
         this.bonusEffect = createBonusEffect(this.shape, isSpecial)
@@ -24,7 +25,11 @@ class Bonus extends ObjectPos {
             if (tank = chars.find(c => c.shape == e2.object)) {
                 if (tank != char1) return // TODO modify if want other tank to take this
                 if (b1) {
-                    scene.menu.bonusChoice(Bonus.randomBonus(3, tank, this.isSpecial))
+                    let choices = levelMemory[level].bonuses_onHearth[this.id] || Bonus.randomBonus(3, tank, this.isSpecial)
+
+                    levelMemory[level].bonuses_onHearth[this.id] = choices
+                    choices.forEach(e => { if (e.tank) e.tank = tank })
+                    scene.menu.bonusChoice(choices)
                     b1.dispose(true);
                     current_level_dico.addBonusObtained()
                 }

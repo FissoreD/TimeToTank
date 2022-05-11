@@ -70,13 +70,13 @@ class BonusEnum {
             this.added = true
             document.getElementById("normalBonus").appendChild(this.div);
         }
-        console.log('HERE');
         let htmlParent = document.getElementsByClassName('normalBonus')[0];
         let bonusText = htmlParent.previousElementSibling;
+        htmlParent.classList.remove('hide')
         bonusText.classList.remove('hide');
         this.div.classList.remove('hide');
         this.shortcut.innerHTML = parseInt(this.shortcut.innerHTML) + 1
-        selected_bonuses.push(this.name);
+        selected_bonuses.push(this);
         this.load()
     }
 

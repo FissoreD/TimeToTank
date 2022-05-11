@@ -95,6 +95,7 @@ const level_map = [
                 "W---W----WWW--------------W----W-----W----W",
                 "W---W----W------W---------W----W-----W----W",
                 "W---W-----------W---------W----W-----W----W",
+                "W---W-----------W---------W----W-----W----W",
                 "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
             ],
         minHeightMap: -0.1,
@@ -435,6 +436,12 @@ function draw_level_map(progress) {
     }
 }
 
+/** @type{{special_taken_bonuses: SpecialBonus[], normal_taken_bonuses: BonusEnum[], bonuses_onHearth: {[key: string]: BonusEnum[]}}[]} */
+const levelMemory = []
+for (let index = 0; index < level_map.length; index++) {
+    levelMemory.push({ special_taken_bonuses: [], normal_taken_bonuses: [], bonuses_onHearth: {} })
+}
+
 function setCurrentLevelDico() {
     current_level_dico = level_map[level]
     chronoLvl = (current_level_dico.lvlObjective == levelObjectives.chronoMission ? new Chrono(50000) : null)
@@ -459,6 +466,8 @@ function setCurrentLevelDico() {
         // current_level_dico.resetValues()
     }
 
+    console.log("Set current lvl dico");
+
     if ((level == 0 || current_level_dico.biome != level_map[level - 1].biome) && globalProgress) {
         scene.menu.toDisplayScenario = true;
         if (level != 0) scene.menu.show(false)
@@ -469,8 +478,25 @@ function setCurrentLevelDico() {
     document.getElementsByClassName('level')[level].classList.remove('blocked')
 
 
-    if (level > 0) {
+    if (level > 0 && !fromLevelChooser) {
+        console.log("Here 1");
         document.getElementsByClassName('level')[level - 1].classList.add('done')
+        levelMemory[level].normal_taken_bonuses = selected_bonuses.map(e => e);
+        levelMemory[level].special_taken_bonuses = char1.specialBonuses.map(e => e);
+    }
+
+    if (fromLevelChooser && char1) {
+        fromLevelChooser = false
+        console.log("There 1");
+        char1.dispose()
+        char1 = new Char("player", 0, 0, 0, 3, 800 * reloadMultUti, 40);
+        BonusEnum.bonusEnumList.forEach(e => e.resetCounter())
+        document.getElementById('specialBonus').innerHTML = ''
+        selected_bonuses = []
+        levelMemory[level].normal_taken_bonuses.forEach(e => e.addToChar())
+        levelMemory[level].special_taken_bonuses.forEach(e => e.addToChar(char1))
+    } else if (!fromLevelChooser && char1) {
+        levelMemory[level].bonuses_onHearth = {}
     }
 }
 

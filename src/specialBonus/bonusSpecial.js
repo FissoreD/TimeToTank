@@ -111,7 +111,8 @@ class SpecialBonus {
     this.isPermanent = isPermanent;
   }
 
-  addToChar() {
+  addToChar(char = undefined) {
+    if (char) this.tank = char
     this.keyListener = listenerList[this.tank.specialBonuses.length];
     this.tank.addSpecialBonus(this);
     if (this.tank == char1) {

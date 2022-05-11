@@ -141,7 +141,7 @@
 
         <div class="box bonusPanel gameBarsClass">
             <div class="hide">Special Bonus</div>
-            <div class="specialBonus hide">
+            <div id="specialBonus" class="specialBonus hide">
                 <!-- <div class="bg" style="--img: url('../images/gunaims.png')">
                     <div class="pie animate no-round" style="--p:50"> 80%</div>
                     <div class="shortcut">9</div>
@@ -212,6 +212,7 @@
         <script>
             let mainDiv = document.getElementById('main')
             let levelBox = document.getElementById('levelBox')
+            let fromLevelChooser = false;
 
             {
                 let levelDiv = document.getElementsByClassName('levels')[0]
@@ -235,13 +236,14 @@
             Array.from(document.getElementsByClassName('level')).forEach((e, pos) => {
                 e.onclick = () => {
                     if (!e.classList.contains('blocked') || true) {
+                        fromLevelChooser = true
                         level = pos;
                         remove_all_objects();
-                        setCurrentLevelDico();
                         init();
                         scene.menu.show(false);
                         scene.menu.displayScenario(false)
                         levelBox.classList.add('hide')
+                        pointerLock()
                     }
                 }
             })

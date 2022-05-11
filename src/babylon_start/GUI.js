@@ -239,6 +239,12 @@ class Menu {
                 }
             })
         }
+        if (selected_bonuses && selected_bonuses.length == 0) {
+            document.getElementById('normalBonus').classList.add('hide')
+        }
+        if (char1 && char1.specialBonuses.length == 0) {
+            document.getElementById('specialBonus').classList.add('hide')
+        }
         if (!toShow) elts.forEach(e => e.classList.add('hide'))
         else {
             if (this.inBonusus) {
