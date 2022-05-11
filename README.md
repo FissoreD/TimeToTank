@@ -44,7 +44,7 @@ While the idea was taken from there, nothing from the code is common between bot
 
 ## Engine
   
-[<img align="left" src="https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" width="200"/>](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+[<img align="left" src="https://img.youtube.com/vi/jf7G_LtHStw/0.jpg" width="200"/>](https://www.youtube.com/watch?v=jf7G_LtHStw)
 
 At first, we started by building the engine of the engine, which would later rule all the game's interactions and mechanics.This was the most difficult part of the development, as problems that would seem quite simple could take a lot of time to solve. Moreover, we were beginners in Babylonjs, and bending the physic engine to our needs wasn't always the easy.
 
