@@ -30,11 +30,13 @@ We also want to mention <b>BUFFA Michel</b>, who encouraged us to participate to
 
 ## Origin
 
-[<img align="left" src="https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" width="200"/>](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+[<img align="left" src="https://img.youtube.com/vi/WTyHxY0fWx0/0.jpg" width="400"/>](https://www.youtube.com/watch?v=WTyHxY0fWx0)
   
 The concept has been based on Noé Bernigaud's project of a Tank game in 2D written in Javascript on [<b>this Github repository</b>](https://github.com/noebernigaud/TankGame), which itself was inspired from the game WiiPlay - Tanks. With Babylonjs, we saw an opportunity to push the game much further and expand the game's feature to make a more complete game out of it.
 
 While the idea was taken from there, nothing from the code is common between both version as we had to remake everything and use the physic engine.
+  
+*Check the original game's video [here](https://www.youtube.com/watch?v=jf7G_LtHStw) or by clicking on the image.*
 
 <br clear="right"/>
   
