@@ -9,6 +9,7 @@ class Relic extends ObjectPos {
         super(chooseRelic(), -width / 2 + x, Barrel.height / 2, -height / 2 + y, 0, 0)
         this.physicsImpostor = new BABYLON.PhysicsImpostor(this.shape, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 70000, restitution: 0.2 })
         this.createCollider()
+        this.relicEffect = createBonusEffect(this.shape, false)
     }
 
     createCollider() {
@@ -29,6 +30,7 @@ class Relic extends ObjectPos {
     dispose(forceDispose = false) {
         collectRelicParticle(this.shape.position) 
         super.dispose(forceDispose)
+        this.relicEffect.dispose()
     }
 
 }
