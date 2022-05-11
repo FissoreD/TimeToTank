@@ -44,7 +44,7 @@ While the idea was taken from there, nothing from the code is common between bot
 
 ## Engine
   
-[<img align="left" src="https://img.youtube.com/vi/jf7G_LtHStw/0.jpg" width="200"/>](https://www.youtube.com/watch?v=jf7G_LtHStw)
+[<img align="left" src="https://img.youtube.com/vi/jf7G_LtHStw/0.jpg" width="400"/>](https://www.youtube.com/watch?v=jf7G_LtHStw)
 
 At first, we started by building the engine of the engine, which would later rule all the game's interactions and mechanics.This was the most difficult part of the development, as problems that would seem quite simple could take a lot of time to solve. Moreover, we were beginners in Babylonjs, and bending the physic engine to our needs wasn't always the easy.
 
@@ -53,6 +53,8 @@ Some noteworthy difficulties were the implementation of the tank's movements, in
 The engine's development is also the period where we learned to use our first tank models, created the bricks of the interaction between the player and the game, and made our first animations. the game was rather basic at this point and there was no gameplay, but it had all the fundations to build up the rest of our game.
 
 Here is a version of the game by the end of the engine's development LINK. There was still a couple of issues in the engine that we would eventually correct later, but we were quite happy about this first step and ready to start implementing the game's feature.
+  
+*Check the video of the engine during development [here](https://www.youtube.com/watch?v=jf7G_LtHStw) or by clicking on the image.*
   
 ***
 
