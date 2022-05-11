@@ -94,7 +94,7 @@ One major concern for the game was performance issue. Quickly after introducing 
 
 By default, a lot of computers use their integrated GPU by default for web application, which isn't built for 3D-rendering. It is impossible to force from the code the computer to use its dedicated GPU, which is much more powerful, as it has to be done in the computer's system parameters. Therefore, we had to take the performance issue at heart, so the game could run even on integrated GPUs.
 
-Particules, models, and the Heightmap were all re-adjusted to make the game run at a good fps number and make things enjoyable again, even on slow integrated GPU.
+Particules, models, and the Heightmap were all re-adjusted to make the game run at a good fps number and make things enjoyable again, even on slow integrated GPU. Furthermore, The AI also had to be re-optimized.
 
 Note: if you think you web browser might be running on your computer's integrated GPU and want to make it run on your dedicated one (if you have one), check out [<b>this tutorial (Windows)</b>](https://www.amd.com/en/support/kb/faq/gpu-110). While the game should run fine even on low-end integrated GPUs, using the dedicated GPU will help make sure you don't experience any fps drop aven in the most ressource-intensive situations.
   
