@@ -63,7 +63,10 @@ class Menu {
                     `This is the last stage of you mission, there are still some <they>bad tank</they> went in Antarctica wanting to melt the ice and build chemical weapon with old virus blocked in the Ice. <br>
                     <we>Win</we> this last mission and the world will be a <we>better place</we>.`
                 ]
-                document.getElementById('text-mission').innerHTML = text[["Earth", "Sand", "Snow"].indexOf(current_level_dico.biome)];
+                let idx = ["Earth", "Sand", "Snow"].indexOf(current_level_dico.biome)
+                document.getElementById('text-mission').innerHTML = text[idx];
+                document.getElementById('storyId').style.setProperty('--img', 'url(' +
+                    ['earth_biome.jpg', 'sand_biome.jpg', "snow_biome.jpg"][idx] + ')')
                 if (char1) char1.stabilizeTank()
                 this.isShown = true;
                 this.displayScenario(true)

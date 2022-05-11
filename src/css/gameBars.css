@@ -283,7 +283,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Tapestry&display=swap');
 
 .story {
-  background-image: url(time_travel.jpg);
+  background-image: var(--img);
   text-align: center;
   /* padding: 10pt; */
   width: 500px;
