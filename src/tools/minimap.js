@@ -27,6 +27,32 @@ class MiniMap {
     this.ctx.stroke();
   }
 
+  drawTriangle(x, y, color, side, withBorder = false) {
+    if (withBorder) this.drawTriangle(x, y, 'rgb(0,0,0)', side + 2)
+
+    this.ctx.fillStyle = color;
+    this.ctx.beginPath();
+
+    var path = new Path2D();
+
+    let height = side * Math.cos(Math.PI/6)
+
+    let x1 = x
+    let y1 = y  - height * 2/3
+    let x2 = x1 - side/2
+    let y2 = y1 + height
+    let x3 = x2 + side
+    let y3 = y2
+
+    path.moveTo(x1, y1)
+    path.lineTo(x2, y2)
+    path.lineTo(x3, y3)
+    path.lineTo(x1, y1)
+
+    this.ctx.fill(path);
+    this.ctx.stroke();
+  }
+
   clear() {
     this.ctx.clearRect(0, 0, this.canvas.offsetWidth, this.canvas.offsetHeight)
   }
@@ -74,6 +100,10 @@ class MiniMap {
     grenades.forEach(b => {
       let point = resize(b.position.z, b.position.x);
       this.drawPoint(point.x, point.y, 'rgb(0,0,0)', 1)
+    })
+    relics.forEach(r => {
+      let point = resize(r.position.z, r.position.x);
+      this.drawTriangle(point.x, point.y, 'rgb(255,215,0)', 6, true)
     })
   }
 }
