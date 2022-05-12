@@ -3,6 +3,13 @@ function distance(x1, y1, x2, y2) {
     return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 }
 
+function startingPointRayAhead(tank, dirZ, dirX, coeff = 1) {
+    return new BABYLON.Vector3(
+        tank.shape.position.x + coeff * dirZ.x,
+        tank.shape.position.y + 3 / 40,
+        tank.shape.position.z + coeff * dirX.x)
+}
+
 function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
     return {

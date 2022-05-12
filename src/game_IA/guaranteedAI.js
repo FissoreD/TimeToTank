@@ -5,13 +5,14 @@ class guaranteedAI {
 
     angleChange;
 
-    constructor(tank, isEnnemy = true) {
+    constructor(tank, isEnnemy = true, isBoss = false) {
         this.tank = tank;
         this.updateTir = 12;
         this.updateDir = 10;
         this.angleChange = 0;
         this.goRight = 0;
         this.isEnnemy = isEnnemy;
+        this.isBossAI = isBoss;
     }
 
     applyStrategy() {
@@ -21,11 +22,7 @@ class guaranteedAI {
         var dirX = this.tank.shape.getDirection(BABYLON.Axis.X);
 
         // Move tank
-        var objAhead = createRay(new BABYLON.Vector3(
-            this.tank.shape.position.x + dirZ.x,
-            this.tank.shape.position.y + 3 / 40,
-            this.tank.shape.position.z + dirX.x),
-            dirZ, 3, false, 5, false, undefined, true);
+        var objAhead = createRay(startingPointRayAhead(this.tank, dirZ, dirX, this.isBossAI ? 2 : 1), dirZ, 3, false, 5, false, undefined, true);
         // let right = Math.atan2(dirX.x, dirZ.x) + Math.PI / 2;
         // let left = Math.atan2(dirX.x, dirZ.x) - Math.PI / 2;
         // var objLeft = createRay(new BABYLON.Vector3(
