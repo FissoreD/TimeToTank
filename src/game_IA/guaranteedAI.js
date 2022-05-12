@@ -22,7 +22,8 @@ class guaranteedAI {
         var dirX = this.tank.shape.getDirection(BABYLON.Axis.X);
 
         // Move tank
-        var objAhead = createRay(startingPointRayAhead(this.tank, dirZ, dirX, this.isBossAI ? 2 : 1), dirZ, 3, false, 5, false, undefined, true);
+        var objAhead = createRay(startingPointRayAhead(this.tank, dirZ, dirX, this.isBossAI ? 2 : 1), dirZ, 3, false, 5, false, "dome", true);
+        // console.log(objAhead)
         // let right = Math.atan2(dirX.x, dirZ.x) + Math.PI / 2;
         // let left = Math.atan2(dirX.x, dirZ.x) - Math.PI / 2;
         // var objLeft = createRay(new BABYLON.Vector3(
@@ -38,7 +39,7 @@ class guaranteedAI {
         // var objAhead = true
         var objLeft = null
         var objRight = null
-        if (!objAhead || objAhead.name == "dome") {
+        if (!objAhead) {
             if (this.updateDir <= 0) {
                 if ((!objRight && !objLeft) || (objRight && objLeft)) { this.goRight = Math.random() > 0.5 ? -1 : 1; }
                 else this.goRight = objRight != null ? 1 : -1;

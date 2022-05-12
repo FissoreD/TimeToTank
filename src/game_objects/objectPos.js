@@ -20,7 +20,7 @@ class ObjectPos extends BABYLON.Mesh {
    * @param {number} speedNorme 
    * @param {number} speedAngle 
    */
-  constructor(type, posX, posY, posZ, speedNorme, speedAngle, life = 1) {
+  constructor(type, posX, posY, posZ, speedNorme, speedAngle, life = 1, offsetY = 0) {
     super('')
 
     var meshBabylon = true;
@@ -74,7 +74,7 @@ class ObjectPos extends BABYLON.Mesh {
       });
 
       // TODO RENAME OBJECT.PLAYER in this.type
-      this.position = new BABYLON.Vector3(posX, ObjectEnum.Player.height / 2 + 1, posZ);
+      this.position = new BABYLON.Vector3(posX, ObjectEnum.Player.height / 2 + 1 + offsetY, posZ);
       shape.position = this.position;
 
       this.shape = shape;

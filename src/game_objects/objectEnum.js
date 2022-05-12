@@ -113,6 +113,10 @@ class ObjectEnum {
     this.container.position.y += this.height / 2;
     this.meshes.forEach(e => this.container.addChild(e));
 
+    if (model == "ww2_house") {
+      this.container.rotate(BABYLON.Axis.Y, Math.PI)
+    }
+
     // Hiding of the mesh
     // this.container.visibility = 1;
     this.container.visibility = false;

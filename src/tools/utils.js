@@ -34,7 +34,9 @@ function createRay(origin, dir, length, affiche = false, disposeTime = 5, return
             rayHelper.dispose(ray);
         }, disposeTime);
     }
-    filter = (pickInfo.filter(e => e != rayHelper && e != exclude))
+    filter = (pickInfo.filter(e => e != rayHelper && e.pickedMesh.name != exclude))
+    // filter.forEach(e => console.log(e.pickedMesh))
+    // console.log("done");
 
     let index = toReverse ? filter.length - 1 : 0
 

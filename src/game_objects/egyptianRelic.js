@@ -22,13 +22,14 @@ class Relic extends ObjectPos {
                 if (r1) {
                     r1.dispose(true);
                     current_level_dico.addRelicObtained()
+                    relicSound.play()
                 }
             }
         }
     }
 
     dispose(forceDispose = false) {
-        collectRelicParticle(this.shape.position) 
+        collectRelicParticle(this.shape.position)
         super.dispose(forceDispose)
         this.relicEffect.dispose()
     }
@@ -42,6 +43,6 @@ function chooseRelic() {
     if (relicCpt == 0) return ObjectEnum.CatRelic
     else if (relicCpt == 1) return ObjectEnum.JackalRelic
     return ObjectEnum.MoonRelic
-    
+
 }
 

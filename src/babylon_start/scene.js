@@ -97,6 +97,8 @@ class Scene {
 
     let date = Date.now()
 
+    scene.checkBullet = 0
+
     scene.beforeRender = () => {
 
 
@@ -113,7 +115,17 @@ class Scene {
         current_level_dico.updateTipMessage()
         scene.minimap.redraw()
         // char1.physicsImpostor.applyForce(new BABYLON.Vector3(0, -gravity * 30000, 0), char1.shape.position)
-        bullets.forEach(bullet => bullet.physicsImpostor.applyForce(new BABYLON.Vector3(0, -gravity, 0), bullet.position))
+        bullets.forEach(bullet => {
+          bullet.physicsImpostor.applyForce(new BABYLON.Vector3(0, -gravity, 0), bullet.position)
+          scene.checkBullet++
+          if (scene.checkBullet > 60) {
+            let velocity = bullet.physicsImpostor.getLinearVelocity()
+            if (Math.sqrt(velocity.x ** 2 + velocity.y ** 2 + velocity.z ** 2) * 10 < 20) {
+              bullet.dispose(true, true)
+            }
+            scene.checkBullet = 0
+          }
+        })
 
         // chars.forEach(c => {
         //   let p = getCannonPoint(c)

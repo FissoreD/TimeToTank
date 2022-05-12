@@ -126,6 +126,9 @@ menuHoverSound.volume = 0.2
 let bonusTookSound = new Audio('audio/hammer.mp3');
 bonusTookSound.volume = 0.2
 
+let relicSound = new Audio('audio/egyptian-discovery.wav');
+bonusTookSound.volume = 0.3
+
 // let musicBackground = new Audio('audio/warmusic.mp3')
 let musicBackground = new Audio('audio/warmusic-cut.mp3')
 musicBackground.volume = 0.1
