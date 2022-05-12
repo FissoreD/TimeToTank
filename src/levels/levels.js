@@ -273,13 +273,13 @@ const level_map = [
                 "-----------------------------------------",
                 "-----------------------------------------",
                 "-----------------------------------------",
-                "---------------------R-------------------",
+                "---------------------@-------------------",
                 "-----------------------------------------",
                 "-----------------------------------------",
                 "-----------------------------------------",
             ],
         minHeightMap: -1,
-        lvlObjective: levelObjectives.killAllTank,
+        lvlObjective: levelObjectives.killBoss,
         biome: "Snow"
     }),
 ]
@@ -373,7 +373,7 @@ function draw_level_map(progress) {
                     //     char.applyStrategy()
                     break;
                 case '@':
-                    var char = new Char("boss", posX, posY, 0, 1, 2000, 30, 2, 2, 50, 5);
+                    var char = new CharBoss("boss", posX, posY, 0, 1, 2000, 30, 2, 1, 30, 10);
                     charsAI.push(char);
                     char.setStrategy(new guaranteedAI(char))
                     chars.push(char);

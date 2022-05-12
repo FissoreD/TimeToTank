@@ -115,4 +115,18 @@ let levelObjectives = {
       "Enemy troops will still appear until you secure these relics!"
     ]
   },
+  killBoss: {
+    description:
+      `Complete the next stage by taking down the final boss!`,
+    goToNextLevel: (e) => {
+      return (charsAI.length == 0);
+    },
+    tip: [
+      ["Tank killed", () => charsDestroyed.length,
+        () => charsDestroyed.length + charsAI.length]
+    ],
+    msg: [
+      "Kill the boss' sbires to take down his shield"
+    ]
+  },
 }

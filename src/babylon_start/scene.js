@@ -181,12 +181,12 @@ class Scene {
             if (index !== -1) charsAI.splice(index, 1)
             c.destroyTank()
 
-            setTimeout(()=>{
+            setTimeout(() => {
               if (!c.shape.isDisposed()) c.dispose(true)
             }, 12000)
 
             if (current_level_dico.lvlObjective == levelObjectives.getAllRelicsAndTanks && relics.length != 0) {
-              setTimeout(()=>{
+              setTimeout(() => {
                 if (relics.length != 0) {
                   var char = new Char("normal", 5, 5, 0, 1, 2000, 30);
                   char.shape.position.y += 3
@@ -195,10 +195,23 @@ class Scene {
                   chars.push(char);
                   char.applyStrategy()
                 }
-                }, 10000)
+              }, 10000)
+            }
+
+            console.log(current_level_dico.lvlObjective == levelObjectives.killBoss);
+
+            //niveau boss
+            if (current_level_dico.lvlObjective == levelObjectives.killBoss) {
+              if (charsAI.length == 1) {
+                if (charsAI[0].domeBoss.isActive) {
+                  charsAI[0].domeBoss.isPermanent = false
+                  charsAI[0].domeBoss.disable()
+                  console.log("disabling boss' shield");
+                }
               }
             }
           }
+        }
         )
 
         charsAllies.forEach(c => {
