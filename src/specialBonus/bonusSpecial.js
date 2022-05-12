@@ -92,7 +92,12 @@ class SpecialBonus {
 
     this.name = bonusType.name;
     this.description = bonusType.description;
-    this.bonusLevelUp = bonusType.bonusLevelUp;
+
+    this.bonusLevelUp = () => {
+      bonusType.bonusLevelUp();
+      let div = document.createElement('div')
+      this.lvlBonus.appendChild(div)
+    };
 
     this.image = document.createElement("img");
     this.image.src = bonusType.image
@@ -114,17 +119,18 @@ class SpecialBonus {
   addToChar(char = undefined) {
     if (char) this.tank = char
     this.keyListener = listenerList[this.tank.specialBonuses.length];
-    this.tank.addSpecialBonus(this);
     if (this.tank == char1) {
       addedObtainableBonus.push(
         new BonusEnum(
           this.name + " level up",
           this.bonusLevelUp,
           "Level up the power of the " + this.name + " special bonus",
-          "./images/health.png"
+          "./images/health.png",
+          this
         ))
     }
     this.load()
+    this.tank.addSpecialBonus(this);
   }
 
   activate() {
@@ -196,8 +202,13 @@ class SpecialBonus {
     this.bg.classList = 'bg'
     this.bg.style.setProperty("--img", `url("../${this.bonusType.image}")`)
 
+    this.lvlBonus = document.createElement('div')
+    this.lvlBonus.classList.add('powerSpecialBonus')
+
     this.bg.appendChild(this.loader);
     this.bg.appendChild(this.shortcut);
+    this.bg.appendChild(this.lvlBonus);
+
 
     if (this.tank == char1) {
       let sb = document.getElementsByClassName('specialBonus')[0]

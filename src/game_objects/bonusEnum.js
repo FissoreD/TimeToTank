@@ -48,7 +48,7 @@ class BonusEnum {
         ),
     ]
 
-    constructor(name, load, description, image, htmlCounter) {
+    constructor(name, load, description, image, parentIfSpecial) {
         this.name = name
         this.load = load
         this.description = description;
@@ -57,7 +57,7 @@ class BonusEnum {
         this.image.classList.add("logo")
         this.image.classList.add("whiteBackground")
 
-        this.htmlCounter = htmlCounter
+        this.parentIfSpecial = parentIfSpecial
 
         this.div = document.createElement('div')
         this.div.classList.add('bg')
@@ -74,9 +74,11 @@ class BonusEnum {
     }
 
     addToChar() {
-        if (!this.added && BonusEnum.bonusEnumList.includes(this)) {
-            this.added = true
-            document.getElementById("normalBonus").appendChild(this.div);
+        if (BonusEnum.bonusEnumList.includes(this)) {
+            if (!this.added) {
+                this.added = true
+                document.getElementById("normalBonus").appendChild(this.div);
+            }
         }
         let htmlParent = document.getElementsByClassName('normalBonus')[0];
         let bonusText = htmlParent.previousElementSibling;
