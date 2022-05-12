@@ -109,7 +109,18 @@ class Scene {
       //   this.scene.renderTargetsEnabled = false
       // }
 
-      document.getElementById("fps").innerHTML = engine.getFps().toFixed() + " fps" + (chronoLvl ? (" <br> Chrono : " + Math.ceil(chronoLvl.timeCooled / 1000) + "." + (chronoLvl.timeCooled % 1000 + "").padEnd(3, "0")) : "")
+      if (chronoLvl) {
+        let chronoTxt = "Chrono : " + Math.floor(chronoLvl.timeCooled / 1000) + "." + (chronoLvl.timeCooled % 1000 + "").padEnd(3, "0")
+
+        if (chronoLvl.timeCooled < 10000) {
+          chronoTxt = "<they>" + chronoTxt + "</they>"
+        }
+        document.getElementById("fps").innerHTML = engine.getFps().toFixed() + " fps<br>" + chronoTxt
+      } else {
+        document.getElementById("fps").innerHTML = engine.getFps().toFixed()
+      }
+
+
 
       if (!this.scene.menu.isShown) {
         current_level_dico.updateTipMessage()
