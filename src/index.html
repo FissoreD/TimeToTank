@@ -107,11 +107,13 @@
         </div>
 
         <div id="main" class="box divb">
-            <div id="adventure" class='button main' onclick="isAdventure = true; scene.menu.displayIntro(true);"
+            <div id="adventure" class='button main'
+                onclick="isAdventure = true; scene.menu.displayIntro(true);pointerLock()"
                 onmouseenter="scene.menu.soundHover()">
                 <span>Adventure Mode</span>
             </div>
-            <div id="roguelike" class='button main' onclick="isAdventure = false; scene.menu.displayIntro(true);"
+            <div id="roguelike" class='button main'
+                onclick="isAdventure = false; scene.menu.displayIntro(true);pointerLock()"
                 onmouseenter="scene.menu.soundHover()">
                 <span>Roguelike Mode</span>
             </div>
@@ -183,7 +185,7 @@
                         gear and <we> You</we> are the only one able to avoid terrible things to happen.
                     </div>
                     <div class="hover" onclick="scene.menu.show(false); scene.menu.displayIntro(false); pointerLock()">
-                        Click Me</div>
+                        Space</div>
                 </div>
             </div>
         </div>

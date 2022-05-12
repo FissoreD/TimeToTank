@@ -5,7 +5,12 @@ canTire = true;
 function keyListener(evt, isPressed) {
     // tirer
     if (evt.code === "Space") {
-        if (isPressed && scene.menu.displayScenario(false)) { }
+        if (!document.getElementById('intro').classList.contains('hide')) {
+            scene.menu.show(false);
+            scene.menu.displayIntro(false);
+            pointerLock()
+        }
+        else if (isPressed && scene.menu.displayScenario(false)) { }
         else inputStates.mouseclick = isPressed;
     }
     // tourelle
