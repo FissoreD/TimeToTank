@@ -180,8 +180,26 @@ class Scene {
             index = charsAI.indexOf(c)
             if (index !== -1) charsAI.splice(index, 1)
             c.destroyTank()
+
+            setTimeout(()=>{
+              if (!c.shape.isDisposed()) c.dispose(true)
+            }, 12000)
+
+            if (current_level_dico.lvlObjective == levelObjectives.getAllRelicsAndTanks && relics.length != 0) {
+              setTimeout(()=>{
+                if (relics.length != 0) {
+                  var char = new Char("normal", 5, 5, 0, 1, 2000, 30);
+                  char.shape.position.y += 3
+                  charsAI.push(char);
+                  char.setStrategy(new guaranteedAI(char))
+                  chars.push(char);
+                  char.applyStrategy()
+                }
+                }, 10000)
+              }
+            }
           }
-        })
+        )
 
         charsAllies.forEach(c => {
           if (c.life <= 0) {
