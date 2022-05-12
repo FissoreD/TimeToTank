@@ -107,11 +107,13 @@
         </div>
 
         <div id="main" class="box divb">
-            <div id="adventure" class='button main' onclick="isAdventure = true; scene.menu.displayIntro(true);"
+            <div id="adventure" class='button main'
+                onclick="isAdventure = true; scene.menu.displayIntro(true);pointerLock()"
                 onmouseenter="scene.menu.soundHover()">
                 <span>Adventure Mode</span>
             </div>
-            <div id="roguelike" class='button main' onclick="isAdventure = false; scene.menu.displayIntro(true);"
+            <div id="roguelike" class='button main'
+                onclick="isAdventure = false; scene.menu.displayIntro(true);pointerLock()"
                 onmouseenter="scene.menu.soundHover()">
                 <span>Roguelike Mode</span>
             </div>
@@ -141,10 +143,13 @@
 
         <div class="box bonusPanel gameBarsClass">
             <div class="hide">Special Bonus</div>
-            <div id="specialBonus" class="specialBonus hide">
+            <div id="specialBonus" class="specialBonus ">
                 <!-- <div class="bg" style="--img: url('../images/gunaims.png')">
                     <div class="pie animate no-round" style="--p:50"> 80%</div>
                     <div class="shortcut">9</div>
+                    <div class="powerSpecialBonus">
+                        <div></div>
+                    </div>
                 </div> -->
             </div>
             <div>Normal Bonus</div>
@@ -180,7 +185,7 @@
                         gear and <we> You</we> are the only one able to avoid terrible things to happen.
                     </div>
                     <div class="hover" onclick="scene.menu.show(false); scene.menu.displayIntro(false); pointerLock()">
-                        Click Me</div>
+                        Space</div>
                 </div>
             </div>
         </div>
