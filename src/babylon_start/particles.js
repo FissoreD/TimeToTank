@@ -8,7 +8,6 @@ function explode(emitter) {
             sys.emitter = emitter
             // sys.worldOffset = new BABYLON.Vector3(emitter.position.x, emitter.position.y, emitter.position.z);
             sys.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD;
-            sys.startDelay = 3000
         }
         set.start();
 
