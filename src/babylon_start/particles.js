@@ -169,11 +169,11 @@ function createSmoke(emitter, isRight = false, isMoving = false, permanent = fal
 }
 
 
-function createTurboParticles(emitter, delay){
+function createTurboParticles(emitter, delay) {
     createTurboEffect(emitter, delay, true)
     createTurboEffect(emitter, delay, false)
 }
-function createTurboEffect(emitter, delay, isRight){
+function createTurboEffect(emitter, delay, isRight) {
     const box = BABYLON.MeshBuilder.CreateBox("turboTank", { size: 0.05 });
     box.parent = emitter
     box.position.z -= 0.95
@@ -181,20 +181,20 @@ function createTurboEffect(emitter, delay, isRight){
     box.position.x += isRight ? 0.22 : -0.18
     box.isVisible = false
 
-    if(isRight){
+    if (isRight) {
         var turboLight = new BABYLON.PointLight("turboSpotLight", new BABYLON.Vector3(-0.2, 0, 0), scene);
         turboLight.diffuse = new BABYLON.Color3(0, 0, 1);
         turboLight.specular = new BABYLON.Color3(0, 0, 1);
         turboLight.intensity = 1.2
         turboLight.range = 4.5;
-                
+
         turboLight.parent = box;
-    
-        setTimeout(()=>{
+
+        setTimeout(() => {
             turboLight.dispose()
         }, delay)
     }
-    
+
 
     // Create a particle system
     var particleSystem = new BABYLON.ParticleSystem("turboParticles", 400, scene);
@@ -249,10 +249,10 @@ function createTurboEffect(emitter, delay, isRight){
     particleSystem.targetStopDuration = 15;
 
     particleSystem.emitter = box
-    
+
     particleSystem.isLocal = true;
 
-    setTimeout(()=>{
+    setTimeout(() => {
         box.dispose()
     }, delay)
     // Start the particle system
@@ -718,17 +718,17 @@ function bullChargeEffect(emitter, delay) {
     bullLight.diffuse = new BABYLON.Color3(1, 0, 0);
     bullLight.specular = new BABYLON.Color3(1, 0, 0);
     bullLight.intensity = 3
-            
+
     bullLight.parent = emitter;
 
-    setTimeout(()=>{
+    setTimeout(() => {
         bullLight.dispose()
     }, delay)
     bullChargeParticle(emitter, 0)
     bullChargeParticle(emitter, 180)
 }
 
-function bullChargeParticle(emitter, position){
+function bullChargeParticle(emitter, position) {
 
     // Create & launch a particule system
     var particleSystem = new BABYLON.ParticleSystem("bullCharge", 500, scene);
@@ -739,9 +739,9 @@ function bullChargeParticle(emitter, position){
     // particleSystem.addColorGradient(1, new BABYLON.Color4(1, 0, 0, 0.82, 0.1));
 
     particleSystem.color1 = new BABYLON.Color4(0.8, 0, 0, 0.4);
-	particleSystem.color2 = new BABYLON.Color4(0.9, 0, 0, 0.3);
-	particleSystem.colorDead = new BABYLON.Color4(1, 0, 0, 0);
-    
+    particleSystem.color2 = new BABYLON.Color4(0.9, 0, 0, 0.3);
+    particleSystem.colorDead = new BABYLON.Color4(1, 0, 0, 0);
+
     particleSystem.minSize = 0.5;
     particleSystem.maxSize = 0.5;
     particleSystem.emitRate = 150;
@@ -757,14 +757,13 @@ function bullChargeParticle(emitter, position){
     particleSystem.cpt = position; // Number of particles
 
     // Custom function to get the circle effect
-    particleSystem.startPositionFunction = function(worldMatrix, positionToUpdate)
-    {
-        var randX = -Math.sin(this.cpt * Math.PI/180)/2;
-        var randY = Math.cos(this.cpt * Math.PI/180)/2;
+    particleSystem.startPositionFunction = function (worldMatrix, positionToUpdate) {
+        var randX = -Math.sin(this.cpt * Math.PI / 180) / 2;
+        var randY = Math.cos(this.cpt * Math.PI / 180) / 2;
         var randZ = this.minEmitBox.z + 1.25;
-        
+
         BABYLON.Vector3.TransformCoordinatesFromFloatsToRef(randX, randY, randZ, worldMatrix, positionToUpdate);
-    
+
         this.cpt++;
     }
     particleSystem.targetStopDuration = 8;
@@ -773,6 +772,7 @@ function bullChargeParticle(emitter, position){
 
     // Start
     particleSystem.start();
+    return particleSystem
 }
 
 function bullChargeEffect2(emitter) {
@@ -1075,15 +1075,15 @@ function collectRelicEffect(emitter, position) {
     particleSystem.maxLifeTime = 0.6;
 
     particleSystem.cpt = position;
-    
+
     particleSystem.preWarmCycles = 10;
     particleSystem.preWarmStepOffset = 1;
 
     // Custom function to get the circle effect
     particleSystem.startPositionFunction = function (worldMatrix, positionToUpdate) {
-        var randX = Math.sin(this.cpt * Math.PI / 180)/3;
+        var randX = Math.sin(this.cpt * Math.PI / 180) / 3;
         var randY = this.minEmitBox.y;
-        var randZ = Math.cos(this.cpt * Math.PI / 180)/3;
+        var randZ = Math.cos(this.cpt * Math.PI / 180) / 3;
 
         BABYLON.Vector3.TransformCoordinatesFromFloatsToRef(randX, randY, randZ, worldMatrix, positionToUpdate);
         particleSystem.minSize = Math.max(0.0001, particleSystem.minSize -= 0.00015);
