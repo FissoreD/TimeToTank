@@ -83,7 +83,7 @@ class Bullet extends ObjectPos {
                     if (this.char == char1 && b2.destructable)
                         current_level_dico.addWallDestroyed()
                 } else if (b2 = barrels.find(e => e.shape == e2.object)) {
-                    if (b1) b1.dispose()
+                    if (b1) b1.dispose(true, true)
                     // createFire(e2.object);
                     // createSmoke(e2.object);
                     b2.explose()
