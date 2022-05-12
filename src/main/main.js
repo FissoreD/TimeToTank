@@ -5,9 +5,7 @@ canTire = true;
 function keyListener(evt, isPressed) {
     // tirer
     if (evt.code === "Space") {
-        if (isPressed && scene.menu.displayScenario(false)) {
-            console.log("HIRE");
-        }
+        if (isPressed && scene.menu.displayScenario(false)) { }
         else inputStates.mouseclick = isPressed;
     }
     // tourelle
@@ -276,7 +274,6 @@ function startgame(level, progress = true) {
     grenades = new Array();
     mines = new Array();
 
-    console.log("This is level", level);
 
     bonuses = new Array();
 

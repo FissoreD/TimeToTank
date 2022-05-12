@@ -38,8 +38,6 @@ function createRay(origin, dir, length, affiche = false, disposeTime = 5, return
 
     let index = toReverse ? filter.length - 1 : 0
 
-    // if (filter.length > 0) {console.log("--------------start--------------");}
-    // filter.forEach(e => console.log(e.pickedMesh.id))
     return filter.length > 0 ? (returnPointInpact ? [filter[index].pickedPoint, filter[index].pickedMesh] : filter[index].pickedMesh) : undefined
 }
 

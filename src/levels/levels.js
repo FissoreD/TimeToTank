@@ -466,7 +466,6 @@ function setCurrentLevelDico() {
         // current_level_dico.resetValues()
     }
 
-    console.log("Set current lvl dico");
 
     if ((level == 0 || current_level_dico.biome != level_map[level - 1].biome) && globalProgress) {
         scene.menu.toDisplayScenario = true;
@@ -479,7 +478,6 @@ function setCurrentLevelDico() {
 
 
     if (level > 0 && !fromLevelChooser) {
-        console.log("Here 1");
         document.getElementsByClassName('level')[level - 1].classList.add('done')
         levelMemory[level].normal_taken_bonuses = selected_bonuses.map(e => e);
         levelMemory[level].special_taken_bonuses = char1.specialBonuses.map(e => e);
@@ -487,7 +485,6 @@ function setCurrentLevelDico() {
 
     if (fromLevelChooser && char1) {
         fromLevelChooser = false
-        console.log("There 1");
         char1.dispose()
         char1 = new Char("player", 0, 0, 0, 3, 800 * reloadMultUti, 40);
         BonusEnum.bonusEnumList.forEach(e => e.resetCounter())

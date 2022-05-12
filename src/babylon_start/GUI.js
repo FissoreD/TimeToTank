@@ -265,7 +265,6 @@ class Menu {
 
 
     displayScenario(display) {
-        console.log("To display", display);
         document.getElementById('intro').classList.add('hide')
         let elt = document.getElementById('storyFullScreen')
         if (display) {

@@ -153,7 +153,6 @@ class Scene {
           }
 
           if (c.shape.position.y <= w.position.y + 0.4) {
-            console.log(c + ' is losing health in water');
             c.healthLoss(c.maxHealth / 180)
           }
 
@@ -198,7 +197,6 @@ class Scene {
               }, 10000)
             }
 
-            console.log(current_level_dico.lvlObjective == levelObjectives.killBoss);
 
             //niveau boss
             if (current_level_dico.lvlObjective == levelObjectives.killBoss) {
@@ -206,7 +204,6 @@ class Scene {
                 if (charsAI[0].domeBoss.isActive) {
                   charsAI[0].domeBoss.isPermanent = false
                   charsAI[0].domeBoss.disable()
-                  console.log("disabling boss' shield");
                 }
               }
             }
