@@ -43,8 +43,8 @@ class BonusEnum {
             function () {
                 char1.regenRate++
             },
-            "With this bonus your char regains one point of life every X sec",
-            "images/health.png"
+            "With this bonus your char regains one more point of life every 5 sec",
+            "images/regeneration.png"
         ),
     ]
 

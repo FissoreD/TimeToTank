@@ -44,6 +44,12 @@ class Char extends ObjectPos {
       camera1.maxCameraSpeed = 4;
       camera.dispose();
       camera = camera1;
+
+
+      this.regenStartDate = Date.now()
+      this.regentimeCooled = 0;
+      this.regencooldown = 5000;
+
     } else {
       this.shape.rotate(BABYLON.Axis.Y, 3.14 / 2);
       MoveAI.rotateTurret(this)
@@ -292,9 +298,11 @@ class Char extends ObjectPos {
   }
 
 
-  healthLoss(damage) {
-    if (this.specialBonuses.some(b => b.name == SPECIAL_BONUS_ID.DOME.name && b.isActive)) return
-    if (this.bullForce) return
+  healthLoss(damage, force = false) {
+    if (!force) {
+      if (this.specialBonuses.some(b => b.name == SPECIAL_BONUS_ID.DOME.name && b.isActive)) return
+      if (this.bullForce) return
+    }
     if (damage < this.health) this.health -= damage
     else {
       this.health = 0
@@ -306,8 +314,26 @@ class Char extends ObjectPos {
   }
 
   healthRegen(quantity) {
-    this.health = Math.max(this.health + quantity, this.maxHealth)
+    this.health = Math.min(this.health + quantity, this.maxHealth)
     this.healtBar.updatePartition()
+  }
+
+  regenUpdate() {
+    if (this.regenRate <= 0 || this.life <= 0) return
+    if (this.life <= 0) return
+    this.regentimeCooled = Math.max(0, this.regenstartDate + this.regencooldown - Date.now());
+    // console.log(this.regentimeCooled);
+    if (this.regentimeCooled <= 0) {
+      this.healthRegen(1)
+      this.regenstartDate = Date.now()
+      this.regentimeCooled = 0;
+      this.regencooldown = Math.min(10000, 12000 / this.regenRate)
+    };
+  }
+
+  regenCorrectTime() {
+    if (this.regenRate <= 0) return
+    this.regenstartDate = Date.now() - this.regencooldown + this.regentimeCooled;
   }
 
   dispose(forceDispose) {

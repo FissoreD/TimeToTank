@@ -271,6 +271,7 @@ class Scene {
           charsAI.forEach(c => c.strategy.applyStrategy());
           charsAllies.forEach(c => c.strategy.applyStrategy());
           chars.forEach(c => SpecialBonus.updateAllThankBonuses(c));
+          char1.regenUpdate()
           if (chronoLvl) chronoLvl.update()
         }// TODO : Here update all bonuses list !!!
         //charsAI.forEach(c => MoveAI.move(c));

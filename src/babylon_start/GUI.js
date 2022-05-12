@@ -91,6 +91,7 @@ class Menu {
                     chars.forEach(c => c.moveSound.play())
                     chars.forEach(e => e.specialBonuses.forEach(b => b.correctTime()))
                     if (chronoLvl) chronoLvl.correctTime()
+                    char1.regenCorrectTime()
                     runRenderLoop()
                 }
             }
@@ -157,6 +158,7 @@ class Menu {
                 this.bonusPanel.classList.add('hide');
                 chars.forEach(e => e.specialBonuses.forEach(b => b.correctTime()))
                 if (chronoLvl) chronoLvl.correctTime()
+                char1.regenCorrectTime()
                 runRenderLoop()
                 this.inBonus = false;
                 document.getElementsByClassName('bonusPanel')[0].classList.remove('hide');
