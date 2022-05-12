@@ -21,7 +21,7 @@ class ObjectEnum {
   static EarthTank = new ObjectEnum("earthTank", "tiger_tank", 0.25, 0.95, 0.625, 1.75)
   static SandTank = new ObjectEnum("sandTank", "desert_tank", 0.5, 0.95, 0.625, 1.85)
   static SnowTank = new ObjectEnum("snowTank", "battle_tank", 0.2, 0.95, 0.625, 1.75)
-  static BossTank = new ObjectEnum("boss_tank", "boss_tank", 0.5, 1.9 ,1.3, 3.7)
+  static BossTank = new ObjectEnum("boss_tank", "boss_tank", 0.5, 1.9, 1.3, 3.7)
 
   //Earthy Biome items
   static Rock = new ObjectEnum("rock", "rock", 0.5, 0.95, 0.7, 0.7)
@@ -36,7 +36,7 @@ class ObjectEnum {
   static DesertRock = new ObjectEnum("desert_rock", "desert_rock", 0.5, 0.8, 0.8, 0.8)
   static Tumbleweed = new ObjectEnum("tumbleweed", "tumbleweed", 1, 0.4, 0.4, 0.4)
   static DesertHouse = new ObjectEnum("desert_house", "desert_house", 0.5, 2, 2, 2)
-  
+
   //Egyptian Relics
   static CatRelic = new ObjectEnum("egyptian_cat", "egyptian_cat", 0.5, 0.6, 0.8, 0.6)
   static JackalRelic = new ObjectEnum("egyptian_jackal", "egyptian_jackal", 0.5, 0.7, 1, 0.7)
@@ -85,7 +85,8 @@ class ObjectEnum {
         x.material.transparencyMode = 1;
       } else if (model == "ww2_house") {
         x.material.specularColor = new BABYLON.Color3(0, 0, 0)
-      } else if (model == "egyptian_cat" || model == "egyptian_jackal" || model == "egyptian_moon"){
+        x.material.emissiveColor = new BABYLON.Color3(0.5, 0.5, 0.5)
+      } else if (model == "egyptian_cat" || model == "egyptian_jackal" || model == "egyptian_moon") {
         x.material.emissiveColor = new BABYLON.Color3(0.5, 0.5, 0.5)
       }
       //x.forceSharedVertices();
@@ -98,7 +99,7 @@ class ObjectEnum {
       [this.meshes[0], this.meshes[2]] = [this.meshes[2], this.meshes[0]];
     }
 
-    
+
 
     // Parent mesh (the original which we will duplicate to create our objects)
     if (model == "tumbleweed") {

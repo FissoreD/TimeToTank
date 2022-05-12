@@ -91,6 +91,8 @@ class Char extends ObjectPos {
 
     this.bullForce = null;
     this.grenadeDamage = 10;
+
+    this.regenRate = 0;
   }
 
   addBullet(time = Date.now()) {
@@ -300,6 +302,11 @@ class Char extends ObjectPos {
       // this.dispose(false)
     }
     //update barre de vie
+    this.healtBar.updatePartition()
+  }
+
+  healthRegen(quantity) {
+    this.health = Math.max(this.health + quantity, this.maxHealth)
     this.healtBar.updatePartition()
   }
 

@@ -21,7 +21,7 @@ const SPECIAL_BONUS_ID = {
   },
   DOME: {
     name: "Shield",
-    description: "Be protected by a 4-lifes dome",
+    description: "Be protected by a 3-lifes dome",
     image: "images/shield.png",
     keyListener: '3',
     bonusLevelUp: function () { char1.specialBonuses.forEach(b => { if (b.name == "Shield") b.delay /= 2 }) },

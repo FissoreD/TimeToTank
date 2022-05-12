@@ -38,6 +38,14 @@ class BonusEnum {
             "With this bonus your char gains 5 maximum health",
             "images/health.png"
         ),
+        new BonusEnum(
+            "Bonus char regeneration",
+            function () {
+                char1.regenRate++
+            },
+            "With this bonus your char regains one point of life every X sec",
+            "images/health.png"
+        ),
     ]
 
     constructor(name, load, description, image, htmlCounter) {
