@@ -358,24 +358,24 @@ function draw_level_map(progress) {
 
                     char.applyStrategy()
                     break;
-                    // case 'B':
-                    //     var char = new Char(ObjectEnum.SnowTank, posX, posY, 0, 2, 10000, 30);
-                    //     charsAI.push(char);
-                    //     chars.push(char);
-                    //     char.setStrategy(new guaranteedAI(char))
-                    //     char.applyStrategy()
-                    //     break;
-                    // case 'G':
-                    //     var char = new Char(ObjectEnum.EarthTank, posX, posY, 0, 2, 4000, 30);
-                    //     charsAI.push(char);
-                    //     chars.push(char);
-                    //     char.setStrategy(new guaranteedAI(char))
-                    //     char.applyStrategy()
-                    break;
+                // case 'B':
+                //     var char = new Char(ObjectEnum.SnowTank, posX, posY, 0, 2, 10000, 30);
+                //     charsAI.push(char);
+                //     chars.push(char);
+                //     char.setStrategy(new guaranteedAI(char))
+                //     char.applyStrategy()
+                //     break;
+                // case 'G':
+                //     var char = new Char(ObjectEnum.EarthTank, posX, posY, 0, 2, 4000, 30);
+                //     charsAI.push(char);
+                //     chars.push(char);
+                //     char.setStrategy(new guaranteedAI(char))
+                //     char.applyStrategy()
+                //break;
                 case '@':
                     var char = new CharBoss("boss", posX, posY, 0, 1, 2000, 30, 2, 1, 30, 10);
                     charsAI.push(char);
-                    char.setStrategy(new guaranteedAI(char))
+                    char.setStrategy(new guaranteedAI(char, true, true))
                     chars.push(char);
 
                     char.applyStrategy()
