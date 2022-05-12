@@ -16,9 +16,9 @@ class Level {
   }
 
   static normalMessage = [
-    "Be careful, water is poisoned, <br> do not fall inside too much longer",
-    "Kill tanks to go into next level",
-    "The minimap on tho-right of the screen <br> can be really useful !"
+    // "Be careful, water is poisoned, <br> do not fall inside too much longer",
+    // "Kill tanks to go into next level",
+    // "The minimap on tho-right of the screen <br> can be really useful !"
   ]
 
   constructor(levelInfo) {

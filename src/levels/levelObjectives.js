@@ -1,7 +1,7 @@
 let levelObjectives = {
   killAllTank: {
     description:
-      "Complete the next stage by destroying every enemy tank",
+      "NEXT MISSION: Destroy all ennemy chars.",
     goToNextLevel: (e) => {
       return charsAI.length == 0
     },
@@ -9,12 +9,12 @@ let levelObjectives = {
       ["Tank killed", () => charsDestroyed.length, () => charsDestroyed.length + charsAI.length]
     ],
     msg: [
+      "Kill ennemy tanks to go into next level"
     ]
   },
   chronoMission: {
     description:
-      `The ennemies have planted a bomb, and are plannign to activate it! 
-      Detroy all of them before the countdown goes to 0`,
+      `NEXT MISSION: Destroy all ennemy chars.<br>WARNING: a bomb has been planted, you have a limited time!`,
     goToNextLevel: (e) => {
       return charsAI.length == 0
     },
@@ -22,37 +22,38 @@ let levelObjectives = {
       ["Tank killed", () => charsDestroyed.length, () => charsDestroyed.length + charsAI.length]
     ],
     msg: [
-      "This is a temporized level : <br> kill enemies before everything explose !"
+      "The bomb is counting down : kill the ennemies quickly before everything explose!"
     ]
   },
   getAllBonuses: {
     description:
-      `Complete the next stage by picking up all bonus supplied`,
+      `NEXT MISSION: Retrieve all bonus supplies to prepare yourself for what's coming!`,
     goToNextLevel: (e) => {
       return bonuses.length == 0
     },
     tip: [["Bonus collected", () => current_level_dico.getBonusObtained(),
       () => bonuses.length + current_level_dico.getBonusObtained()]],
     msg: [
-      "You must collect bonuses to<br> go to next level !"
+      "You must collect bonuses to go to complete this stage!",
+      "The minimap on top-right of the screen can be really useful!"
     ]
   },
   labyrinth: {
     description:
-      `Complete the next stage by picking up all bonus supplied`,
+      `NEXT MISSION: Retrieve all bonus supplies to prepare yourself for what's coming!`,
     goToNextLevel: (e) => {
       return bonuses.length == 0
     },
     tip: [["Bonus collected", () => current_level_dico.getBonusObtained(),
       () => bonuses.length + current_level_dico.getBonusObtained()]],
     msg: [
-      "You must collect bonuses to<br> go to next level !"
+      "You must collect bonuses to complete this stage!",
+      "The minimap on top-right of the screen can be really useful!"
     ]
   },
   getBonusesAndKillTanks: {
     description:
-      `Complete the next stage by collecting all of the bonus supplied 
-      and destroying every enemy tank`,
+      `NEXT MISSION: Destroy all ennemy chars and retrieve all bonus supplies`,
     goToNextLevel: (e) => {
       return (bonuses.length == 0 && charsAI.length == 0)
     },
@@ -63,11 +64,14 @@ let levelObjectives = {
         () => charsDestroyed.length + charsAI.length]
     ],
     msg: [
+      "You must collect bonuses and kill all ennemy tanks to complete this stage!",
+      "The minimap on top-right of the screen can be really useful!",
+      "You can check the level's objective progression at the top-left of your screen."
     ]
   },
   burnAllBarrels: {
     description:
-      `Destroy all the essence barrels to cut down ennemies' supplies`,
+      `NEXT MISSION: Destroy all the essence barrels to cut down ennemies' supplies.`,
     goToNextLevel: (e) => {
       return barrels.every(barrel => (
         barrel.isBurning
@@ -77,13 +81,12 @@ let levelObjectives = {
       ["Barrels burned", () => `${barrels.filter(b => b.isBurning).length}`, () => barrels.length]
     ],
     msg: [
-      "Destroy barrels, to pass the level !"
+      "Destroy barrels to pass the level!"
     ]
   },
   batteryKillTanks: {
     description:
-      `Complete the next stage by destroying all of the batteries which energy the ennemies shield
-      and destroying every enemy tanks`,
+      `NEXT MISSION: Destroy all ennemy chars.<br>WARNING: batteries are supplying their shield's energy. Push the batteries into water to take down the shields!`,
     goToNextLevel: (e) => {
       return (batteries.every(b => b.isDestroyed) && (charsAI.length == 0));
     },
@@ -94,13 +97,12 @@ let levelObjectives = {
         () => charsDestroyed.length + charsAI.length]
     ],
     msg: [
-      "Push batteries into water to disable tanks shield !",
-      "Remember : batteries are not baloons<br>But sometimes..."
+      "Push all the batteries into the water to disable the ennemy tanks' shield!",
+      "Be careful, your tank isn't amphibious - don't go too far in the water!"
     ]
   }, getAllRelicsAndTanks: {
     description:
-      `Complete the next stage by collecting all of the Egyptian relics
-      and destroying every enemy tank`,
+      `NEXT MISSION: Destroy all ennemy chars and retrieve the egyptian relics.<br>WARNING: The ennemies will keep coming as long as there are still relics!`,
     goToNextLevel: (e) => {
       return (relics.length == 0 && charsAI.length == 0)
     },
@@ -111,13 +113,13 @@ let levelObjectives = {
         () => charsDestroyed.length + charsAI.length]
     ],
     msg: [
-      "Collect all Egyptian relics before the enemy takes them.",
-      "Enemy troops will still appear until you secure these relics!"
+      "Collect all Egyptian relics to take them away from the ennemies.",
+      "Enemy troops will still appear until you secure all these relics!"
     ]
   },
   killBoss: {
     description:
-      `Complete the next stage by taking down the final boss!`,
+      `NEXT MISSION: Take down the final boss!`,
     goToNextLevel: (e) => {
       return (charsAI.length == 0);
     },
@@ -126,7 +128,9 @@ let levelObjectives = {
         () => charsDestroyed.length + charsAI.length]
     ],
     msg: [
-      "Kill the boss' sbires to take down his shield"
+      "Kill the boss' sbires to take down his shield!",
+      "The Boss is particularly powerful - be careful to not get hit!",
+      "The Boss will make his shield reappear and call new sbires after taking too much damage!"
     ]
   },
 }
