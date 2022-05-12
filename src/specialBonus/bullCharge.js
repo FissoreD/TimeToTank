@@ -24,9 +24,14 @@ class BullCharge extends SpecialBonus {
                 let c2;
                 if (c2 = charsAI.find(e => e.shape == e2.object)) {
                     if (c2) {
-                        c2.healthLoss(5000)
+                        c2.healthLoss(30)
                         current_level_dico.addKilledChar()
                         c1.bullForce = null
+                        c1.specialBonuses.forEach(b => {
+                            if (b.name == "Bull Charge") {
+                                b.bonusStartedDate -= 10000
+                            }
+                        })
                     }
                 }
             }
