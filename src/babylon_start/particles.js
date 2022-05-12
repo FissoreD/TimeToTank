@@ -6,7 +6,9 @@ function explode(emitter) {
 
         for (var sys of set.systems) {
             sys.emitter = emitter
-            sys.worldOffset = new BABYLON.Vector3(emitter.position.x, emitter.position.y, emitter.position.z);
+            // sys.worldOffset = new BABYLON.Vector3(emitter.position.x, emitter.position.y, emitter.position.z);
+            sys.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD;
+            sys.startDelay = 3000
         }
         set.start();
 
@@ -259,14 +261,14 @@ function createTurboEffect(emitter, delay, isRight){
 }
 
 function createDust(emitter) {
-    var particleSystem = new BABYLON.ParticleSystem("particles", 1000);
+    var particleSystem = new BABYLON.ParticleSystem("particles", 500);
 
     // Texture of each particle
     particleSystem.particleTexture = new BABYLON.Texture("textures/smoke.png");
 
     // lifetime
-    particleSystem.minLifeTime = 2;
-    particleSystem.maxLifeTime = 4;
+    particleSystem.minLifeTime = 1;
+    particleSystem.maxLifeTime = 2;
 
     // Emit rate
     particleSystem.emitRate = 100;
