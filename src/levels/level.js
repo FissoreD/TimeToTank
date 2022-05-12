@@ -180,6 +180,8 @@ class Level {
     }
 
     startCell.colSpan = 2;
+    startCell.style.fontSize = "x-large"
+    startCell.style.textShadow = "0 0 3px #000000, 0 0 3px #000000, 0 0 3px #000000, 0 0 3px #000000"
     startLine.appendChild(startCell)
     tab.appendChild(startLine)
 
@@ -198,8 +200,10 @@ class Level {
     if (status == lvlStatus.NXT_LVL) {
       let nextLvlDescLine = document.createElement("tr")
       let nextLvlDesc = createTd(level_map[level + 1].lvlObjective.description)
-      nextLvlDesc.classList.add('greenBg')
+      //nextLvlDesc.classList.add('greenBg')
       nextLvlDesc.colSpan = 2
+      // nextLvlDesc.style.fontSize = "x-large"
+      nextLvlDesc.style.textShadow = "0 0 3px #000000, 0 0 3px #000000, 0 0 3px #000000, 0 0 3px #000000"
       nextLvlDescLine.appendChild(nextLvlDesc)
       tab.appendChild(nextLvlDescLine)
     }
@@ -207,11 +211,14 @@ class Level {
       let nextLvlDescLine = document.createElement("tr")
       let nextLvlDesc = createTd(level_map[level].lvlObjective.description)
       nextLvlDesc.colSpan = 2
+      nextLvlDesc.style.textShadow = "0 0 3px #000000, 0 0 3px #000000, 0 0 3px #000000, 0 0 3px #000000"
       nextLvlDescLine.appendChild(nextLvlDesc)
       tab.appendChild(nextLvlDescLine)
     }
     let endLine = document.createElement("tr")
     let endCell = (status != lvlStatus.NXT_LVL) ? (tryAgain ? createTd("Try again") : createTd("Main Menu")) : createTd("Next Level")
+    endCell.style.fontSize = "x-large"
+    endCell.style.textShadow = "0 0 3px #000000, 0 0 3px #000000, 0 0 3px #000000, 0 0 3px #000000"
     endCell.colSpan = 2;
     endCell.onclick = () => {
       if (tryAgain) {

@@ -180,7 +180,7 @@
   background-color: rgba(102, 102, 102, 0.342);
   border: 1pt solid #ffffff42;
   font-family: 'Tapestry', monospace;
-  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+  text-shadow: 0 0 4px #000, 0 0 4px #000, 0 0 4px #000, 0 0 4px #000;
   font-size: 10pt;
   border-radius: 10pt;
   font-size: 12pt;
@@ -303,7 +303,7 @@
   font-weight: 400;
   font-style: italic;
   line-height: 35px;
-  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+  text-shadow: 0 0 4px #000, 0 0 4px #000, 0 0 4px #000, 0 0 4px #000;
   font-family: 'Tapestry',
     monospace;
 }
