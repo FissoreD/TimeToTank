@@ -7,6 +7,8 @@
 |:-------------------------:|:-------------------------:|
 |[![TRAILER](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE) | [![TRAILER](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)|
   
+[<b>CLICK HERE TO PLAY THE GAME</b>](https://noebernigaud.github.io/Tank3D/src/)
+  
 ***
 
 # Goal 
@@ -21,6 +23,16 @@ VENTURELLI Antoine | FISSORE Davide | BERNIGAUD Noé
 <img src="https://zupimages.net/up/22/19/39hp.png" alt="Venturelli Antoine" width="200"/> | <img src="https://zupimages.net/up/22/19/di99.png" alt="Architecture Dossiers" width="200"/> | <img src="https://zupimages.net/up/22/19/dak6.png" alt="BERNIGAUD Noé" width="200"/>
 
 We are three students at the University of Côte d'Azur in M1 of Computer Science. Together, we form <b>DNA games</b>, a team formed to develop this project from start to end.
+  
+While at the start we decided that everybody would do a little bit of everything, with time we naturaly all grew some affinity for particular domains and made them our speciality:
+  
+<ul>
+  <li>VENTURELLI Antoine was our models, particules effects, and textures specialist.</li>
+  <li>FISSORE Davide was in charge of the menus and the elemental bricks behind the project's implementations.</li>
+  <li>BERNIGAUD Noe was taking care of features' algorithms, and the musics and sound effects.</li>
+</ul>
+
+However, despite our specialization that occured during the project, we always stayed polyvalent and one of the main strenght of our team was our ability to meet very regularly and help each other out in all domains of the development.
 
 We also want to mention <b>BUFFA Michel</b>, who encouraged us to participate to the contest and was our Babylonjs professor.
   
@@ -30,7 +42,7 @@ We also want to mention <b>BUFFA Michel</b>, who encouraged us to participate to
 
 ## Origin
 
-[<img align="left" src="https://img.youtube.com/vi/WTyHxY0fWx0/0.jpg" width="400"/>](https://www.youtube.com/watch?v=WTyHxY0fWx0)
+[<img align="right" src="https://img.youtube.com/vi/WTyHxY0fWx0/0.jpg" width="400"/>](https://www.youtube.com/watch?v=WTyHxY0fWx0)
   
 The concept has been based on Noé Bernigaud's project of a Tank game in 2D written in Javascript on [<b>this Github repository</b>](https://github.com/noebernigaud/TankGame), which itself was inspired from the game WiiPlay - Tanks. With Babylonjs, we saw an opportunity to push the game much further and expand the game's feature to make a more complete game out of it.
 
@@ -46,15 +58,16 @@ While the idea was taken from there, nothing from the code is common between bot
 
 ## Engine
   
-[<img align="left" src="https://img.youtube.com/vi/jf7G_LtHStw/0.jpg" width="400"/>](https://www.youtube.com/watch?v=jf7G_LtHStw)
+[<img align="right" src="https://img.youtube.com/vi/jf7G_LtHStw/0.jpg" width="400"/>](https://www.youtube.com/watch?v=jf7G_LtHStw)
 
-At first, we started by building the engine of the engine, which would later rule all the game's interactions and mechanics.This was the most difficult part of the development, as problems that would seem quite simple could take a lot of time to solve. Moreover, we were beginners in Babylonjs, and bending the physic engine to our needs wasn't always the easy.
+At first, we started by building the engine of the engine, which would later rule all the game's interactions and mechanics.This was the most difficult part of the development, as problems that would seem quite simple could take a lot of time to solve. Moreover, we were beginners in Babylonjs, and bending the physic engine to our needs wasn't always easy.
+<ul>
+   <li>At the beginning, the gravity didn't look like it was working correctly. Tanks felt like ballons, as they were falling very slowly. We eventually realized that this was due to our scale being accidentaly gigantic, and therefore re-sized all the object's dimension by dividing them by 40, which corrected the issue.
+  <li>We had a lot of trouble implementing the tank's movements, in particular setting up the friction, to create natural movement. Using the Babylonjs engine's friction feature was preventing the tank to move correctly, but setting it to 0 would make the tank glide like if it was on ice. Therefore, we had to create our own mechanism to have a dynamic friction parameter and apply forces that would emulate a natural-looking friction when moving the tank.</li>
+  <li>Another major difficulty was the import and usage of our first models. Understanding them and how they work was particularly challenging as we had no prior experience in 3D rendering.</li>
+  </ul>
 
-Some noteworthy difficulties were the implementation of the tank's movements, in particular setting up the friction, to create natural movement. Another difficult part was the physic of the bullets. We wanted them to be rather slow so the players could avoid them, making the game a lot more fun, but we also wanted to use the physic engine to make the bullets bounce.
-
-The engine's development is also the period where we learned to use our first tank models, created the bricks of the interaction between the player and the game, and made our first animations. the game was rather basic at this point and there was no gameplay, but it had all the fundations to build up the rest of our game.
-
-Here is a version of the game by the end of the engine's development LINK. There was still a couple of issues in the engine that we would eventually correct later, but we were quite happy about this first step and ready to start implementing the game's feature.
+The engine's development is also the period where we created the bricks of the interaction between the player and the game, and made our first animations. The game was rather basic at this point and there was no gameplay, but it had all the fundations to build up the rest of our game. There was still a couple of issues in the engine that we would eventually correct later, but we were quite happy about this first step and ready to start implementing the game's feature.
   
 *Check the video of the engine during development [here](https://www.youtube.com/watch?v=jf7G_LtHStw) or by clicking on the image.*
   
@@ -78,7 +91,7 @@ The next part was to improve the controls - up until now, the aim was donne with
 
 ## Bonuses
   
-[<img align="left" src="https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" width="200"/>](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+[<img align="right" src="https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" width="200"/>](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
 
 At this point, the game was starting to look like a complete game. We had gameplay with different levels and ennemies, a good-looking map, a rudimentary menu, and the tank felt pleasant to control. However, it was still lacking some fun gameplay and discovery factor. It was time to implement the bonus feature, which would make our game into a roguelike, very fitting of the theme "You are unique".
 
@@ -94,9 +107,9 @@ One major concern for the game was performance issue. Quickly after introducing 
 
 By default, a lot of computers use their integrated GPU by default for web application, which isn't built for 3D-rendering. It is impossible to force from the code the computer to use its dedicated GPU, which is much more powerful, as it has to be done in the computer's system parameters. Therefore, we had to take the performance issue at heart, so the game could run even on integrated GPUs.
 
-Particules, models, and the Heightmap were all re-adjusted to make the game run at a good fps number and make things enjoyable again, even on slow integrated GPU. Furthermore, The AI also had to be re-optimized.
+Particules, models, and the Heightmap were all re-adjusted to make the game run at a good fps number and make things enjoyable again, even on slow integrated GPU. Furthermore, The AI also had to be re-optimized. One fun thing that had to be corrected was the update of the health bars, which was taking a surprisingly high amount of ressources.
 
-Note: if you think you web browser might be running on your computer's integrated GPU and want to make it run on your dedicated one (if you have one), check out [<b>this tutorial (Windows)</b>](https://www.amd.com/en/support/kb/faq/gpu-110). While the game should run fine even on low-end integrated GPUs, using the dedicated GPU will help make sure you don't experience any fps drop aven in the most ressource-intensive situations.
+Note: if you think you web browser might be running on your computer's integrated GPU and want to make it run on your dedicated one (if you have one), check out [<b>this tutorial (Windows)</b>](https://www.amd.com/en/support/kb/faq/gpu-110). While the game should run fine even on low-end integrated GPUs, using the dedicated GPU will help make sure you don't experience any fps drop even in the most ressource-intensive situations.
   
 ***
 
