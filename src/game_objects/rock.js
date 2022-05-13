@@ -7,6 +7,9 @@ class Rock extends ObjectPos {
     constructor(x, y) {
         super(chooseRock(), -width / 2 + x, Barrel.height / 2, -height / 2 + y, 0, 0)
         this.physicsImpostor = new BABYLON.PhysicsImpostor(this.shape, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 70000, restitution: 0.2 })
+        
+        this.shape.rotate(BABYLON.Axis.Y, Math.random() * Math.PI)
+          
     }
 }
 

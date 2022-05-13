@@ -88,6 +88,10 @@ class ObjectEnum {
         x.material.emissiveColor = new BABYLON.Color3(0.5, 0.5, 0.5)
       } else if (model == "egyptian_cat" || model == "egyptian_jackal" || model == "egyptian_moon") {
         x.material.emissiveColor = new BABYLON.Color3(0.5, 0.5, 0.5)
+      } else if (model == "military_box"){
+        x.material.emissiveColor = new BABYLON.Color3(0.4, 0.4, 0.4)
+      } else if (model == "rock"){
+        x.material.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.3)
       }
       //x.forceSharedVertices();
       // x.cullingStrategy = BABYLON.AbstractMesh.CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY

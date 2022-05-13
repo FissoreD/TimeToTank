@@ -10,12 +10,12 @@ class dome extends SpecialBonus {
     createDome() {
         this.dome = new BABYLON.MeshBuilder.CreateSphere("dome", { diameter: this.radius }, scene)
         var domeMaterial = new BABYLON.StandardMaterial("domeMaterial", scene);
-        domeMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0.2);
+        domeMaterial.diffuseColor = new BABYLON.Color3(0.05, 0.1, 0.3);
         domeMaterial.emissiveTexture = new BABYLON.Texture("textures/dome.jpg", scene)
         domeMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
         domeMaterial.backFaceCulling = false
         this.dome.material = domeMaterial
-        this.dome.visibility = 0.1;
+        this.dome.visibility = 0.15;
         this.dome.parent = this.tank.shape
         this.dome.isVisible = false
     }
