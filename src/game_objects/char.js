@@ -92,6 +92,9 @@ class Char extends ObjectPos {
 
     this.charExploseSound = new Audio('audio/charExplosion.mp3');
     this.charExploseSound.volume = 0.4
+    
+    this.vehicleExplosionSound = new Audio('audio/vehicleExplosion.mp3');
+    this.vehicleExplosionSound.volume = 1
 
     this.specialBonuses = [];
 
@@ -336,7 +339,11 @@ class Char extends ObjectPos {
     this.regenstartDate = Date.now() - this.regencooldown + this.regentimeCooled;
   }
 
-  dispose(forceDispose) {
+  dispose(forceDispose, displayExplosion) {
+    if (displayExplosion) {
+      tankExplosion(this.shape.position)
+      playSoundWithDistanceEffect(this.vehicleExplosionSound, this.shape)
+    }
     super.dispose(forceDispose)
     this.healtBar.disposeBar()
     this.specialBonuses.forEach(b => b.fullDispose())

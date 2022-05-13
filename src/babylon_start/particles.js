@@ -941,7 +941,6 @@ function massiveExplosion(emitter) {
 
 
     // Color gradient
-
     particleSystem3.addColorGradient(0, new BABYLON.Color4(0.1, 0.1, 0.1, 0.5), new BABYLON.Color4(0.2, 0.2, 0.2, 0.5));
     particleSystem3.addColorGradient(0.4, new BABYLON.Color4(0.2, 0.2, 0.2, 0.5), new BABYLON.Color4(0.4, 0.4, 0.4, 0.5));
     particleSystem3.addColorGradient(0.7, new BABYLON.Color4(0.3, 0.3, 0.3, 0.2), new BABYLON.Color4(0.5, 0.5, 0.5, 0.4));
@@ -983,6 +982,178 @@ function massiveExplosion(emitter) {
     particleSystem3.particleEmitterType = emitterType;
 
     particleSystem3.manualEmitCount = 2000;
+    particleSystem3.disposeOnStop = true;
+
+    particleSystem1.start();
+    particleSystem2.start();
+    particleSystem3.start();
+}
+
+function tankExplosion(emitter) {
+    //---------------------------------------------------------------------------
+    // Create the core of the explosion
+    var particleSystem1 = new BABYLON.ParticleSystem("particles", 600);
+
+    // Texture of each particle
+    particleSystem1.particleTexture = new BABYLON.Texture("textures/flare.png");
+
+    // lifetime
+    particleSystem1.minLifeTime = 0.5;
+    particleSystem1.maxLifeTime = 1.25;
+
+    // Emit rate
+    particleSystem1.emitRate = 600;
+    particleSystem1.minEmitPower = 0.5;
+    particleSystem1.maxEmitPower = 1.5;
+
+    // Gravity
+    particleSystem1.gravity = new BABYLON.Vector3(0.25, 4, 0);
+
+    // Color
+    particleSystem1.updateSpeed = 0.01;
+    particleSystem1.color1 = new BABYLON.Color4(1, 0.3, 0, 1);
+    particleSystem1.color2 = new BABYLON.Color4(1, 0.5, 0, 1);
+    particleSystem1.colorDead = new BABYLON.Color4(0.5, 0.27, 0, 0.77);
+
+
+    // Speed gradient
+    particleSystem1.addVelocityGradient(0, 1, 1.5);
+    particleSystem1.addVelocityGradient(0.1, 0.8, 0.9);
+    particleSystem1.addVelocityGradient(0.7, 0.4, 0.5);
+    particleSystem1.addVelocityGradient(1, 0.1, 0.2);
+
+
+    // Rotation
+    particleSystem1.minInitialRotation = 0;
+    particleSystem1.maxInitialRotation = Math.PI;
+    particleSystem1.minAngularSpeed = -1;
+    particleSystem1.maxAngularSpeed = 1;
+
+    particleSystem1.addSizeGradient(0.1, 0.5);
+    particleSystem1.addSizeGradient(0.5, 1);
+
+
+    // Blendmode
+    particleSystem1.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE;
+
+    // Emitter shape
+    particleSystem1.emitter = emitter;
+    var emitterType = new BABYLON.SphereParticleEmitter();
+    emitterType.radius = 1;
+    emitterType.radiusRange = 0.5;
+
+    particleSystem1.particleEmitterType = emitterType;
+
+    particleSystem1.manualEmitCount = 300;
+    particleSystem1.disposeOnStop = true;
+
+    
+    //---------------------------------------------------------------------------
+    // Create the little fragments
+    var particleSystem2 = new BABYLON.ParticleSystem("fragments", 400, scene);
+
+    //Texture of each particle
+    particleSystem2.particleTexture = new BABYLON.Texture("textures/star.jpg", scene);
+
+    // Where the particles come from
+    particleSystem2.emitter = emitter;
+    var emitterType = new BABYLON.SphereParticleEmitter();
+    emitterType.radius = 0.4;
+    emitterType.radiusRange = 0.5;
+
+    particleSystem2.particleEmitterType = emitterType;
+
+
+    // Colors of all particles
+    particleSystem2.color1 = new BABYLON.Color4(0.97, 0.77, 0.11);
+    particleSystem2.color2 = new BABYLON.Color4(0.95, 0.49, 0.02);
+    particleSystem2.colorDead = new BABYLON.Color4(0.9, 0.6, 0.11, 0.86);
+
+    // Size of each particle
+    particleSystem2.minSize = 0.1;
+    particleSystem2.maxSize = 0.3;
+
+    // Life time of each particle
+    particleSystem2.minLifeTime = 0.5;
+    particleSystem2.maxLifeTime = 2;
+
+    // Emission rate
+    particleSystem2.manualEmitCount = 100;
+
+    // Blend mode
+    particleSystem2.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE;
+
+    // Set the gravity of all particles
+    particleSystem2.gravity = new BABYLON.Vector3(0, -2.81, 0);
+
+    // Angular speed, in radians
+    particleSystem2.minAngularSpeed = 0;
+    particleSystem2.maxAngularSpeed = Math.PI;
+
+    // Speed
+    particleSystem2.minEmitPower = 2;
+    particleSystem2.maxEmitPower = 4;
+
+    particleSystem2.updateSpeed = 0.02;
+    particleSystem2.disposeOnStop = true;
+    //---------------------------------------------------------------------------
+    //Create the smoke of the explosion
+    var particleSystem3 = new BABYLON.ParticleSystem("particles", 600);
+
+    // Texture of each particle
+    particleSystem3.particleTexture = new BABYLON.Texture("textures/smoke.png");
+
+    // lifetime
+    particleSystem3.minLifeTime = 0.5;
+    particleSystem3.maxLifeTime = 2.5;
+
+    // Emit rate
+    particleSystem3.emitRate = 600;
+    particleSystem3.minEmitPower = 1.5;
+    particleSystem3.maxEmitPower = 2.5;
+
+    // Gravity
+    particleSystem3.gravity = new BABYLON.Vector3(0.25, 4, 0);
+    
+    // Color gradient
+    particleSystem3.addColorGradient(0, new BABYLON.Color4(0, 0, 0, 0.9));
+    particleSystem3.addColorGradient(0.4, new BABYLON.Color4(0.1, 0.1, 0.1, 0.85));
+    particleSystem3.addColorGradient(0.7, new BABYLON.Color4(0.15, 0.15, 0.15, 0.7));
+    particleSystem3.addColorGradient(1.0, new BABYLON.Color4(0.25, 0.25, 0.25, 0.5));
+    
+    particleSystem3.updateSpeed = 0.01;
+
+
+    // Speed gradient
+    particleSystem3.addVelocityGradient(0, 1, 1.5);
+    particleSystem3.addVelocityGradient(0.1, 0.8, 0.9);
+    particleSystem3.addVelocityGradient(0.7, 0.4, 0.5);
+    particleSystem3.addVelocityGradient(1, 0.1, 0.2);
+
+
+    // Rotation
+    particleSystem3.minInitialRotation = 0;
+    particleSystem3.maxInitialRotation = Math.PI;
+    particleSystem3.minAngularSpeed = -1;
+    particleSystem3.maxAngularSpeed = 1;
+
+    // Size
+    particleSystem3.minSize = 0.4
+    particleSystem3.maxSize = 1.5
+
+
+    // Blendmode
+    particleSystem3.blendMode = BABYLON.ParticleSystem.BLENDMODE_STANDARD;
+
+    // Emitter shape
+    particleSystem3.emitter = emitter;
+    var emitterType = new BABYLON.SphereParticleEmitter();
+    emitterType.radius = 1;
+    emitterType.radiusRange = 0.8;
+
+    particleSystem3.particleEmitterType = emitterType;
+
+    particleSystem3.manualEmitCount = 220;
     particleSystem3.disposeOnStop = true;
 
     particleSystem1.start();

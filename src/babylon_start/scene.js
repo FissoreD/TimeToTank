@@ -204,8 +204,8 @@ class Scene {
             c.destroyTank()
 
             setTimeout(() => {
-              if (!c.shape.isDisposed()) c.dispose(true)
-            }, 12000)
+              if (!c.shape.isDisposed()) c.dispose(true, true)
+            }, 5000)
 
             if (current_level_dico.lvlObjective == levelObjectives.getAllRelicsAndTanks && relics.length != 0) {
               setTimeout(() => {
@@ -241,6 +241,9 @@ class Scene {
             index = charsAllies.indexOf(c)
             if (index !== -1) charsAllies.splice(index, 1)
             c.destroyTank()
+            setTimeout(() => {
+              if (!c.shape.isDisposed()) c.dispose(true, true)
+            }, 5000)
           }
         })
 
