@@ -7,7 +7,7 @@
 |:-------------------------:|:-------------------------:|
 |[![TRAILER](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE) | [![TRAILER](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)|
   
-[<b>PLAY THE GAME</b>](https://noebernigaud.github.io/Tank3D/src/)
+[<b>CLICK HERE TO PLAY THE GAME</b>](https://noebernigaud.github.io/Tank3D/src/)
   
 ***
 
@@ -64,7 +64,7 @@ At first, we started by building the engine of the engine, which would later rul
 <ul>
    <li>At the beginning, the gravity didn't look like it was working correctly. Tanks felt like ballons, as they were falling very slowly. We eventually realized that this was due to our scale being accidentaly gigantic, and therefore re-sized all the object's dimension by dividing them by 40, which corrected the issue.
   <li>We had a lot of trouble implementing the tank's movements, in particular setting up the friction, to create natural movement. Using the Babylonjs engine's friction feature was preventing the tank to move correctly, but setting it to 0 would make the tank glide like if it was on ice. Therefore, we had to create our own mechanism to have a dynamic friction parameter and apply forces that would emulate a natural-looking friction when moving the tank.</li>
-  <li>Another major difficulty was the import and usage of our first models. Understanding them and how they work was particularly challenging as we had no prior experience in 3D rendering</li>
+  <li>Another major difficulty was the import and usage of our first models. Understanding them and how they work was particularly challenging as we had no prior experience in 3D rendering.</li>
   </ul>
 
 The engine's development is also the period where we created the bricks of the interaction between the player and the game, and made our first animations. The game was rather basic at this point and there was no gameplay, but it had all the fundations to build up the rest of our game. There was still a couple of issues in the engine that we would eventually correct later, but we were quite happy about this first step and ready to start implementing the game's feature.
