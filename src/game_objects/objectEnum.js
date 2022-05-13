@@ -90,7 +90,7 @@ class ObjectEnum {
         x.material.emissiveColor = new BABYLON.Color3(0.5, 0.5, 0.5)
       } else if (model == "military_box"){
         x.material.emissiveColor = new BABYLON.Color3(0.4, 0.4, 0.4)
-      } else if (model == "rock"){
+      } else if (model == "rock" || model == "desert_rock"){
         x.material.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.3)
       }
       //x.forceSharedVertices();
