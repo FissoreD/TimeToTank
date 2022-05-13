@@ -27,7 +27,7 @@ We are three students at the University of Côte d'Azur in M1 of Computer Scienc
 While at the start we decided that everybody would do a little bit of everything, with time we naturaly all grew some affinity for particular domains and made them our speciality:
   
 <ul>
-  <li>VENTURELLI Antoine was our models, particules, and textures specialist.</li>
+  <li>VENTURELLI Antoine was our models, particules effects, and textures specialist.</li>
   <li>FISSORE Davide was in charge of the menus and the elemental bricks behind the project's implementations.</li>
   <li>BERNIGAUD Noe was taking care of features' algorithms, and the musics and sound effects.</li>
 </ul>
