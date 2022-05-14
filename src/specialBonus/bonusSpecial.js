@@ -119,13 +119,14 @@ class SpecialBonus {
   addToChar(char = undefined) {
     if (char) this.tank = char
     this.keyListener = listenerList[this.tank.specialBonuses.length];
+    let image = this.bonusType.image.split(".")[0] + "_up.png"
     if (this.tank == char1) {
       addedObtainableBonus.push(
         new BonusEnum(
           this.name + " level up",
           this.bonusLevelUp,
           "Level up the power of the " + this.name + " special bonus",
-          "./images/health.png",
+          image,
           this
         ))
     }
@@ -258,12 +259,12 @@ class SpecialBonus {
   static createSpecialBonusList(tank) {
     return [
       new crossHair(tank),
-      new MachineGun(tank),
-      new dome(tank),
-      new SpeedTurbo(tank),
-      new MindControl(tank),
-      new Teleport(tank),
-      new BullCharge(tank),
+      // new MachineGun(tank),
+      // new dome(tank),
+      // new SpeedTurbo(tank),
+      // new MindControl(tank),
+      // new Teleport(tank),
+      // new BullCharge(tank),
       new Grenade(tank),
       new Allies(tank),
     ].filter(e => !tank.specialBonuses.map(e => e.name).includes(e.name));
