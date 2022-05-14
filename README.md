@@ -77,9 +77,13 @@ The engine's development is also the period where we created the bricks of the i
 
 What marked the transition between the engine's development and the features development was the introduction of the heightmap. This was a game-changer both for graphics and gameplay. After that, we developped menus, different levels, added new models, and changed our empty world into a beautiful island. We also introduced the sounds and music, and build a function to make sound's volumes dynamic depending on the distance of the emitter relative to the player.
 
+A difficulty we encountered during this stage of development was the light. Since the beginning, all our objects had an emissive light (they were all phosphorescent), which wasn't looking natural and also was preventing us to diplay shadows properly. When changing lights, we also had to change our tank model as the previous one wasn't reacting well to that change.
+
 The opponents' AI was then deployed, as well as multiple level objectives. One of the main challenge for the AI was to keep it simple but also make it look natural and interesting, and we are very happy about the current result. Another big part was to make the AI stay in the island and not go into the water, and to make it target the player, which were respectively solved with invisible delimiters and invisible rays.
 
 Later on, we built levels with specific missions, such as timed levels, levels where you would have to find some items, or ennemies that could only be damaged once the player fullfil a condition. This variety in the gameplay and objectives allows the game to be less repetitive, and keep players on their toes.
+
+We also introduced the different biomes (earth, sand, and snow) to make the visual experience more diverse, and give each biome their own identity. A fun thing about the biomes is that they actually all are loaded right at the start of the game - the 2 that are not currently used are below, invisible and uninteractible. We move the biomes up and down depending on which one we need, and render only the one we're using. It kind of works like a theatre piece, where the different scenes are hidden behind the curtains waiting for their turn to be displayed.
   
 ***
 
