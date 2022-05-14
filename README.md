@@ -62,7 +62,7 @@ While the idea was taken from there, nothing from the code is common between bot
 
 At first, we started by building the engine of the engine, which would later rule all the game's interactions and mechanics.This was the most difficult part of the development, as problems that would seem quite simple could take a lot of time to solve. Moreover, we were beginners in Babylonjs, and bending the physic engine to our needs wasn't always easy.
 <ul>
-   <li>At the beginning, the gravity didn't look like it was working correctly. Tanks felt like ballons, as they were falling very slowly. We eventually realized that this was due to our scale being accidentaly gigantic, and therefore re-sized all the object's dimension by dividing them by 40, which corrected the issue.
+   <li>At the beginning, the gravity didn't look like it was working correctly. Tanks felt like ballons, as they were falling very slowly. We eventually realized that this was due to the scale of our world being accidentaly gigantic, and therefore re-sized all the object's dimension by dividing them by 40, which corrected the issue.
   <li>We had a lot of trouble implementing the tank's movements, in particular setting up the friction, to create natural movement. Using the Babylonjs engine's friction feature was preventing the tank to move correctly, but setting it to 0 would make the tank glide like if it was on ice. Therefore, we had to create our own mechanism to have a dynamic friction parameter and apply forces that would emulate a natural-looking friction when moving the tank.</li>
   <li>Another major difficulty was the import and usage of our first models. Understanding them and how they work was particularly challenging as we had no prior experience in 3D rendering.</li>
   </ul>
