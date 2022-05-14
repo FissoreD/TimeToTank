@@ -6,7 +6,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("../images/tank_bg.jpg");
+  background-image: url("../images/TimeToTank_bg.jpg");
 }
 
 body * {
