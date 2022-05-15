@@ -1,9 +1,9 @@
 class dome extends SpecialBonus {
 
     constructor(tank, isPermanent = false) {
-        super(tank, SPECIAL_BONUS_ID.DOME, 15000, 15000, isPermanent);
-        this.life = 3;
-        this.maxLife = 3;
+        super(tank, SPECIAL_BONUS_ID.DOME, 15000, 5000, isPermanent);
+        this.life = 2;
+        this.maxLife = 2;
         this.radius = 3;
     }
 

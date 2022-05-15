@@ -1,6 +1,6 @@
 class Teleport extends SpecialBonus {
     constructor(tank) {
-        super(tank, SPECIAL_BONUS_ID.TELEPORT, 5000);
+        super(tank, SPECIAL_BONUS_ID.TELEPORT, 6000);
     }
 
     use() {

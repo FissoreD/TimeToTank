@@ -30,7 +30,7 @@ class Char extends ObjectPos {
         break;
       default: break;
     }
-    super(type, -width / 2 + x, Char.height / 2, -height / 2 + y, vitesse, angle, life);
+    super(type, -width / 2 + x, Char.height / 2, -height / 2 + y, vitesse + (type.name == ObjectEnum.Player.name) ? 0 : (biome == "Earth" ? 0 : (biome == "Sand" ? Math.floor(vitesse / 4) : Math.floor(vitesse / 3))), angle, life);
 
     this.getTurretTank().rotate(BABYLON.Axis.X, -0.01)
     this.getTurretTank().rotate(BABYLON.Axis.X, +0.01)
@@ -55,13 +55,13 @@ class Char extends ObjectPos {
       MoveAI.rotateTurret(this)
     }
 
-    this.delayMinBetweenBullets = tempsMinEntreTirsEnMillisecondes;
+    this.delayMinBetweenBullets = tempsMinEntreTirsEnMillisecondes - (type.name == ObjectEnum.Player.name) ? 0 : (biome == "Earth" ? 0 : (biome == "Sand" ? Math.floor(tempsMinEntreTirsEnMillisecondes / 4) : Math.floor(tempsMinEntreTirsEnMillisecondes / 3)));
     this.delayMinBetweenMines = 5000;
-    this.bulletSpeed = bulletSpeed;
+    this.bulletSpeed = bulletSpeed + (type.name == ObjectEnum.Player.name) ? 0 : (biome == "Earth" ? 0 : (biome == "Sand" ? Math.floor(bulletSpeed / 4) : Math.floor(bulletSpeed * 3)));
     this.bulletLife = bulletLife;
-    this.bulletDamage = bulletDamage + (biome == "Earth" ? 0 : (biome == "Sand" ? Math.floor(bulletDamage / 3) : Math.floor(bulletDamage * 2 / 3)))
+    this.bulletDamage = bulletDamage + (type.name == ObjectEnum.Player.name) ? 0 : (biome == "Earth" ? 0 : (biome == "Sand" ? Math.floor(bulletDamage / 3) : Math.floor(bulletDamage * 2 / 3)))
     this.inclinaisonTurretIncrement = inclinaisonTurretIncrement || 0.002;
-    this.health = health + (biome == "Earth" ? 0 : (biome == "Sand" ? Math.floor(health / 2) : health))
+    this.health = health + (type.name == ObjectEnum.Player.name) ? 0 : (biome == "Earth" ? 0 : (biome == "Sand" ? Math.floor(health / 2) : health))
     this.maxHealth = this.health
 
     //this.test = BABYLON.MeshBuilder.CreateSphere("test", { diameter: 0.1, segments: 4 }, scene);
@@ -92,7 +92,7 @@ class Char extends ObjectPos {
 
     this.charExploseSound = new Audio('audio/charExplosion.mp3');
     this.charExploseSound.volume = 0.4
-    
+
     this.vehicleExplosionSound = new Audio('audio/vehicleExplosion.mp3');
     this.vehicleExplosionSound.volume = 1
 

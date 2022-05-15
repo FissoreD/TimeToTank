@@ -1,6 +1,6 @@
 class SpeedTurbo extends SpecialBonus {
     constructor(tank) {
-        super(tank, SPECIAL_BONUS_ID.SPEED_TURBO, 6000, 3000);
+        super(tank, SPECIAL_BONUS_ID.SPEED_TURBO, 5000, 4000);
     }
 
     disable() {

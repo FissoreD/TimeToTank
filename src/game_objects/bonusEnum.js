@@ -3,29 +3,29 @@ class BonusEnum {
     static bonusEnumList = [
         new BonusEnum(
             "Speed",
-            function () { char1.speedNorme += 1.5 },
+            function () { char1.speedNorme += 1 },
             "Your char will go faster",
             "images/speed_tank.png",
             "speedT"
         ),
         new BonusEnum(
             "Reload bullet",
-            function () { if (char1.delayMinBetweenBullets >= 100) char1.delayMinBetweenBullets -= 100 },
-            "The delay between shoots is faster",
+            function () { char1.delayMinBetweenBullets *= 0.80 },
+            "The delay between shoots is 1.5x shorter",
             "images/reload_bullet.png",
             "reloadB"
         ),
         new BonusEnum(
             "Bullets speed",
-            function () { char1.bulletSpeed += 20 },
-            "Now your bullets will go two time faster !",
+            function () { char1.bulletSpeed += 30 },
+            "Now your bullets will go 30km/h faster !",
             "images/speed_bullet.png",
             "speedB"
         ),
         new BonusEnum(
             "Bonus bullet damage",
-            function () { char1.bulletDamage += 3 },
-            "With this bonus your bullets will deal 5 more damage",
+            function () { char1.bulletDamage += 4 },
+            "With this bonus your bullets will deal 4 more damage",
             "images/bullet_damage.png"
         ),
         new BonusEnum(

@@ -125,7 +125,7 @@ class SpecialBonus {
         new BonusEnum(
           this.name + " level up",
           this.bonusLevelUp,
-          "Level up the power of the " + this.name + " special bonus",
+          "Level up the power of the " + this.name + " special bonus by dividing its cooldown by 2",
           image,
           this
         ))
