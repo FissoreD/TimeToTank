@@ -3,7 +3,7 @@
 ## <p  align="center">by *D.N.A. Production*<p>
 ***
 
-| <b>Trailer</b> | <b>Gameplay</b> |
+| <b>TRAILER</b> | <b>GAMEPLAY</b> |
 |:-------------------------:|:-------------------------:|
 |[![TRAILER](https://img.youtube.com/vi/cT2lDLww-wA/0.jpg)](https://www.youtube.com/watch?v=cT2lDLww-wA) | [![GAMEPLAY](https://img.youtube.com/vi/6_SWAfjujOU/0.jpg)](https://www.youtube.com/watch?v=6_SWAfjujOU)|
   
