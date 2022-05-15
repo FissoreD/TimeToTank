@@ -1,6 +1,6 @@
 import { SpecialBonus, SPECIAL_BONUS_ID } from "./bonusSpecial.js";
 import { bullChargeEffect } from "../babylon_start/particles.js";
-import { inputStates, charsAI } from "../main/global_vars.js";
+import { inputStates, charsAI, chars } from "../main/global_vars.js";
 import { scene } from "../babylon_start/scene.js";
 
 export class BullCharge extends SpecialBonus {
