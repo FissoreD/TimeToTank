@@ -10,7 +10,7 @@ export class CharBoss extends Char {
 
     constructor(type, x, y, angle, vitesse, tempsMinEntreTirsEnMillisecondes, bulletSpeed = 40, bulletLife = 2, life = 1, health = 50, bulletDamage = 5, inclinaisonTurretIncrement = 0.002) {
         super(type, x, y, angle, vitesse, tempsMinEntreTirsEnMillisecondes, bulletSpeed, bulletLife, life, health, bulletDamage, inclinaisonTurretIncrement)
-        this.nbDmgBeforeShield = 10
+        this.nbDmgBeforeShield = 15
         this.dmgTakenSinceShield = 0
         this.domeBoss = new dome(this, true)
         this.domeBoss.addToChar()
@@ -25,13 +25,13 @@ export class CharBoss extends Char {
 
         if (damage < this.health) {
             if (this.nbDmgBeforeShield <= 0) {
-                var char = new Char("mini", scene.width / 2 + this.shape.position.x + 2, scene.height / 2 + this.shape.position.y - 2, 0, 1, 1000, 45, 2, 1, 3, 3);
+                var char = new Char("normal", scene.width / 2 + this.shape.position.x + 2, scene.height / 2 + this.shape.position.y - 2, 0, 1, 2000, 30);
                 charsAI.push(char);
                 char.setStrategy(new guaranteedAI(char))
                 chars.push(char);
                 char.applyStrategy()
 
-                var char2 = new Char("mini", scene.width / 2 + this.shape.position.x - 2, scene.height / 2 + this.shape.position.y + 2, 0, 1, 1000, 45, 2, 1, 3, 3);
+                var char2 = new Char("normal", scene.width / 2 + this.shape.position.x - 2, scene.height / 2 + this.shape.position.y + 2, 0, 1, 2000, 30);
                 charsAI.push(char2);
                 char2.setStrategy(new guaranteedAI(char2))
                 chars.push(char2);

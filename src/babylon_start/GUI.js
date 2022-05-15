@@ -226,7 +226,7 @@ export class Menu {
         scene.char1.dispose(true)
         this.clearBonus()
         remove_all_objects()
-        startgame(scele.level)
+        startgame(scene.level)
     }
 
     clearBonus() {

@@ -44,7 +44,7 @@ export class Char extends ObjectPos {
         break;
       default: break;
     }
-    super(type, -scene.width / 2 + x, Char.height / 2, -scene.height / 2 + y, vitesse + ((type.name == ObjectEnum.Player.name) ? 0 : (biome == "Earth" ? 0 : (biome == "Sand" ? vitesse / 4 : vitesse / 3))), angle, life);
+    super(type, -scene.width / 2 + x, Char.height / 2, -scene.height / 2 + y, vitesse + ((type.name == ObjectEnum.Player.name) ? 0 : ((biome == "Earth") ? 0 : ((biome == "Sand") ? (vitesse / 4) : vitesse))), angle, life);
 
     this.getTurretTank().rotate(BABYLON.Axis.X, -0.01)
     this.getTurretTank().rotate(BABYLON.Axis.X, +0.01)
@@ -69,9 +69,9 @@ export class Char extends ObjectPos {
       MoveAI.rotateTurret(this)
     }
 
-    this.delayMinBetweenBullets = tempsMinEntreTirsEnMillisecondes - ((type.name == ObjectEnum.Player.name) ? 0 : (biome == "Earth" ? 0 : (biome == "Sand" ? Math.floor(tempsMinEntreTirsEnMillisecondes / 4) : Math.floor(tempsMinEntreTirsEnMillisecondes / 3))))
+    this.delayMinBetweenBullets = tempsMinEntreTirsEnMillisecondes - ((type.name == ObjectEnum.Player.name) ? 0 : ((biome == "Earth") ? 0 : ((biome == "Sand") ? Math.floor(tempsMinEntreTirsEnMillisecondes / 4) : Math.floor(tempsMinEntreTirsEnMillisecondes / 2))))
     this.delayMinBetweenMines = 5000;
-    this.bulletSpeed = bulletSpeed;
+    this.bulletSpeed = bulletSpeed + ((type.name == ObjectEnum.Player.name) ? 0 : ((biome == "Snow") ? (Math.floor(bulletSpeed / 2)) : 0));
     this.bulletLife = bulletLife;
     this.bulletDamage = bulletDamage + ((type.name == ObjectEnum.Player.name) ? 0 : (biome == "Earth" ? 0 : (biome == "Sand" ? Math.floor(bulletDamage / 3) : Math.floor(bulletDamage / 2))))
     this.inclinaisonTurretIncrement = inclinaisonTurretIncrement || 0.002;
