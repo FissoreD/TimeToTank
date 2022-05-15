@@ -39,7 +39,7 @@ export class crossHair extends SpecialBonus {
       ShootAI.targetPlayer(this.tank, 1000, true, laserCoolDown, true, this.crossHair);
 
       if (this.crossHair.position) this.crossHair.position.y -= 200
-      if (hl) hl.removeAllMeshes()
+      if (scene.hl) scene.hl.removeAllMeshes()
     }
   }
 
@@ -48,9 +48,9 @@ export class crossHair extends SpecialBonus {
  * @param {boolean} toHighlight 
  */
   highlightTank(tank, toHighlight) {
-    if (toHighlight && !hl.hasMesh(tank.shape.getChildMeshes()[0])) {
+    if (toHighlight && !scene.hl.hasMesh(tank.shape.getChildMeshes()[0])) {
       let fileterMeshToHigLight = tank.getMeshesToHighlight();
-      fileterMeshToHigLight.forEach(m => hl.addMesh(m, new BABYLON.Color3(1, 0, 0)))
+      fileterMeshToHigLight.forEach(m => scene.hl.addMesh(m, new BABYLON.Color3(1, 0, 0)))
     }
   }
 
