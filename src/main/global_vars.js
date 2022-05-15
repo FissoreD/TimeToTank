@@ -85,7 +85,7 @@ bulletImage.src = './images/bullet.png';
 export let explosionSound = new Audio('audio/Explosion2.mp3');
 explosionSound.volume = 0.2;
 
-let applauseSound = new Audio('audio/Human-Applause-LargeCrowd01.mp3');
+export let applauseSound = new Audio('audio/Human-Applause-LargeCrowd01.mp3');
 
 export let menuHoverSound = new Audio('audio/hoverMenu.mp3');
 menuHoverSound.volume = 0.2
