@@ -31,7 +31,7 @@ export class crossHair extends SpecialBonus {
         this.highlightTank(char, true)
 
       } else {
-        if (hl) hl.removeAllMeshes()
+        if (scene.hl) scene.hl.removeAllMeshes()
       }
       if (this.crossHair.position) this.crossHair.position = position
     }
