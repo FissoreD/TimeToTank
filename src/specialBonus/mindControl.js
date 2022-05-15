@@ -6,7 +6,7 @@ import { charsAI } from "../main/global_vars.js";
 
 export class MindControl extends SpecialBonus {
     constructor(tank) {
-        super(tank, SPECIAL_BONUS_ID.MIND_CONTROL, 10000, 10000);
+        super(tank, SPECIAL_BONUS_ID.MIND_CONTROL, 12000, 6000);
         this.radius = 10;
     }
 

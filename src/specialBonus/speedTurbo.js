@@ -4,7 +4,7 @@ import { SpecialBonus, SPECIAL_BONUS_ID } from "./bonusSpecial.js";
 
 export class SpeedTurbo extends SpecialBonus {
     constructor(tank) {
-        super(tank, SPECIAL_BONUS_ID.SPEED_TURBO, 6000, 3000);
+        super(tank, SPECIAL_BONUS_ID.SPEED_TURBO, 5000, 4000);
     }
 
     disable() {
@@ -18,7 +18,7 @@ export class SpeedTurbo extends SpecialBonus {
             super.activate()
             createTurboParticles(this.tank.shape, this.bonusStartedDelay)
             this.oldSpeed = this.tank.speedNorme;
-            this.tank.speedNorme = this.oldSpeed + 5;
+            this.tank.speedNorme = this.oldSpeed + 6;
         }
     }
 }

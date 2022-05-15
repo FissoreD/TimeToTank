@@ -63,13 +63,13 @@ export class Menu {
             if (this.toDisplayScenario) {
                 let text = [
                     `European Island - 1944 A.C.<br>
-                    You are in the second world war and try to stop <they>insanous villain</they> <br>
-                    from change the course of the war for their profit. <br>
+                    You are in the second world war and have to stop <they>insanous villain</they> <br>
+                    from changing the course of the war for their profit. <br>
                     This is your first mission ! Be <we> brave</we>`,
                     `Egypt - 544 B.C.<br>
                     You have passed the first stage of <we>your</we> journey and now <we>you</we> enter the Egyptian world, <br> where <we>you</we> have to collect the Egyptian statues away from <they>enemies</they>.<br> <we>Good Luck!</we>`,
                     `Antartica - 980 A.C.<br>
-                    This is the last stage of you mission, there are still some <they>bad tank</they> went in Antarctica wanting to melt the ice and build chemical weapon with old virus blocked in the Ice. <br>
+                    This is the last stage of your mission. Some <they>bad guys</they> went in Antarctica wanting to melt the ice to build chemical weapons with an old virus blocked in the Ice. <br>
                     <we>Win</we> this last mission and the world will be a <we>better place</we>.`
                 ]
                 let idx = ["Earth", "Sand", "Snow"].indexOf(scene.current_level_dico.biome)

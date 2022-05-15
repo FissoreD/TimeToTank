@@ -7,7 +7,7 @@ import { chars } from "../main/global_vars.js";
 export class crossHair extends SpecialBonus {
 
   constructor(tank) {
-    super(tank, SPECIAL_BONUS_ID.CROSS_HAIR, 5000);
+    super(tank, SPECIAL_BONUS_ID.CROSS_HAIR, 3000);
     this.isActive = true;
   }
 
