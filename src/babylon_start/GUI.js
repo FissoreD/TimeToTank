@@ -7,6 +7,7 @@ import { remove_all_objects } from "../main/main.js";
 
 import { selected_bonuses, addedObtainableBonus, chars, menuHoverSound, musicBackground } from "../main/global_vars.js";
 import { engine } from "./scene.js";
+import { startgame } from "../main/main.js";
 
 export class Menu {
     constructor() {
