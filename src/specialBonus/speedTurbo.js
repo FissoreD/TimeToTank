@@ -1,4 +1,8 @@
-class SpeedTurbo extends SpecialBonus {
+import { createTurboParticles } from "../babylon_start/particles.js";
+import { SpecialBonus, SPECIAL_BONUS_ID } from "./bonusSpecial.js";
+
+
+export class SpeedTurbo extends SpecialBonus {
     constructor(tank) {
         super(tank, SPECIAL_BONUS_ID.SPEED_TURBO, 5000, 4000);
     }

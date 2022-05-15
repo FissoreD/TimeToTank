@@ -1,4 +1,10 @@
-class Barrel extends ObjectPos {
+import { ObjectPos } from "./objectPos.js";
+import { scene } from "../babylon_start/scene.js";
+import { massiveExplosion } from "../babylon_start/particles.js";
+import { ObjectEnum } from "./objectEnum.js";
+import { barrels, chars } from "../main/global_vars.js";
+
+export class Barrel extends ObjectPos {
 
     static height = 0.01;
     static diameter = 0.8;
@@ -9,7 +15,7 @@ class Barrel extends ObjectPos {
      * @param {number} y 
      */
     constructor(x, y) {
-        super(ObjectEnum.Barrel, -width / 2 + x, Barrel.height / 2, -height / 2 + y, 0, 0)
+        super(ObjectEnum.Barrel, -scene.width / 2 + x, Barrel.height / 2, -scene.height / 2 + y, 0, 0)
         // this.physicsImpostor = new BABYLON.PhysicsImpostor(this.shape, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 3000, restitution: 0.2 })
         this.physicsImpostor = new BABYLON.PhysicsImpostor(this.shape, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 3000, restitution: 0.2 })
         this.isBurning = false

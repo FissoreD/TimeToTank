@@ -1,4 +1,14 @@
-class Bonus extends ObjectPos {
+import { ObjectPos } from "./objectPos.js";
+import { scene } from "../babylon_start/scene.js";
+import { createBonusEffect } from "../babylon_start/particles.js";
+import { addedObtainableBonus } from "../main/global_vars.js";
+import { ObjectEnum } from "./objectEnum.js";
+import { bonuses, chars } from "../main/global_vars.js";
+import { levelMemory } from "../levels/levels.js";
+import { BonusEnum } from "./bonusEnum.js";
+import { createSpecialBonusList } from "../tools/utils.js";
+
+export class Bonus extends ObjectPos {
 
 
     static diameter = 1;
@@ -9,7 +19,7 @@ class Bonus extends ObjectPos {
      * @param {boolean} isSpecial
      */
     constructor(posX, posY, isSpecial = false) {
-        super(isSpecial ? ObjectEnum.SpecialBonus : ObjectEnum.Bonus, -width / 2 + posX, Bonus.diameter / 2, -height / 2 + posY, 0, 0, 1);
+        super(isSpecial ? ObjectEnum.SpecialBonus : ObjectEnum.Bonus, -scene.width / 2 + posX, Bonus.diameter / 2, -scene.height / 2 + posY, 0, 0, 1);
         this.id = posX + "" + posY
         this.physicsImpostor = new BABYLON.PhysicsImpostor(this.shape, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 50000, restitution: 0.5 });
         this.createCollider()
@@ -23,15 +33,15 @@ class Bonus extends ObjectPos {
             let b1 = bonuses.find(e => e.shape == e1.object)
             let tank;
             if (tank = chars.find(c => c.shape == e2.object)) {
-                if (tank != char1) return // TODO modify if want other tank to take this
+                if (tank != scene.char1) return // TODO modify if want other tank to take this
                 if (b1) {
-                    let choices = levelMemory[level].bonuses_onHearth[this.id] || Bonus.randomBonus(3, tank, this.isSpecial)
+                    let choices = levelMemory[scene.level].bonuses_onHearth[this.id] || Bonus.randomBonus(3, tank, this.isSpecial)
 
-                    levelMemory[level].bonuses_onHearth[this.id] = choices
+                    levelMemory[scene.level].bonuses_onHearth[this.id] = choices
                     choices.forEach(e => { if (e.tank) e.tank = tank })
                     scene.menu.bonusChoice(choices)
                     b1.dispose(true);
-                    current_level_dico.addBonusObtained()
+                    scene.current_level_dico.addBonusObtained()
                 }
             }
         }
@@ -39,7 +49,7 @@ class Bonus extends ObjectPos {
 
     static randomBonus(num, tank, isSpecial = false) {
         var res = []
-        var copy_bonusEnum = isSpecial ? SpecialBonus.createSpecialBonusList(tank) : BonusEnum.bonusEnumList.slice().concat(addedObtainableBonus);
+        var copy_bonusEnum = isSpecial ? createSpecialBonusList(tank) : BonusEnum.bonusEnumList.slice().concat(addedObtainableBonus);
         for (var i = 0; i < num; i++) {
             var rand = Math.floor(Math.random() * copy_bonusEnum.length)
             res.push(copy_bonusEnum[rand])

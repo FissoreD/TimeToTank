@@ -1,39 +1,42 @@
-class BonusEnum {
+import { selected_bonuses } from "../main/global_vars.js"
+import { scene } from "../babylon_start/scene.js"
+
+export class BonusEnum {
 
     static bonusEnumList = [
         new BonusEnum(
             "Speed",
-            function () { char1.speedNorme += 1 },
+            function () { scene.char1.speedNorme += 1 },
             "Your char will go faster",
             "images/speed_tank.png",
             "speedT"
         ),
         new BonusEnum(
             "Reload bullet",
-            function () { char1.delayMinBetweenBullets *= 0.80 },
+            function () { scene.char1.delayMinBetweenBullets *= 0.80 },
             "The delay between shoots is 1.5x shorter",
             "images/reload_bullet.png",
             "reloadB"
         ),
         new BonusEnum(
             "Bullets speed",
-            function () { char1.bulletSpeed += 30 },
+            function () { scene.char1.bulletSpeed += 30 },
             "Now your bullets will go 30km/h faster !",
             "images/speed_bullet.png",
             "speedB"
         ),
         new BonusEnum(
             "Bonus bullet damage",
-            function () { char1.bulletDamage += 4 },
+            function () { scene.char1.bulletDamage += 4 },
             "With this bonus your bullets will deal 4 more damage",
             "images/bullet_damage.png"
         ),
         new BonusEnum(
             "Bonus char health",
             function () {
-                char1.maxHealth += 5
-                char1.health += 5
-                char1.healtBar.updatePartition()
+                scene.char1.maxHealth += 5
+                scene.char1.health += 5
+                scene.char1.healtBar.updatePartition()
             },
             "With this bonus your char gains 5 maximum health",
             "images/health.png"
@@ -41,7 +44,7 @@ class BonusEnum {
         new BonusEnum(
             "Bonus char regeneration",
             function () {
-                char1.regenRate++
+                scene.char1.regenRate++
             },
             "With this bonus your char regains one more point of life every 5 sec",
             "images/regeneration.png"

@@ -1,5 +1,8 @@
+import { biome } from "../levels/levels.js";
+import { sceneBab, scene } from "./scene.js";
+
 function explode(emitter) {
-    BABYLON.ParticleHelper.CreateAsync("explosion", scene).then((set) => {
+    BABYLON.ParticleHelper.CreateAsync("explosion", sceneBab).then((set) => {
         set.systems.forEach(s => {
             s.disposeOnStop = true;
         });
@@ -14,14 +17,14 @@ function explode(emitter) {
     });
 }
 
-function bulletExplode(position, isExploding, isCanonFire) {
+export function bulletExplode(position, isExploding, isCanonFire) {
     var isCanonFire = isCanonFire || false;
 
     // Create a particle system
-    var particleSystem = new BABYLON.ParticleSystem("bulletParticles", 200, scene);
+    var particleSystem = new BABYLON.ParticleSystem("bulletParticles", 200, sceneBab);
 
     // Texture of each particle
-    particleSystem.particleTexture = new BABYLON.Texture("textures/flare.png", scene);
+    particleSystem.particleTexture = new BABYLON.Texture("textures/flare.png", sceneBab);
 
     // Where the particles come from
     particleSystem.emitter = position;
@@ -33,7 +36,7 @@ function bulletExplode(position, isExploding, isCanonFire) {
         emitterType.radiusRange = 0;
         particleSystem.particleEmitterType = emitterType;
     } else {
-        let d = char1.getTurretTank().getDirection(BABYLON.Axis.Z);
+        let d = scene.char1.getTurretTank().getDirection(BABYLON.Axis.Z);
         let r = 0.02;
         let d1 = new BABYLON.Vector3(d.x + r, d.y + r, d.z + r);
         let d2 = new BABYLON.Vector3(d.x - r, d.y - r, d.z - r);
@@ -74,7 +77,7 @@ function bulletExplode(position, isExploding, isCanonFire) {
     return particleSystem;
 }
 
-function createSmoke(emitter, isRight = false, isMoving = false, permanent = false) {
+export function createSmoke(emitter, isRight = false, isMoving = false, permanent = false) {
     const box = BABYLON.MeshBuilder.CreateBox("smokeTank", { size: 0.05 });
     box.parent = emitter
     box.position.z -= 0.95
@@ -169,10 +172,11 @@ function createSmoke(emitter, isRight = false, isMoving = false, permanent = fal
 }
 
 
-function createTurboParticles(emitter, delay) {
+export function createTurboParticles(emitter, delay) {
     createTurboEffect(emitter, delay, true)
     createTurboEffect(emitter, delay, false)
 }
+
 function createTurboEffect(emitter, delay, isRight) {
     const box = BABYLON.MeshBuilder.CreateBox("turboTank", { size: 0.05 });
     box.parent = emitter
@@ -182,7 +186,7 @@ function createTurboEffect(emitter, delay, isRight) {
     box.isVisible = false
 
     if (isRight) {
-        var turboLight = new BABYLON.PointLight("turboSpotLight", new BABYLON.Vector3(-0.2, 0, 0), scene);
+        var turboLight = new BABYLON.PointLight("turboSpotLight", new BABYLON.Vector3(-0.2, 0, 0), sceneBab);
         turboLight.diffuse = new BABYLON.Color3(0, 0, 1);
         turboLight.specular = new BABYLON.Color3(0, 0, 1);
         turboLight.intensity = 1.2
@@ -197,10 +201,10 @@ function createTurboEffect(emitter, delay, isRight) {
 
 
     // Create a particle system
-    var particleSystem = new BABYLON.ParticleSystem("turboParticles", 400, scene);
+    var particleSystem = new BABYLON.ParticleSystem("turboParticles", 400, sceneBab);
 
     //Texture of each particle
-    particleSystem.particleTexture = new BABYLON.Texture("textures/boost.png", scene);
+    particleSystem.particleTexture = new BABYLON.Texture("textures/boost.png", sceneBab);
 
     // Where the particles come from
     particleSystem.minEmitBox = new BABYLON.Vector3(0, 0, 0);
@@ -259,7 +263,7 @@ function createTurboEffect(emitter, delay, isRight) {
     particleSystem.start();
 }
 
-function createDust(emitter) {
+export function createDust(emitter) {
     var particleSystem = new BABYLON.ParticleSystem("particles", 500);
 
     // Texture of each particle
@@ -284,7 +288,7 @@ function createDust(emitter) {
 
     // Color gradient
     particleSystem.setColor = () => {
-        if (biome == "Snow") particleSystem.addColorGradient(0, new BABYLON.Color4(1, 1, 1, 0.2), new BABYLON.Color4(1, 1, 1, 0.2))
+        if (biome[0] == "Snow") particleSystem.addColorGradient(0, new BABYLON.Color4(1, 1, 1, 0.2), new BABYLON.Color4(1, 1, 1, 0.2))
         else particleSystem.addColorGradient(0, new BABYLON.Color4(194 / 255, 178 / 255, 128 / 255, 0.2), new BABYLON.Color4(225 / 255, 191 / 255, 146 / 255, 0.1))
     }
 
@@ -317,16 +321,16 @@ function createDust(emitter) {
     return particleSystem;
 }
 
-function playSmoke(particleSystem) {
+export function playSmoke(particleSystem) {
     particleSystem.start();
 }
 
-function stopSmoke(particleSystem) {
+export function stopSmoke(particleSystem) {
     particleSystem.stop();
 }
 
 // function createFire(emitter) {
-//     BABYLON.ParticleHelper.CreateAsync("fire", scene).then((set) => {
+//     BABYLON.ParticleHelper.CreateAsync("fire", sceneBab).then((set) => {
 //         set.systems.forEach(s => {
 //             s.disposeOnStop = true;
 
@@ -352,7 +356,7 @@ function stopSmoke(particleSystem) {
 //     });
 // }
 
-function createBonusEffect(emitter, isSpecialBonus) {
+export function createBonusEffect(emitter, isSpecialBonus) {
     const particleSystem = new BABYLON.ParticleSystem("particles", 50);
 
     //Texture of each particle
@@ -397,7 +401,7 @@ function createBonusEffect(emitter, isSpecialBonus) {
     return particleSystem
 }
 
-function batteryEffect(emitter) {
+export function batteryEffect(emitter) {
     const particleSystem = new BABYLON.ParticleSystem("particles", 25);
 
     //Texture of each particle
@@ -440,10 +444,10 @@ function batteryEffect(emitter) {
     return particleSystem
 }
 
-function createFire(emitter) {
+export function createFire(emitter) {
     //Smoke
-    var smokeSystem = new BABYLON.ParticleSystem("particles", 1000, scene);
-    smokeSystem.particleTexture = new BABYLON.Texture("textures/flare.png", scene);
+    var smokeSystem = new BABYLON.ParticleSystem("particles", 1000, sceneBab);
+    smokeSystem.particleTexture = new BABYLON.Texture("textures/flare.png", sceneBab);
     smokeSystem.minEmitBox = new BABYLON.Vector3(-0.5, 1, -0.5); // Starting all from
     smokeSystem.maxEmitBox = new BABYLON.Vector3(0.5, 1, 0.5); // To...
 
@@ -481,10 +485,10 @@ function createFire(emitter) {
 
 
     // Create a particle system
-    var fireSystem = new BABYLON.ParticleSystem("particles", 2000, scene);
+    var fireSystem = new BABYLON.ParticleSystem("particles", 2000, sceneBab);
 
     //Texture of each particle
-    fireSystem.particleTexture = new BABYLON.Texture("textures/flare.png", scene);
+    fireSystem.particleTexture = new BABYLON.Texture("textures/flare.png", sceneBab);
 
     // Where the particles come from
     fireSystem.minEmitBox = new BABYLON.Vector3(-0.25, 0, -0.25); // Starting all from
@@ -533,12 +537,12 @@ function createFire(emitter) {
     fireSystem.start();
 }
 
-function mindControlParticle(emitter, radius) {
+export function mindControlParticle(emitter, radius) {
     var position = emitter.clone()
     position.y += 0.2
     // Create & launch a particule system
-    var particleSystem = new BABYLON.ParticleSystem("mindControlParticles", 10000, scene);
-    particleSystem.particleTexture = new BABYLON.Texture("textures/flare.png", scene);
+    var particleSystem = new BABYLON.ParticleSystem("mindControlParticles", 10000, sceneBab);
+    particleSystem.particleTexture = new BABYLON.Texture("textures/flare.png", sceneBab);
     particleSystem.color1 = new BABYLON.Color4(0.34, 0.04, 0.3);
     particleSystem.color2 = new BABYLON.Color4(0.37, 0.05, 0.28);
     particleSystem.colorDead = new BABYLON.Color4(0.33, 0.04, 0.33, 0.76);
@@ -587,15 +591,15 @@ function mindControlParticle(emitter, radius) {
     particleSystem.start();
 }
 
-function teleportationParticle(emitter) {
+export function teleportationParticle(emitter) {
     teleportationEffect(emitter, 0)
     teleportationEffect(emitter, 180)
 }
 
 function teleportationEffect(emitter, position) {
     // Create & launch a particule system
-    var particleSystem = new BABYLON.ParticleSystem("spawnParticles", 400, scene);
-    particleSystem.particleTexture = new BABYLON.Texture("textures/flare.png", scene);
+    var particleSystem = new BABYLON.ParticleSystem("spawnParticles", 400, sceneBab);
+    particleSystem.particleTexture = new BABYLON.Texture("textures/flare.png", sceneBab);
     particleSystem.color1 = new BABYLON.Color4(0.7, 0.8, 1.0, 1.0);
     particleSystem.color2 = new BABYLON.Color4(0.2, 0.5, 1.0, 1.0);
     particleSystem.colorDead = new BABYLON.Color4(0, 0, 0.2, 0.0);
@@ -640,9 +644,9 @@ function teleportationEffect(emitter, position) {
     particleSystem.start();
 }
 
-function shieldEffect(emitter, radius, isExploding = false) {
-    var particleSystem = new BABYLON.ParticleSystem("particles", isExploding ? 500 : 300, scene);
-    particleSystem.particleTexture = new BABYLON.Texture("textures/flare.png", scene);
+export function shieldEffect(emitter, radius, isExploding = false) {
+    var particleSystem = new BABYLON.ParticleSystem("particles", isExploding ? 500 : 300, sceneBab);
+    particleSystem.particleTexture = new BABYLON.Texture("textures/flare.png", sceneBab);
 
     particleSystem.emitter = emitter
 
@@ -677,9 +681,9 @@ function shieldEffect(emitter, radius, isExploding = false) {
     particleSystem.start();
 }
 
-function shieldImpact(emitter) {
-    var particleSystem = new BABYLON.ParticleSystem("particles", 200, scene);
-    particleSystem.particleTexture = new BABYLON.Texture("textures/flare.png", scene);
+export function shieldImpact(emitter) {
+    var particleSystem = new BABYLON.ParticleSystem("particles", 200, sceneBab);
+    particleSystem.particleTexture = new BABYLON.Texture("textures/flare.png", sceneBab);
     particleSystem.emitter = emitter
 
     // Colors of all particles
@@ -713,8 +717,8 @@ function shieldImpact(emitter) {
     particleSystem.start();
 }
 
-function bullChargeEffect(emitter, delay) {
-    var bullLight = new BABYLON.SpotLight("bullSpotLight", new BABYLON.Vector3(0, 3, 0), new BABYLON.Vector3(0, -1, 0), Math.PI / 4, 50, scene, true);
+export function bullChargeEffect(emitter, delay) {
+    var bullLight = new BABYLON.SpotLight("bullSpotLight", new BABYLON.Vector3(0, 3, 0), new BABYLON.Vector3(0, -1, 0), Math.PI / 4, 50, sceneBab, true);
     bullLight.diffuse = new BABYLON.Color3(1, 0, 0);
     bullLight.specular = new BABYLON.Color3(1, 0, 0);
     bullLight.intensity = 3
@@ -731,8 +735,8 @@ function bullChargeEffect(emitter, delay) {
 function bullChargeParticle(emitter, position) {
 
     // Create & launch a particule system
-    var particleSystem = new BABYLON.ParticleSystem("bullCharge", 500, scene);
-    particleSystem.particleTexture = new BABYLON.Texture("textures/spark.png", scene);
+    var particleSystem = new BABYLON.ParticleSystem("bullCharge", 500, sceneBab);
+    particleSystem.particleTexture = new BABYLON.Texture("textures/spark.png", sceneBab);
 
     // particleSystem.addColorGradient(0, new BABYLON.Color4(0.87, 0, 0, 0.6));
     // particleSystem.addColorGradient(0.5, new BABYLON.Color4(0.95, 0, 0, 0.71, 0.5));
@@ -776,8 +780,8 @@ function bullChargeParticle(emitter, position) {
 }
 
 function bullChargeEffect2(emitter) {
-    var particleSystem = new BABYLON.ParticleSystem('bullCharge', 600, scene);
-    particleSystem.particleTexture = new BABYLON.Texture('textures/flare.png', scene);
+    var particleSystem = new BABYLON.ParticleSystem('bullCharge', 600, sceneBab);
+    particleSystem.particleTexture = new BABYLON.Texture('textures/flare.png', sceneBab);
 
     particleSystem.minLifeTime = 1;
     particleSystem.maxLifeTime = 3;
@@ -812,13 +816,13 @@ function bullChargeEffect2(emitter) {
     particleSystem.start();
 }
 
-function massiveExplosion(emitter) {
+export function massiveExplosion(emitter) {
     //---------------------------------------------------------------------------
     // Create the core of the explosion
-    var particleSystem1 = new BABYLON.ParticleSystem("core", 600, scene);
+    var particleSystem1 = new BABYLON.ParticleSystem("core", 600, sceneBab);
 
     //Texture of each particle
-    particleSystem1.particleTexture = new BABYLON.Texture("textures/flare.png", scene);
+    particleSystem1.particleTexture = new BABYLON.Texture("textures/flare.png", sceneBab);
 
     // Where the particles come from
     particleSystem1.emitter = emitter
@@ -866,10 +870,10 @@ function massiveExplosion(emitter) {
 
     //---------------------------------------------------------------------------
     // Create the little fragments
-    var particleSystem2 = new BABYLON.ParticleSystem("fragments", 200, scene);
+    var particleSystem2 = new BABYLON.ParticleSystem("fragments", 200, sceneBab);
 
     //Texture of each particle
-    particleSystem2.particleTexture = new BABYLON.Texture("textures/star.jpg", scene);
+    particleSystem2.particleTexture = new BABYLON.Texture("textures/star.jpg", sceneBab);
 
     // Where the particles come from
     particleSystem2.emitter = emitter;
@@ -989,7 +993,7 @@ function massiveExplosion(emitter) {
     particleSystem3.start();
 }
 
-function tankExplosion(emitter) {
+export function tankExplosion(emitter) {
     //---------------------------------------------------------------------------
     // Create the core of the explosion
     var particleSystem1 = new BABYLON.ParticleSystem("particles", 600);
@@ -1047,13 +1051,13 @@ function tankExplosion(emitter) {
     particleSystem1.manualEmitCount = 300;
     particleSystem1.disposeOnStop = true;
 
-    
+
     //---------------------------------------------------------------------------
     // Create the little fragments
-    var particleSystem2 = new BABYLON.ParticleSystem("fragments", 400, scene);
+    var particleSystem2 = new BABYLON.ParticleSystem("fragments", 400, sceneBab);
 
     //Texture of each particle
-    particleSystem2.particleTexture = new BABYLON.Texture("textures/star.jpg", scene);
+    particleSystem2.particleTexture = new BABYLON.Texture("textures/star.jpg", sceneBab);
 
     // Where the particles come from
     particleSystem2.emitter = emitter;
@@ -1114,13 +1118,13 @@ function tankExplosion(emitter) {
 
     // Gravity
     particleSystem3.gravity = new BABYLON.Vector3(0.25, 4, 0);
-    
+
     // Color gradient
     particleSystem3.addColorGradient(0, new BABYLON.Color4(0, 0, 0, 0.9));
     particleSystem3.addColorGradient(0.4, new BABYLON.Color4(0.1, 0.1, 0.1, 0.85));
     particleSystem3.addColorGradient(0.7, new BABYLON.Color4(0.15, 0.15, 0.15, 0.7));
     particleSystem3.addColorGradient(1.0, new BABYLON.Color4(0.25, 0.25, 0.25, 0.5));
-    
+
     particleSystem3.updateSpeed = 0.01;
 
 
@@ -1161,12 +1165,12 @@ function tankExplosion(emitter) {
     particleSystem3.start();
 }
 
-function electricExplosion(emitter) {
+export function electricExplosion(emitter) {
     // Create the core of the electric explosion
-    var particleSystem = new BABYLON.ParticleSystem("electric", 80, scene);
+    var particleSystem = new BABYLON.ParticleSystem("electric", 80, sceneBab);
 
     //Texture of each particle
-    particleSystem.particleTexture = new BABYLON.Texture("textures/spark.png", scene);
+    particleSystem.particleTexture = new BABYLON.Texture("textures/spark.png", sceneBab);
 
     // Where the particles come from
     particleSystem.emitter = emitter
@@ -1219,15 +1223,15 @@ function electricExplosion(emitter) {
     particleSystem.start()
 }
 
-function collectRelicParticle(emitter) {
+export function collectRelicParticle(emitter) {
     collectRelicEffect(emitter, 0)
     collectRelicEffect(emitter, 180)
 }
 
 function collectRelicEffect(emitter, position) {
     // Create & launch the particule system
-    var particleSystem = new BABYLON.ParticleSystem("spawnParticles", 600, scene);
-    particleSystem.particleTexture = new BABYLON.Texture("textures/flare.png", scene);
+    var particleSystem = new BABYLON.ParticleSystem("spawnParticles", 600, sceneBab);
+    particleSystem.particleTexture = new BABYLON.Texture("textures/flare.png", sceneBab);
     particleSystem.color1 = new BABYLON.Color4(0, 0.4, 0, 0.6);
     particleSystem.color2 = new BABYLON.Color4(0, 0.5, 0, 0.4);
     particleSystem.colorDead = new BABYLON.Color4(0, 0, 0, 0);

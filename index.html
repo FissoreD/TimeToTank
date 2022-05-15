@@ -23,7 +23,9 @@
     <script src="../lib/babylon.inspector.bundle.js"></script>
     <script src="../lib/dat.gui.min.js"></script>
 
-    <script src="babylon_start/tool_babylon.js"></script>
+    <!-- <script src=""></script> -->
+
+    <!-- <script src="babylon_start/tool_babylon.js"></script>
     <script src="main/global_vars.js"></script>
     <script src="levels/levelObjectives.js"></script>
     <script src="levels/level.js"></script>
@@ -50,8 +52,8 @@
     <script src="tools/utils.js"></script>
     <script src="game_objects/wall.js"></script>
     <script src="game_objects/delimiterMesh.js"></script>
-    <script src="main/main.js"></script>
-
+    <script src="main/main.js"></script> -->
+    <!-- 
     <script src="game_IA/shootAI.js"></script>
     <script src="game_IA/moveAI.js"></script>
     <script src="game_IA/guaranteedAI.js"></script>
@@ -60,9 +62,11 @@
     <script src="tools/counter.js"></script>
     <script src="tools/chrono.js"></script>
 
+    
+
 
     <!-- SPECIAL BONUSES -->
-    <script src="specialBonus/bonusSpecial.js"></script>
+    <!-- <script src="specialBonus/bonusSpecial.js"></script>
     <script src="specialBonus/crossHair.js"></script>
     <script src="specialBonus/dome.js"></script>
     <script src="specialBonus/machineGun.js"></script>
@@ -71,7 +75,9 @@
     <script src="specialBonus/teleport.js"></script>
     <script src="specialBonus/bullCharge.js"></script>
     <script src="specialBonus/grenade.js"></script>
-    <script src="specialBonus/allies.js"></script>
+    <script src="specialBonus/allies.js"></script> -->
+
+    <script src="./src/babylon_start/scene.js" type="module"></script>
 
     <link rel="shortcut icon" href="images/tankGreen.png">
 </head>
@@ -108,17 +114,17 @@
 
         <div id="main" class="box divb">
             <div id="adventure" class='button main'
-                onclick="isAdventure = true; scene.menu.displayIntro(true);pointerLock()"
+                onclick="scene.isAdventure = true; scene.menu.displayIntro(true);pointerLock()"
                 onmouseenter="scene.menu.soundHover()">
                 <span>Adventure Mode</span>
             </div>
             <div id="roguelike" class='button main'
-                onclick="isAdventure = false; scene.menu.displayIntro(true);pointerLock()"
+                onclick="scene.isAdventure = false; scene.menu.displayIntro(true);pointerLock()"
                 onmouseenter="scene.menu.soundHover()">
                 <span>Roguelike Mode</span>
             </div>
             <div id="continue" class='button hide'
-                onclick="if (pointerLockChange != null && Date.now() - pointerLockChange < 1400) { console.log('exit pointer lock too fast!')} else {scene.menu.show(false); pointerLock();}"
+                onclick="if (scene.pointerLockChange != null && Date.now() - scene.pointerLockChange < 1400) { console.log('exit pointer lock too fast!')} else {scene.menu.show(false); pointerLock();}"
                 onmouseenter="scene.menu.soundHover()">
                 <span>Continue</span>
             </div>
@@ -173,8 +179,6 @@
             <div><span>Plante a brule</span><span>2/3</span></div> -->
         </div>
 
-        <script src="babylon_start/scene.js"></script>
-
         <div id='intro' class="intro full-screen hide">
             <div class="story box" style="--img: ''">
                 <div>
@@ -200,74 +204,11 @@
             </div>
         </div>
 
-        <script>
-            window.onresize = function () {
-                if (engine) engine.resize();
-            }
-            window.onresize()
-
-            // setInterval(() => {
-            //     if (Date.now() - dateLastMessageTip > 3000) {
-            //         console.log(123);
-            //         let tips = document.getElementById('tips')
-            //         if (counter >= msg.length) counter = 0
-            //         tips.innerHTML = msg[counter++]
-            //         dateLastMessageTip = Date.now()
-            //     }
-            // }, 1000 / 60)
-
-            // let m = new Menu()
-            new Scene();
-
-            // hb = new Healthbar()
-            // hb.updatePartition()
-        </script>
-
         <div id="levelBox" class="box levelsBox hide">
             <div class="levels">
             </div>
             <div id="backButton" class="backButton">Back</div>
         </div>
-
-        <script>
-            let mainDiv = document.getElementById('main')
-            let levelBox = document.getElementById('levelBox')
-            let fromLevelChooser = false;
-
-            {
-                let levelDiv = document.getElementsByClassName('levels')[0]
-                level_map.forEach((e, pos) => {
-                    let child = document.createElement('div')
-                    child.classList.add('level', 'blocked')
-                    child.innerHTML = pos + 1
-                    levelDiv.appendChild(child)
-                })
-            }
-            document.getElementById('backButton').onclick = () => {
-                mainDiv.classList.remove('hide')
-                levelBox.classList.add('hide')
-            }
-
-            document.getElementById('goToLevels').onclick = () => {
-                levelBox.classList.remove('hide')
-                mainDiv.classList.add('hide')
-            }
-
-            Array.from(document.getElementsByClassName('level')).forEach((e, pos) => {
-                e.onclick = () => {
-                    if (!e.classList.contains('blocked') || true) {
-                        fromLevelChooser = true
-                        level = pos;
-                        remove_all_objects();
-                        init();
-                        scene.menu.show(false);
-                        scene.menu.displayScenario(false)
-                        levelBox.classList.add('hide')
-                        pointerLock()
-                    }
-                }
-            })
-        </script>
     </body>
 
 </html>

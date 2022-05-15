@@ -1,4 +1,9 @@
-class BullCharge extends SpecialBonus {
+import { SpecialBonus, SPECIAL_BONUS_ID } from "./bonusSpecial.js";
+import { bullChargeEffect } from "../babylon_start/particles.js";
+import { inputStates, charsAI, chars } from "../main/global_vars.js";
+import { scene } from "../babylon_start/scene.js";
+
+export class BullCharge extends SpecialBonus {
     constructor(tank) {
         super(tank, SPECIAL_BONUS_ID.BULL_CHARGE, 10000, 1300);
     }
@@ -25,7 +30,7 @@ class BullCharge extends SpecialBonus {
                 if (c2 = charsAI.find(e => e.shape == e2.object)) {
                     if (c2) {
                         c2.healthLoss(30)
-                        current_level_dico.addKilledChar()
+                        scene.current_level_dico.addKilledChar()
                         c1.bullForce = null
                         c1.specialBonuses.forEach(b => {
                             if (b.name == "Bull Charge") {

@@ -1,4 +1,10 @@
-class crossHair extends SpecialBonus {
+import { SpecialBonus, SPECIAL_BONUS_ID } from "./bonusSpecial.js";
+import { getCannonPoint } from "../game_IA/shootAI.js";
+import { sceneBab } from "../babylon_start/scene.js";
+import { ShootAI } from "../game_IA/shootAI.js";
+import { chars } from "../main/global_vars.js";
+
+export class crossHair extends SpecialBonus {
 
   constructor(tank) {
     super(tank, SPECIAL_BONUS_ID.CROSS_HAIR, 3000);
@@ -51,12 +57,12 @@ class crossHair extends SpecialBonus {
   load() {
     super.load()
 
-    var crossHair = new BABYLON.MeshBuilder.CreatePlane("crossHair", { size: 0.5 }, scene);
+    var crossHair = new BABYLON.MeshBuilder.CreatePlane("crossHair", { size: 0.5 }, sceneBab);
 
     crossHair.billboardMode = BABYLON.AbstractMesh.BILLBOARDMODE_Y;
 
-    crossHair.material = new BABYLON.StandardMaterial("crossHair", scene);
-    crossHair.material.diffuseTexture = new BABYLON.Texture("images/gunaims.png", scene);
+    crossHair.material = new BABYLON.StandardMaterial("crossHair", sceneBab);
+    crossHair.material.diffuseTexture = new BABYLON.Texture("images/gunaims.png", sceneBab);
     crossHair.material.diffuseTexture.hasAlpha = true;
     crossHair.material.emissiveColor = BABYLON.Color3.White()
     crossHair.isPickable = false;

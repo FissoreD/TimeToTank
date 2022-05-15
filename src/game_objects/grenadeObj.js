@@ -1,4 +1,14 @@
-class GrenadeObj extends ObjectPos {
+import { ObjectPos } from "./objectPos.js";
+import { createSmoke, createFire, massiveExplosion } from "../babylon_start/particles.js";
+import { createMaterial } from "../babylon_start/tool_babylon.js";
+import { walls, chars, barrels, grenades } from "../main/global_vars.js";
+import { Char } from "./char.js";
+import { scene, sceneBab } from "../babylon_start/scene.js";
+import { Bullet } from "./bullet.js";
+import { ObjectEnum } from "./objectEnum.js";
+import { remove } from "../tools/utils.js";
+
+export class GrenadeObj extends ObjectPos {
 
 
     static diameter = 0.2;
@@ -82,9 +92,9 @@ class GrenadeObj extends ObjectPos {
     }
 
     createShape() {
-        var shape = BABYLON.MeshBuilder.CreateSphere("bullet", { diameter: Bullet.diameter, segments: 5 }, scene);
+        var shape = BABYLON.MeshBuilder.CreateSphere("bullet", { diameter: Bullet.diameter, segments: 5 }, sceneBab);
         shape.material = createMaterial(scene, "textures/grenade.png");
-        hlBalls.addMesh(shape, new BABYLON.Color3(1, 0, 0))
+        scene.hlBalls.addMesh(shape, new BABYLON.Color3(1, 0, 0))
         return shape;
     }
 

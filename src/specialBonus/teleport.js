@@ -1,4 +1,7 @@
-class Teleport extends SpecialBonus {
+import { SpecialBonus, SPECIAL_BONUS_ID } from "./bonusSpecial.js";
+import { teleportationParticle } from "../babylon_start/particles.js";
+
+export class Teleport extends SpecialBonus {
     constructor(tank) {
         super(tank, SPECIAL_BONUS_ID.TELEPORT, 6000);
     }

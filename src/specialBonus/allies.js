@@ -1,4 +1,10 @@
-class Allies extends SpecialBonus {
+import { SpecialBonus, SPECIAL_BONUS_ID } from "./bonusSpecial.js";
+import { guaranteedAI } from "../game_IA/guaranteedAI.js";
+import { Char } from "../game_objects/char.js";
+import { chars, charsAllies } from "../main/global_vars.js";
+import { scene } from "../babylon_start/scene.js";
+
+export class Allies extends SpecialBonus {
     constructor(tank) {
         super(tank, SPECIAL_BONUS_ID.ALLIES, 30000);
     }
@@ -11,9 +17,9 @@ class Allies extends SpecialBonus {
             allie1.setStrategy(new guaranteedAI(allie1, false))
             chars.push(allie1);
             let fileterMeshToHigLight = allie1.getMeshesToHighlight();
-            fileterMeshToHigLight.forEach(m => hl.addMesh(m, new BABYLON.Color3(0, 1, 0)))
+            fileterMeshToHigLight.forEach(m => scene.hl.addMesh(m, new BABYLON.Color3(0, 1, 0)))
             allie1.healtBar.healthBarTextMaterial.emissiveColor = new BABYLON.Color3(20.0 / 255, 112.0 / 255, 25.0 / 255);
-              
+
 
             // var allie2 = new Char("normal", 3, 3, 0, 1, 2000, 40, 1, 1, 5, 3);
             // allie2.shape.position.y += 3

@@ -1,4 +1,10 @@
-class guaranteedAI {
+import { startingPointRayAhead, createRay } from "../tools/utils.js";
+import { scene } from "../babylon_start/scene.js";
+import { MoveAI } from "./moveAI.js";
+import { ShootAI } from "./shootAI.js";
+import { charsAI, charsAllAllies } from "../main/global_vars.js";
+
+export class guaranteedAI {
 
     /** @type {Char} */
     tank;

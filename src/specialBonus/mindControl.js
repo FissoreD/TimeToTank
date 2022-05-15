@@ -1,4 +1,10 @@
-class MindControl extends SpecialBonus {
+import { mindControlParticle } from "../babylon_start/particles.js";
+import { SpecialBonus, SPECIAL_BONUS_ID } from "./bonusSpecial.js";
+import { guaranteedAI } from "../game_IA/guaranteedAI.js";
+import { scene } from "../babylon_start/scene.js";
+import { charsAI } from "../main/global_vars.js";
+
+export class MindControl extends SpecialBonus {
     constructor(tank) {
         super(tank, SPECIAL_BONUS_ID.MIND_CONTROL, 12000, 6000);
         this.radius = 10;
@@ -7,7 +13,7 @@ class MindControl extends SpecialBonus {
     disable() {
         super.disable()
         this.hitTanks.forEach(c => { c[0].strategy = c[1] })
-        hlControlled.removeAllMeshes()
+        scene.hlControlled.removeAllMeshes()
     }
 
     use() {
@@ -23,7 +29,7 @@ class MindControl extends SpecialBonus {
                     this.hitTanks.push([c, c.strategy])
                     c.strategy = new guaranteedAI(c, false)
                     let fileterMeshToHigLight = c.getMeshesToHighlight();
-                    fileterMeshToHigLight.forEach(m => hlControlled.addMesh(m, new BABYLON.Color3(1, 0, 1)))
+                    fileterMeshToHigLight.forEach(m => scene.hlControlled.addMesh(m, new BABYLON.Color3(1, 0, 1)))
                 }
             })
         }

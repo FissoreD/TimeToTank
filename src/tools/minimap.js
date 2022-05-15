@@ -1,4 +1,8 @@
-class MiniMap {
+import { scene } from "../babylon_start/scene.js";
+import { WallPerimeter } from "../game_objects/wall.js";
+import { chars, walls, barrels, batteries, bonuses, bullets, grenades, relics, charsAllies } from "../main/global_vars.js";
+
+export class MiniMap {
 
   /** @type {CanvasRenderingContext2D} */
   ctx;
@@ -35,11 +39,11 @@ class MiniMap {
 
     var path = new Path2D();
 
-    let height = side * Math.cos(Math.PI/6)
+    let height = side * Math.cos(Math.PI / 6)
 
     let x1 = x
-    let y1 = y  - height * 2/3
-    let x2 = x1 - side/2
+    let y1 = y - height * 2 / 3
+    let x2 = x1 - side / 2
     let y2 = y1 + height
     let x3 = x2 + side
     let y3 = y2
@@ -68,6 +72,7 @@ class MiniMap {
     this.clear()
     this.canvas.height = this.canvas.offsetHeight
     this.canvas.width = this.canvas.offsetWidth
+    let height = scene.height, width = scene.width, char1 = scene.char1;
     let resize = (x, y) => ({
       x: (1 - (x + height / 2) / height) * this.canvas.offsetWidth * 0.6 + this.canvas.offsetWidth * 0.4 / 2,
       y: (1 - (y + width / 2) / width) * this.canvas.offsetHeight * 0.6 + this.canvas.offsetHeight * 0.4 / 2
