@@ -5,7 +5,7 @@ import { playSoundWithDistanceEffect } from "./utils.js";
 export class Chrono {
     constructor(cooldown) {
         this.startDate = Date.now()
-        this.timeCooled = 0;
+        this.timeCooled = cooldown;
         this.cooldown = cooldown;
         this.finished = false;
     }

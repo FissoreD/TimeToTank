@@ -13,6 +13,7 @@ import { levelObjectives } from "../levels/levelObjectives.js";
 import { sceneInterval } from "../main/main.js";
 import { remove_all_objects, init } from "../main/main.js";
 import { Char } from "../game_objects/char.js";
+import { Chrono } from "../tools/chrono.js";
 
 export var canvas = document.getElementById("myCanvas");
 var ground;
@@ -45,6 +46,7 @@ class Scene {
 
     /** @type{Level} */
     this.current_level_dico = level_map[0];
+    /** @type{Chrono} */
     this.chronoLvl = undefined;
     this.cell_x_number = cell_x_number;
     this.cell_y_number = cell_y_number;
