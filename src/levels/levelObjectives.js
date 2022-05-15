@@ -1,4 +1,7 @@
-let levelObjectives = {
+import { scene } from "../babylon_start/scene.js"
+import { charsDestroyed, charsAI, bonuses, barrels, batteries, relics } from "../main/global_vars.js"
+
+export let levelObjectives = {
   killAllTank: {
     description:
       "NEXT MISSION: Destroy all ennemy chars.",
@@ -31,8 +34,8 @@ let levelObjectives = {
     goToNextLevel: (e) => {
       return bonuses.length == 0
     },
-    tip: [["Bonus collected", () => current_level_dico.getBonusObtained(),
-      () => bonuses.length + current_level_dico.getBonusObtained()]],
+    tip: [["Bonus collected", () => scene.current_level_dico.getBonusObtained(),
+      () => bonuses.length + scene.current_level_dico.getBonusObtained()]],
     msg: [
       "You must collect bonuses to go to complete this stage!",
       "The minimap on top-right of the screen can be really useful!"
@@ -44,8 +47,8 @@ let levelObjectives = {
     goToNextLevel: (e) => {
       return bonuses.length == 0
     },
-    tip: [["Bonus collected", () => current_level_dico.getBonusObtained(),
-      () => bonuses.length + current_level_dico.getBonusObtained()]],
+    tip: [["Bonus collected", () => scene.current_level_dico.getBonusObtained(),
+      () => bonuses.length + scene.current_level_dico.getBonusObtained()]],
     msg: [
       "You must collect bonuses to complete this stage!",
       "The minimap on top-right of the screen can be really useful!"
@@ -58,8 +61,8 @@ let levelObjectives = {
       return (bonuses.length == 0 && charsAI.length == 0)
     },
     tip: [
-      ["Bonus collected", () => current_level_dico.getBonusObtained(),
-        () => bonuses.length + current_level_dico.getBonusObtained()],
+      ["Bonus collected", () => scene.current_level_dico.getBonusObtained(),
+        () => bonuses.length + scene.current_level_dico.getBonusObtained()],
       ["Tank killed", () => charsDestroyed.length,
         () => charsDestroyed.length + charsAI.length]
     ],
@@ -91,8 +94,8 @@ let levelObjectives = {
       return (batteries.every(b => b.isDestroyed) && (charsAI.length == 0));
     },
     tip: [
-      ["Battery disabled", () => current_level_dico.getBatteryDestroyed(),
-        () => batteries.length + current_level_dico.getBatteryDestroyed()],
+      ["Battery disabled", () => scene.current_level_dico.getBatteryDestroyed(),
+        () => batteries.length + scene.current_level_dico.getBatteryDestroyed()],
       ["Tank killed", () => charsDestroyed.length,
         () => charsDestroyed.length + charsAI.length]
     ],
@@ -107,8 +110,8 @@ let levelObjectives = {
       return (relics.length == 0 && charsAI.length == 0)
     },
     tip: [
-      ["Relic collected", () => current_level_dico.getRelicObtained(),
-        () => relics.length + current_level_dico.getRelicObtained()],
+      ["Relic collected", () => scene.current_level_dico.getRelicObtained(),
+        () => relics.length + scene.current_level_dico.getRelicObtained()],
       ["Tank killed", () => charsDestroyed.length,
         () => charsDestroyed.length + charsAI.length]
     ],

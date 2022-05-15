@@ -1,4 +1,8 @@
-class MoveAI {
+import { scene } from "../babylon_start/scene.js"
+import { charsAllAllies, charsAllies } from "../main/global_vars.js"
+import { charsAI } from "../main/global_vars.js"
+
+export class MoveAI {
 
 
   /**
@@ -6,7 +10,7 @@ class MoveAI {
    */
   static rotateTurret(tank, isEnnemy = true) {
     var turret = tank.getTurretTank()
-    var target = char1
+    var target = scene.char1
 
     if (!isEnnemy) {
       var distance = 1000
@@ -20,7 +24,7 @@ class MoveAI {
           target = c
         }
       })
-      if (target == char1) return
+      if (target == scene.char1) return
     }
     else if (charsAllies.length > 0) {
       var distance = 1000

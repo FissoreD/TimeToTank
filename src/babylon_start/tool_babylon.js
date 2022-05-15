@@ -1,15 +1,15 @@
-function createMaterial(scene, path) {
-  var myMaterial = new BABYLON.StandardMaterial(path, scene);
+export function createMaterial(scene, path) {
+  var myMaterial = new BABYLON.StandardMaterial(path, scene.scene);
 
-  myMaterial.diffuseTexture = new BABYLON.Texture(path, scene);
-  myMaterial.specularTexture = new BABYLON.Texture(path, scene);
-  myMaterial.emissiveTexture = new BABYLON.Texture(path, scene);
-  myMaterial.ambientTexture = new BABYLON.Texture(path, scene);
+  myMaterial.diffuseTexture = new BABYLON.Texture(path, scene.scene);
+  myMaterial.specularTexture = new BABYLON.Texture(path, scene.scene);
+  myMaterial.emissiveTexture = new BABYLON.Texture(path, scene.scene);
+  myMaterial.ambientTexture = new BABYLON.Texture(path, scene.scene);
 
   return myMaterial;
 }
 
-function defineBoundingBox(eltList) {
+export function defineBoundingBox(eltList) {
   let childMeshes = eltList;
   let min = childMeshes[0].getBoundingInfo().boundingBox.minimumWorld;
   let max = childMeshes[0].getBoundingInfo().boundingBox.maximumWorld;

@@ -1,4 +1,13 @@
-class Bullet extends ObjectPos {
+import { ObjectPos } from "./objectPos.js";
+import { scene } from "../babylon_start/scene.js";
+import { bulletExplode } from "../babylon_start/particles.js";
+import { createMaterial } from "../babylon_start/tool_babylon.js";
+import { walls, bulletImage, bullets, chars, barrels, trees } from "../main/global_vars.js";
+import { ObjectEnum } from "./objectEnum.js";
+import { playSoundWithDistanceEffect } from "../tools/utils.js";
+import { getCannonPoint } from "../game_IA/shootAI.js";
+
+export class Bullet extends ObjectPos {
 
 
     static diameter = 0.2;
@@ -34,9 +43,9 @@ class Bullet extends ObjectPos {
 
         this.createCollider()
 
-        this.trail = new BABYLON.TrailMesh('bulletTrail', this, scene, 0.06, 12, true);
+        this.trail = new BABYLON.TrailMesh('bulletTrail', this, scene.scene, 0.06, 12, true);
 
-        var sourceMat = new BABYLON.StandardMaterial('sourceMat', scene);
+        var sourceMat = new BABYLON.StandardMaterial('sourceMat', scene.scene);
         sourceMat.emissiveColor = new BABYLON.Color3(1, 1, 1);
         sourceMat.diffuseColor = new BABYLON.Color3(1, 0, 0);
         sourceMat.specularColor = new BABYLON.Color3(1, 1, 0);
@@ -54,7 +63,7 @@ class Bullet extends ObjectPos {
         this.setVolumebulletexplosion = 0.3
         this.bulletexplosion.volume = this.setVolumebulletexplosion;
 
-        if (char1 == char) current_level_dico.addBulletFired()
+        if (scene.char1 == char) scene.current_level_dico.addBulletFired()
     }
 
     createCollider() {
@@ -75,13 +84,13 @@ class Bullet extends ObjectPos {
                 } else if (b2 = chars.find(e => e.shape == e2.object)) {
                     if (b1) b1.dispose(true, true)
                     if (b2) b2.healthLoss(this.damage)
-                    if (this.char == char1 && b2 != char1 && b2.life <= 0)
-                        current_level_dico.addKilledChar()
+                    if (this.char == scene.char1 && b2 != scene.char1 && b2.life <= 0)
+                        scene.current_level_dico.addKilledChar()
                 } else if (b2 = walls.find(e => e.shape == e2.object)) {
                     if (b1) b1.dispose()
                     if (b2) b2.destroy()
-                    if (this.char == char1 && b2.destructable)
-                        current_level_dico.addWallDestroyed()
+                    if (this.char == scene.char1 && b2.destructable)
+                        scene.current_level_dico.addWallDestroyed()
                 } else if (b2 = barrels.find(e => e.shape == e2.object)) {
                     if (b1) b1.dispose(true, true)
                     // createFire(e2.object);
@@ -102,10 +111,10 @@ class Bullet extends ObjectPos {
     destroySound() { return }
 
     createShape() {
-        var shape = BABYLON.MeshBuilder.CreateSphere("bullet", { diameter: Bullet.diameter, segments: 4 }, scene);
+        var shape = BABYLON.MeshBuilder.CreateSphere("bullet", { diameter: Bullet.diameter, segments: 4 }, scene.scene);
         shape.material = createMaterial(scene, bulletImage.src);
         // shape.cullingStrategy = BABYLON.AbstractMesh.CULLINGSTRATEGY_BOUNDINGSPHERE_ONLY
-        hlBalls.addMesh(shape, new BABYLON.Color3(1, 0, 0))
+        scene.hlBalls.addMesh(shape, new BABYLON.Color3(1, 0, 0))
 
         return shape;
     }

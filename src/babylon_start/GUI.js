@@ -1,7 +1,12 @@
-var button;
-var button_list;
+import { exitPointerLoc, changeCadenceTir, isLocked, pointerLock, runRenderLoop } from "../main/main.js";
+import { scene, canvas } from "./scene.js";
+import { bonusTookSound } from "../main/global_vars.js";
+import { globalProgress } from "../main/global_vars.js";
 
-class Menu {
+import { selected_bonuses, addedObtainableBonus, chars, menuHoverSound, musicBackground } from "../main/global_vars.js";
+import { engine } from "./scene.js";
+
+export class Menu {
     constructor() {
         this.canBeSwitched = true;
         this.toDisplayScenario = false;
@@ -48,7 +53,7 @@ class Menu {
     show(toShow) {
         if (toShow) {
             exitPointerLoc()
-            if (char1) char1.stabilizeTank()
+            if (scene.char1) scene.char1.stabilizeTank()
             document.getElementById("main").classList.remove('hide')
         }
         else {
@@ -65,11 +70,11 @@ class Menu {
                     This is the last stage of you mission, there are still some <they>bad tank</they> went in Antarctica wanting to melt the ice and build chemical weapon with old virus blocked in the Ice. <br>
                     <we>Win</we> this last mission and the world will be a <we>better place</we>.`
                 ]
-                let idx = ["Earth", "Sand", "Snow"].indexOf(current_level_dico.biome)
+                let idx = ["Earth", "Sand", "Snow"].indexOf(scene.current_level_dico.biome)
                 document.getElementById('text-mission').innerHTML = text[idx];
                 document.getElementById('storyId').style.setProperty('--img', 'url(' +
                     ['earth_biome.jpg', 'sand_biome.jpg', "snow_biome.jpg"][idx] + ')')
-                if (char1) char1.stabilizeTank()
+                if (scene.char1) scene.char1.stabilizeTank()
                 this.isShown = true;
                 this.displayScenario(true)
                 this.toDisplayScenario = false;
@@ -90,11 +95,11 @@ class Menu {
                 this.setBackground()
             } else {
                 if (!this.inBonus) {
-                    musicBackground.play()
+                    musicBackground[0].play()
                     chars.forEach(c => c.moveSound.play())
                     chars.forEach(e => e.specialBonuses.forEach(b => b.correctTime()))
-                    if (chronoLvl) chronoLvl.correctTime()
-                    char1.regenCorrectTime()
+                    if (scene.chronoLvl) scene.chronoLvl.correctTime()
+                    scene.char1.regenCorrectTime()
                     runRenderLoop()
                 }
             }
@@ -115,7 +120,7 @@ class Menu {
     }
 
     setBackground() {
-        if (char1.life <= 0) {
+        if (scene.char1.life <= 0) {
             this.prettyBG()
         } else {
 
@@ -160,8 +165,8 @@ class Menu {
                 bEnum.addToChar()
                 this.bonusPanel.classList.add('hide');
                 chars.forEach(e => e.specialBonuses.forEach(b => b.correctTime()))
-                if (chronoLvl) chronoLvl.correctTime()
-                char1.regenCorrectTime()
+                if (scene.chronoLvl) scene.chronoLvl.correctTime()
+                scene.char1.regenCorrectTime()
                 runRenderLoop()
                 this.inBonus = false;
                 document.getElementsByClassName('bonusPanel')[0].classList.remove('hide');
@@ -203,8 +208,8 @@ class Menu {
     }
 
     restart() {
-        musicBackground.pause()
-        globalProgress = true
+        musicBackground[0].pause()
+        globalProgress[0] = true
         engine.stopRenderLoop()
         document.getElementsByClassName('bonusPanel')[0].classList.add('hide');
         let sb = document.getElementsByClassName('specialBonus')[0];
@@ -214,11 +219,11 @@ class Menu {
         document.getElementById("continue").classList.add('hide');
         Array.from(document.getElementsByClassName('main')).forEach(e => e.classList.remove('hide'))
         scene.menu = new Menu()
-        level = 0;
-        char1.dispose(true)
+        scene.level = 0;
+        scene.char1.dispose(true)
         this.clearBonus()
         remove_all_objects()
-        startgame(level)
+        startgame(scele.level)
     }
 
     clearBonus() {
@@ -235,11 +240,12 @@ class Menu {
     }
 
     toggleNotMenuElement(toShow) {
+        console.log(scene);
         /** @type{HTMLDivElement[]} */
         let elts = Array.from(document.getElementsByClassName("gameBarsClass"))
         let remove = () => {
             elts.forEach(e => {
-                if (!(e.classList.contains('bonusPanel') && (char1.specialBonuses.length == 0 && selected_bonuses.length == 0))) {
+                if (!(e.classList.contains('bonusPanel') && (scene.char1.specialBonuses.length == 0 && selected_bonuses.length == 0))) {
                     e.classList.remove('hide')
                 } else {
                     e.classList.add('hide')
@@ -249,7 +255,7 @@ class Menu {
         if (selected_bonuses && selected_bonuses.length == 0) {
             document.getElementById('normalBonus').classList.add('hide')
         }
-        if (char1 && char1.specialBonuses.length == 0) {
+        if (scene.char1 && scene.char1.specialBonuses.length == 0) {
             document.getElementById('specialBonus').classList.add('hide')
         }
         if (!toShow) elts.forEach(e => e.classList.add('hide'))

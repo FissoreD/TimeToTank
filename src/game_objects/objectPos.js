@@ -1,4 +1,10 @@
-class ObjectPos extends BABYLON.Mesh {
+import { shadowGenerator } from "../babylon_start/scene.js";
+import { ObjectEnum } from "./objectEnum.js";
+import { impostorCharList } from "../main/global_vars.js";
+import { trees, relics, chars, barrels, bullets, houses, rocks, walls, bonuses, batteries } from "../main/global_vars.js";
+import { remove } from "../tools/utils.js";
+
+export class ObjectPos extends BABYLON.Mesh {
 
   /** @type {number} */
   speedAngle;

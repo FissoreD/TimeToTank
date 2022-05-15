@@ -1,4 +1,12 @@
-class Wall {
+import { ObjectPos } from "./objectPos.js";
+import { shadowGenerator } from "../babylon_start/scene.js";
+import { cell_size } from "../main/global_vars.js";
+import { scene } from "../babylon_start/scene.js";
+import { ObjectEnum } from "./objectEnum.js";
+import { walls } from "../main/global_vars.js";
+import { createMaterial } from "../babylon_start/tool_babylon.js";
+
+export class Wall {
 
     static height = cell_size + 1.8;
     static width = cell_size;
@@ -14,7 +22,7 @@ class Wall {
         this.destructable = destructable
         // super(destructable ? ObjectEnum.WallD : ObjectEnum.Wall, -width / 2 + x, Wall.height / 2, - height / 2 + y, 0, 0)
         this.shape = this.createShape();
-        this.shape.position = new BABYLON.Vector3(-width / 2 + x, Wall.height / 2 - 1, -height / 2 + y)
+        this.shape.position = new BABYLON.Vector3(-scene.width / 2 + x, Wall.height / 2 - 1, -scene.height / 2 + y)
         this.physicsImpostor = new BABYLON.PhysicsImpostor(this.shape, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.1, friction: 0 });
         // this.shape.showBoundingBox = true
         shadowGenerator.addShadowCaster(this.shape)
@@ -26,7 +34,7 @@ class Wall {
     }
 
     createShape() {
-        var shape = BABYLON.MeshBuilder.CreateBox("box", { height: Wall.height, width: Wall.width, depth: Wall.depth }, scene);
+        var shape = BABYLON.MeshBuilder.CreateBox("box", { height: Wall.height, width: Wall.width, depth: Wall.depth }, scene.scene);
         shape.material = createMaterial(scene, this.type.name);
         return shape;
     }
@@ -39,7 +47,7 @@ class Wall {
     }
 }
 
-class WallPerimeter {
+export class WallPerimeter {
     constructor(x, y, width, depth) {
         this.width = width * cell_size;
         this.depth = depth * cell_size;
@@ -52,8 +60,8 @@ class WallPerimeter {
     }
 
     createShape() {
-        var shape = BABYLON.MeshBuilder.CreateBox("box", { height: Wall.height, width: this.width, depth: this.depth }, scene);
-        shape.material = createMaterial(scene, ObjectEnum.Wall.name);
+        var shape = BABYLON.MeshBuilder.CreateBox("box", { height: Wall.height, width: this.width, depth: this.depth }, scene.scene);
+        shape.material = createMaterial(scene.scene, ObjectEnum.Wall.name);
         return shape;
     }
 

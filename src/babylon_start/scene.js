@@ -1,33 +1,56 @@
 /// <reference path="babylon.d.ts" />
 
-var canvas = document.getElementById("myCanvas");
+import { playSoundWithDistanceEffect } from "../tools/utils.js";
+import { Menu } from "./GUI.js";
+import { gravity, width, height, cell_size, cell_x_number, cell_y_number, bullets, chars, charsAI, charsAllAllies, charsAllies, walls, barrels, batteries, relics } from "../main/global_vars.js";
+import { level_map, biome } from "../levels/levels.js";
+import { ObjectEnum } from "../game_objects/objectEnum.js";
+import { pointerLock, getAllMeshList, anime } from "../main/main.js";
+import { guaranteedAI } from "../game_IA/guaranteedAI.js";
+import { SpecialBonus } from "../specialBonus/bonusSpecial.js";
+import { lvlStatus } from "../levels/level.js";
+import { levelObjectives } from "../levels/levelObjectives.js";
+import { sceneInterval } from "../main/main.js";
+import { remove_all_objects, init } from "../main/main.js";
+import { Char } from "../game_objects/char.js";
+
+export var canvas = document.getElementById("myCanvas");
 var ground;
 var lightCam;
-canShoot = false;
-/** @type {BABYLON.Mesh} */
-var tankMeshes;
-var opponentContainer;
-var opponentMeshes;
-var opponentMaterials;
+// canShoot = false;
 /** @type {BABYLON.Engine} */
-var engine;
+export var engine;
 /** @type {BABYLON.ShadowGenerator} */
-var shadowGenerator;
-var tanksAIReady;
-var inMenu = true;
-var light1;
+export var shadowGenerator;
+export var light1;
 var groundSand;
-var listGrounds = [];
-var listSkyboxes = [];
+export var listGrounds = [];
+export var listSkyboxes = [];
 var w;
+
+
+/** @type{Scene} */
+export var scene;
+export var sceneBab;
 
 class Scene {
 
   constructor() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    tanksAIReady = false;
+    // tanksAIReady = false;
     this.engine = new BABYLON.Engine(canvas, true, null, false);
+    this.pointerLockChange = null;
+    this.level = 0;
+
+    /** @type{Level} */
+    this.current_level_dico = level_map[0];
+    this.chronoLvl = undefined;
+    this.cell_x_number = cell_x_number;
+    this.cell_y_number = cell_y_number;
+    this.heitht = height;
+    this.width = width;
+    this.isAdventure = true;
 
     engine = this.engine;
     engine.enableOfflineSupport = false;
@@ -37,9 +60,14 @@ class Scene {
     //   engine.resize()
     // })
 
-    engine.displayLoadingUI();
+
+    this.char1 = undefined;
+
+    scene = this;
+    // engine.displayLoadingUI();
     this.scene = this.createScene();
-    this.scene.menu = new Menu()
+    sceneBab = this.scene;
+    this.menu = new Menu()
     this.setPhysic()
     this.setGround()
     this.setShadow()
@@ -47,16 +75,67 @@ class Scene {
     this.setBackground()
     this.setParticles()
     // this.setGizmo()
-    this.setCamera()
+    this.camera = this.setCamera()
 
-    ObjectEnum.initiate_all_models()
+    ObjectEnum.initiate_all_models(this.scene)
+    this.setLevelsListener()
+
+
+    window.onresize = function () {
+      if (engine) engine.resize();
+    }
+    window.onresize()
+  }
+
+  setLevelsListener() {
+    let mainDiv = document.getElementById('main')
+    let levelBox = document.getElementById('levelBox')
+    window.fromLevelChooser = false;
+
+    {
+      let levelDiv = document.getElementsByClassName('levels')[0]
+      level_map.forEach((e, pos) => {
+        let child = document.createElement('div')
+        child.classList.add('level', 'blocked')
+        child.innerHTML = pos + 1
+        levelDiv.appendChild(child)
+      })
+    }
+    document.getElementById('backButton').onclick = () => {
+      mainDiv.classList.remove('hide')
+      levelBox.classList.add('hide')
+    }
+
+    document.getElementById('goToLevels').onclick = () => {
+      levelBox.classList.remove('hide')
+      mainDiv.classList.add('hide')
+    }
+
+    Array.from(document.getElementsByClassName('level')).forEach((e, pos) => {
+      e.onclick = () => {
+        if (!e.classList.contains('blocked') || true) {
+          window.fromLevelChooser = true
+          this.level = pos;
+          remove_all_objects();
+          init();
+          this.menu.show(false);
+          this.menu.displayScenario(false)
+          levelBox.classList.add('hide')
+          pointerLock()
+        }
+      }
+    })
+  }
+
+  render() {
+    sceneBab.render()
   }
 
   /**
    * @returns {BABYLON.Scene}
    */
   createScene() {
-    scene = new BABYLON.Scene(this.engine);
+    var scene = new BABYLON.Scene(this.engine);
 
     // engine.runRenderLoop(() => scene.render())
     // var options = new BABYLON.SceneOptimizerOptions(50, 2000);
@@ -71,31 +150,29 @@ class Scene {
     scene.autoClear = false; // Color buffer
     scene.autoClearDepthAndStencil = false; // Depth and stencil, obviously
 
-    hl = new BABYLON.HighlightLayer("hl", scene);
+    this.hl = new BABYLON.HighlightLayer("hl", scene);
 
-    hl.blurHorizontalSize = hl.blurVerticalSize = 0.3;
+    this.hl.blurHorizontalSize = this.hl.blurVerticalSize = 0.3;
 
-    hlBalls = new BABYLON.HighlightLayer("hlBalls", scene);
+    this.hlBalls = new BABYLON.HighlightLayer("hlBalls", scene);
 
-    hlBalls.blurHorizontalSize = hlBalls.blurVerticalSize = 0.001;
+    this.hlBalls.blurHorizontalSize = this.hlBalls.blurVerticalSize = 0.001;
 
-    hlControlled = new BABYLON.HighlightLayer("hlControlled", scene);
+    this.hlControlled = new BABYLON.HighlightLayer("hl-Controlled", scene);
 
-    hlControlled.blurHorizontalSize = hlControlled.blurVerticalSize = 0.3;
+    this.hlControlled.blurHorizontalSize = this.hlControlled.blurVerticalSize = 0.3;
 
-    hlMinigun = new BABYLON.HighlightLayer("hlMinigun", scene);
+    this.hlMinigun = new BABYLON.HighlightLayer("hl-Minigun", scene);
 
-    hlMinigun.blurHorizontalSize = hlMinigun.blurVerticalSize = 0.3;
+    this.hlMinigun.blurHorizontalSize = this.hlMinigun.blurVerticalSize = 0.3;
 
-    hlAllies = new BABYLON.HighlightLayer("hlAllies", scene);
+    this.hlAllies = new BABYLON.HighlightLayer("hl-Allies", scene);
 
-    hlAllies.blurHorizontalSize = hlAllies.blurVerticalSize = 0.3;
+    this.hlAllies.blurHorizontalSize = this.hlAllies.blurVerticalSize = 0.3;
 
-    hlBattery = new BABYLON.HighlightLayer("hlBattery", scene);
+    this.hlBattery = new BABYLON.HighlightLayer("hl-Battery", scene);
 
-    hlBattery.blurHorizontalSize = hlBattery.blurVerticalSize = 0.3;
-
-    let date = Date.now()
+    this.hlBattery.blurHorizontalSize = this.hlBattery.blurVerticalSize = 0.3;
 
     scene.checkBullet = 0
 
@@ -103,16 +180,16 @@ class Scene {
 
 
       // if (Date.now() - date > 100) {
-      //   this.scene.renderTargetsEnabled = true
+      //   scene.renderTargetsEnabled = true
       //   date = Date.now()
-      // } else if (this.scene.renderTargetsEnabled) {
-      //   this.scene.renderTargetsEnabled = false
+      // } else if (scene.renderTargetsEnabled) {
+      //   scene.renderTargetsEnabled = false
       // }
 
-      if (chronoLvl) {
-        let chronoTxt = "Chrono : " + Math.floor(chronoLvl.timeCooled / 1000) + "." + (chronoLvl.timeCooled % 1000 + "").padEnd(3, "0")
+      if (this.chronoLvl) {
+        let chronoTxt = "Chrono : " + Math.floor(this.chronoLvl.timeCooled / 1000) + "." + (this.chronoLvl.timeCooled % 1000 + "").padEnd(3, "0")
 
-        if (chronoLvl.timeCooled < 10000) {
+        if (this.chronoLvl.timeCooled < 10000) {
           chronoTxt = "<they>" + chronoTxt + "</they>"
         }
         document.getElementById("fps").innerHTML = engine.getFps().toFixed() + " fps<br>" + chronoTxt
@@ -122,10 +199,10 @@ class Scene {
 
 
 
-      if (!this.scene.menu.isShown) {
-        current_level_dico.updateTipMessage()
-        scene.minimap.redraw()
-        // char1.physicsImpostor.applyForce(new BABYLON.Vector3(0, -gravity * 30000, 0), char1.shape.position)
+      if (!this.menu.isShown) {
+        this.current_level_dico.updateTipMessage()
+        this.minimap.redraw()
+        // this.char1.physicsImpostor.applyForce(new BABYLON.Vector3(0, -gravity * 30000, 0), this.char1.shape.position)
         bullets.forEach(bullet => {
           bullet.physicsImpostor.applyForce(new BABYLON.Vector3(0, -gravity, 0), bullet.position)
           scene.checkBullet++
@@ -150,21 +227,21 @@ class Scene {
               obj.position.x >= width / 2 + 40 ||
               obj.position.z <= height / 2 - 60 ||
               obj.position.z >= height / 2 + 40 ||
-              obj.position.y < current_level_dico.minHeightMap - 0.8 ||
+              obj.position.y < this.current_level_dico.minHeightMap - 0.8 ||
               obj.position.y >= +8)
           }
           if (outOfBound(obj.shape) || outOfBound(obj)) {
-            if (obj == char1) {
-              if (char1.life > 0) char1.healthLoss(char1.maxHealth + 1)
+            if (obj == this.char1) {
+              if (this.char1.life > 0) this.char1.healthLoss(this.char1.maxHealth + 1)
             }
             else obj.dispose(true, true)
           }
         })
-        let velocity = char1.physicsImpostor.getLinearVelocity()
+        let velocity = this.char1.physicsImpostor.getLinearVelocity()
         let speed = Math.sqrt(velocity.x ** 2 + velocity.y ** 2 + velocity.z ** 2) * 10
         document.getElementById("speed").innerHTML = Math.round(speed)
 
-        // let posChar1 = char1.shape.position
+        // let posthis.char1 = this.char1.shape.position
 
         chars.forEach(c => {
 
@@ -207,7 +284,7 @@ class Scene {
               if (!c.shape.isDisposed()) c.dispose(true, true)
             }, 5000)
 
-            if (current_level_dico.lvlObjective == levelObjectives.getAllRelicsAndTanks && relics.length != 0) {
+            if (this.current_level_dico.lvlObjective == levelObjectives.getAllRelicsAndTanks && relics.length != 0) {
               setTimeout(() => {
                 if (relics.length != 0) {
                   var char = new Char("normal", 5, 5, 0, 1, 2000, 30);
@@ -222,7 +299,7 @@ class Scene {
 
 
             //niveau boss
-            if (current_level_dico.lvlObjective == levelObjectives.killBoss) {
+            if (this.current_level_dico.lvlObjective == levelObjectives.killBoss) {
               if (charsAI.length == 1) {
                 if (charsAI[0].domeBoss.isActive) {
                   charsAI[0].domeBoss.isPermanent = false
@@ -252,7 +329,7 @@ class Scene {
           if (b.shape.position.y <= w.position.y + 0.2) {
             b.isDestroyed = true
             b.destroy()
-            current_level_dico.addBatteryDestroyed()
+            this.current_level_dico.addBatteryDestroyed()
             if (batteries.length <= 0) {
               charsAI.forEach(c => c.specialBonuses.forEach(e => e.isPermanent = false))
             }
@@ -260,27 +337,29 @@ class Scene {
         })
 
 
-        char1.applyBullForce();
+        this.char1.applyBullForce();
 
         //si le char joueur meurt
-        if (char1.life <= 0 && !this.scene.menu.isInMenu() || level == level_map.length) {
-          if (pointerLockChange != null && Date.now() - pointerLockChange < 1400) console.log('entering pointer lock too fast!')
+        if (this.char1.life <= 0 && !this.menu.isInMenu() || level == level_map.length) {
+          if (this.pointerlockchange != null && Date.now() - this.pointerlockchange < 1400) console.log('entering pointer lock too fast!')
           else {
             chars.forEach(c => c.stabilizeTank())
-            playSoundWithDistanceEffect(char1.charExploseSound, char1, false)
-            current_level_dico.goNextLevel(lvlStatus.DIE)
+            playSoundWithDistanceEffect(this.char1.charExploseSound, this.char1, false)
+            this.current_level_dico.goNextLevel(lvlStatus.DIE)
           }
           //si le char joueur fini le niveau
-        } else if (current_level_dico.canGoNextLevel()) {
-          if (pointerLockChange != null && Date.now() - pointerLockChange < 1400) console.log('entering pointer lock too fast!')
+        } else if (this.current_level_dico.canGoNextLevel()) {
+          if (this.pointerlockchange != null && Date.now() - this.pointerlockchange < 1400) console.log('entering pointer lock too fast!')
           else {
             chars.forEach(c => c.stabilizeTank())
-            char1.bullForce = null
+            this.char1.bullForce = null
+            console.log(22222222);
             //si il vient de finir le dernier niveau
-            if (level + 1 == level_map.length) {
-              current_level_dico.goNextLevel(lvlStatus.WIN)
-            } else if (!this.scene.menu.inOtherMenu()) {
-              current_level_dico.goNextLevel()
+            if (this.level + 1 == level_map.length) {
+              console.log(1111111);
+              this.current_level_dico.goNextLevel(lvlStatus.WIN)
+            } else if (!this.menu.inOtherMenu()) {
+              this.current_level_dico.goNextLevel()
               if (sceneInterval) {
                 clearInterval(sceneInterval)
               }
@@ -289,13 +368,16 @@ class Scene {
         }
 
         else {
-          charsAllAllies = charsAllies.slice()
-          charsAllAllies.push(char1)
+          charsAllAllies.length = 0
+          for (const char of charsAllies) {
+            charsAllAllies.push(char)
+          }
+          charsAllAllies.push(this.char1)
           charsAI.forEach(c => c.strategy.applyStrategy());
           charsAllies.forEach(c => c.strategy.applyStrategy());
           chars.forEach(c => SpecialBonus.updateAllThankBonuses(c));
-          char1.regenUpdate()
-          if (chronoLvl) chronoLvl.update()
+          this.char1.regenUpdate()
+          if (this.chronoLvl) this.chronoLvl.update()
         }// TODO : Here update all bonuses list !!!
         //charsAI.forEach(c => MoveAI.move(c));
 
@@ -308,11 +390,11 @@ class Scene {
   setPhysic() {
     var gravityVector = new BABYLON.Vector3(0, gravity, 0);
     var physicsPlugin = new BABYLON.CannonJSPlugin();
-    scene.enablePhysics(gravityVector, physicsPlugin);
+    this.scene.enablePhysics(gravityVector, physicsPlugin);
   }
 
   setCamera() {
-    camera = new BABYLON.FollowCamera("tankCamera", ground.position, scene, ground);
+    let camera = new BABYLON.FollowCamera("tankCamera", ground.position, this.scene, ground);
     // camera.attachControl(canvas, true);
     camera.radius = 40;
     camera.heightOffset = 14;
@@ -320,6 +402,7 @@ class Scene {
     camera.cameraAcceleration = .1;
     camera.maxCameraSpeed = 10;
 
+    return camera
   }
 
   setGround() {
@@ -327,19 +410,19 @@ class Scene {
     //   width: width * 1.5 + cell_size,
     //   height: height * 1.5 + cell_size,
     //   subdivisions: 80,
-    //   minHeight: current_level_dico.minHeightMap,
+    //   minHeight: this.current_level_dico.minHeightMap,
     //   maxHeight: 0,
 
     //   onReady: () => onGroundCreated(this),
     // };
-    //scene is optional and defaults to the current scene
+    //this.scene is optional and defaults to the current this.scene
 
     let groundOptions = (name, index) => {
       return {
         width: width * 1.5 + cell_size,
         height: height * 1.5 + cell_size,
         subdivisions: 28,
-        minHeight: current_level_dico.minHeightMap,
+        minHeight: this.current_level_dico.minHeightMap,
         maxHeight: 1.5,
 
         onReady: () => onGroundCreated(this, name, index),
@@ -350,27 +433,27 @@ class Scene {
       "gdhm",
       `textures/earthy_ground.png`,
       groundOptions("earthy", 0),
-      scene
+      this.scene
     ));
     listGrounds.push(BABYLON.MeshBuilder.CreateGroundFromHeightMap(
       "gdhm",
       `textures/sandy_ground.png`,
       groundOptions("sandy", 1),
-      scene
+      this.scene
     ));
     listGrounds.push(BABYLON.MeshBuilder.CreateGroundFromHeightMap(
       "gdhm",
       `textures/snowy_ground.png`,
       groundOptions("snowy", 2),
-      scene
+      this.scene
     ));
 
     function onGroundCreated(myScene, name, index) {
       const groundMaterial = new BABYLON.StandardMaterial(
         "groundMaterial",
-        scene
+        sceneBab
       );
-      groundMaterial.diffuseTexture = new BABYLON.Texture(`textures/${name}_ground_diffuse.png`, scene, null, true, null, function () {
+      groundMaterial.diffuseTexture = new BABYLON.Texture(`textures/${name}_ground_diffuse.png`, sceneBab, null, true, null, function () {
         if (name == "earthy") ObjectEnum.loadingDone();
       });
       listGrounds[index].material = groundMaterial;
@@ -384,7 +467,7 @@ class Scene {
       //   listGrounds[index],
       //   BABYLON.PhysicsImpostor.HeightmapImpostor,
       //   { mass: 0 },
-      //   scene
+      //   this.scene
       // );
 
 
@@ -405,20 +488,20 @@ class Scene {
 
   setWater(gr) {
     //sand ground
-    var groundTexture = new BABYLON.Texture("textures/sand.jpg", scene);
+    var groundTexture = new BABYLON.Texture("textures/sand.jpg", this.scene);
     groundTexture.vScale = groundTexture.uScale = 4.0;
 
-    var groundMaterial = new BABYLON.StandardMaterial("groundMaterial", scene);
+    var groundMaterial = new BABYLON.StandardMaterial("groundMaterial", this.scene);
     groundMaterial.diffuseTexture = groundTexture;
 
-    groundSand = BABYLON.MeshBuilder.CreateGround("groundSand", { height: 128, width: 128, subdivisions: 32 }, scene);
+    groundSand = BABYLON.MeshBuilder.CreateGround("groundSand", { height: 128, width: 128, subdivisions: 32 }, this.scene);
     groundSand.position.y = gr.position.y - 0.1
     groundSand.material = groundMaterial;
     groundSand.physicsImpostor = new BABYLON.PhysicsImpostor(
       groundSand,
       BABYLON.PhysicsImpostor.BoxImpostor,
       { mass: 0 },
-      scene
+      this.scene
     );
     // var collidedChar
     // groundSand.physicsImpostor.onCollideEvent = (e1, e2) => {
@@ -429,11 +512,11 @@ class Scene {
 
 
     //water ground
-    var waterMesh = BABYLON.MeshBuilder.CreateGround("waterMesh", { height: 256, width: 256, subdivisions: 32 }, scene);
+    var waterMesh = BABYLON.MeshBuilder.CreateGround("waterMesh", { height: 256, width: 256, subdivisions: 32 }, this.scene);
     waterMesh.position.y = gr.position.y - 0.1
-    var water = new BABYLON.WaterMaterial("water", scene, new BABYLON.Vector2(256, 256));
+    var water = new BABYLON.WaterMaterial("water", this.scene, new BABYLON.Vector2(256, 256));
     water.backFaceCulling = true;
-    water.bumpTexture = new BABYLON.Texture("textures/waterbump.png", scene);
+    water.bumpTexture = new BABYLON.Texture("textures/waterbump.png", this.scene);
     water.windForce = -5;
     water.waveHeight = 0.1;
     water.bumpHeight = 0.1;
@@ -448,7 +531,7 @@ class Scene {
 
   setShadow() {
 
-    light1 = new BABYLON.PointLight("spotLight1", new BABYLON.Vector3(0, 10, 0), scene);
+    light1 = new BABYLON.PointLight("spotLight1", new BABYLON.Vector3(0, 10, 0), this.scene);
     light1.emissive = new BABYLON.Color3(0, 0, 0);
     light1.specular = new BABYLON.Color3(0.2, 0.2, 0.2);
 
@@ -466,25 +549,25 @@ class Scene {
   }
 
   setFog() {
-    if (biome != "Snow") return;
-    // scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
-    //BABYLON.Scene.FOGMODE_NONE;
-    //BABYLON.Scene.FOGMODE_EXP2;
-    scene.fogMode = BABYLON.Scene.FOGMODE_LINEAR;
-    scene.fogColor = new BABYLON.Color3(1, 1, 1);
-    scene.fogDensity = 0.3;
-    scene.fogStart = 0.1;
-    scene.fogEnd = 30.0;
+    if (biome[0] != "Snow") return;
+    // this.scene.fogMode = BABYLON.this.scene.FOGMODE_EXP;
+    //BABYLON.this.scene.FOGMODE_NONE;
+    //BABYLON.this.scene.FOGMODE_EXP2;
+    this.scene.fogMode = BABYLON.Scene.FOGMODE_LINEAR;
+    this.scene.fogColor = new BABYLON.Color3(1, 1, 1);
+    this.scene.fogDensity = 0.3;
+    this.scene.fogStart = 0.1;
+    this.scene.fogEnd = 30.0;
   }
 
 
   setBackground() {
 
     let createSkybox = (name) => {
-      let skybox = BABYLON.MeshBuilder.CreateBox("skyBox", { size: 512.0 }, scene);
-      let skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+      let skybox = BABYLON.MeshBuilder.CreateBox("skyBox", { size: 512.0 }, this.scene);
+      let skyboxMaterial = new BABYLON.StandardMaterial("skyBox", this.scene);
       skyboxMaterial.backFaceCulling = false;
-      skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(`images/${name}_sky/skybox`, scene);
+      skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(`images/${name}_sky/skybox`, this.scene);
       skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
       skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
       skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
@@ -502,12 +585,12 @@ class Scene {
 
   setParticles() {
     // Set up new rendering pipeline
-    var pipeline = new BABYLON.DefaultRenderingPipeline("default", true, scene);
+    var pipeline = new BABYLON.DefaultRenderingPipeline("default", true, this.scene);
 
     // Tone mapping
-    scene.imageProcessingConfiguration.toneMappingEnabled = true;
-    scene.imageProcessingConfiguration.toneMappingType = BABYLON.ImageProcessingConfiguration.TONEMAPPING_ACES;
-    scene.imageProcessingConfiguration.exposure = 1;
+    this.scene.imageProcessingConfiguration.toneMappingEnabled = true;
+    this.scene.imageProcessingConfiguration.toneMappingType = BABYLON.ImageProcessingConfiguration.TONEMAPPING_ACES;
+    this.scene.imageProcessingConfiguration.exposure = 1;
 
     // Bloom
     pipeline.bloomEnabled = true;
@@ -518,7 +601,7 @@ class Scene {
   }
 
   setGizmo() {
-    var gizmoManager = new BABYLON.GizmoManager(scene);
+    var gizmoManager = new BABYLON.GizmoManager(this.scene);
     gizmoManager.positionGizmoEnabled = true;
     gizmoManager.rotationGizmoEnabled = true;
     gizmoManager.scaleGizmoEnabled = true;
@@ -526,3 +609,11 @@ class Scene {
   }
 
 }
+
+console.log("THIS IS A TEXT");
+
+window.addEventListener('load', () => {
+  new Scene()
+  window.scene = scene
+  window.pointerLock = pointerLock
+});

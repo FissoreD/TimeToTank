@@ -1,8 +1,18 @@
 
-let sceneInterval;
-canTire = true;
+import { scene, engine, canvas, sceneBab } from "../babylon_start/scene.js";
+import { level_map, draw_level_map } from "../levels/levels.js";
+import { MiniMap } from "../tools/minimap.js";
+import { barrels, batteries, delimiters, chars, charsAI, charsAllies, charsDestroyed, bullets, grenades, bonuses, walls, trees, inputStates, rocks, houses, relics } from "./global_vars.js";
+import { reloadMultUti } from "./global_vars.js";
+import { createSmoke, playSmoke, stopSmoke, createFire } from "../babylon_start/particles.js";
+
+
+export var playing;
+
+export let sceneInterval;
+export var canTire = true;
 // INITIALISATION
-function keyListener(evt, isPressed) {
+export function keyListener(evt, isPressed) {
     // tirer
     if (evt.code === "Space") {
         if (!document.getElementById('intro').classList.contains('hide')) {
@@ -21,12 +31,12 @@ function keyListener(evt, isPressed) {
     }
     // ??
     else if (evt.code === "KeyW") {
-        if (!isPressed) char1.stabilizeTank()
-        else if (!inputStates.foreward) char1.stabilizeTank(false)
+        if (!isPressed) scene.char1.stabilizeTank()
+        else if (!inputStates.foreward) scene.char1.stabilizeTank(false)
         inputStates.foreward = isPressed;
     } else if (evt.code === "KeyS") {
-        if (!isPressed) char1.stabilizeTank()
-        else if (!inputStates.backward) char1.stabilizeTank(false)
+        if (!isPressed) scene.char1.stabilizeTank()
+        else if (!inputStates.backward) scene.char1.stabilizeTank(false)
         inputStates.backward = isPressed;
     }
     // POUR S'ENFLAMER
@@ -54,12 +64,12 @@ function keyListener(evt, isPressed) {
         canTire = false
         let length = 1000;
         let ray = new BABYLON.Ray(new BABYLON.Vector3(
-            char1.shape.position.x + char1.getTurretTank().getDirection(BABYLON.Axis.Z).x * 10,
-            char1.shape.position.y + 3 / 40,
-            char1.shape.position.z + char1.getTurretTank().getDirection(BABYLON.Axis.X).x * 10), char1.getTurretTank().getDirection(BABYLON.Axis.Z), length);
+            scene.char1.shape.position.x + scene.char1.getTurretTank().getDirection(BABYLON.Axis.Z).x * 10,
+            scene.char1.shape.position.y + 3 / 40,
+            scene.char1.shape.position.z + scene.char1.getTurretTank().getDirection(BABYLON.Axis.X).x * 10), scene.char1.getTurretTank().getDirection(BABYLON.Axis.Z), length);
 
         setTimeout(() => canTire = true, 300);
-        let pickInfo = scene.pickWithRay(ray, (mesh) => {
+        let pickInfo = sceneBab.pickWithRay(ray, (mesh) => {
             return mesh;
         });
         if (pickInfo.pickedMesh) {
@@ -72,7 +82,7 @@ function keyListener(evt, isPressed) {
         //     rayHelper.dispose(ray);
         // }, 200);
     } else if (isPressed) {
-        char1.specialBonuses.forEach(sp => sp.applyListener(evt));
+        scene.char1.specialBonuses.forEach(sp => sp.applyListener(evt));
     }
     // else if (evt.code === "KeyP") {
     //     if (isPressed && scene.menu.canBeSwitched) {
@@ -86,86 +96,86 @@ function keyListener(evt, isPressed) {
     // }
 }
 
-function stabilizeIfNotMoving() {
+export function stabilizeIfNotMoving() {
 
 }
 
-function keyApplaier() {
+export function keyApplaier() {
 
 
     var speed_angle = 0.05;
 
-    if (typeof char1.shape === 'undefined' || scene.menu.isInMenu() || char1.health <= 0) return;
+    if (scene.char1 == undefined || typeof scene.char1.shape === 'undefined' || scene.menu.isInMenu() || scene.char1.health <= 0) return;
 
     // On regarde si on doit poser une mine
     // if (inputStates.SPACE) {
-    //     char1.addMine(Date.now());
+    //     scene.char1.addMine(Date.now());
     // }
     // On regarde si on doit tirer
     if (inputStates.mouseclick) {
-        char1.addBullet(Date.now());
+        scene.char1.addBullet(Date.now());
     }
 
     if (inputStates.turretUp) {
-        char1.rotateTurretUpDown(true);
+        scene.char1.rotateTurretUpDown(true);
     }
 
     if (inputStates.turretDown) {
-        char1.rotateTurretUpDown(false);
+        scene.char1.rotateTurretUpDown(false);
     }
 
     // TOURNER LE TANK
-    if (inputStates.rot_minus && !inputStates.rot_plus && !char1.bullForce) {
-        char1.rotateTurretAxisY(-speed_angle, tankMeshes)
-        // camera.alpha = -char1.getTurretTank().rotationQuaternion.toEulerAngles().y - Math.PI / 2 - char1.shape.rotationQuaternion.toEulerAngles().y
-        char1.rotateAxisY(-speed_angle)
+    if (inputStates.rot_minus && !inputStates.rot_plus && !scene.char1.bullForce) {
+        scene.char1.rotateTurretAxisY(-speed_angle)
+        // camera.alpha = -scene.char1.getTurretTank().rotationQuaternion.toEulerAngles().y - Math.PI / 2 - scene.char1.shape.rotationQuaternion.toEulerAngles().y
+        scene.char1.rotateAxisY(-speed_angle)
 
     }
-    if (inputStates.rot_plus && !inputStates.rot_minus && !char1.bullForce) {
-        char1.rotateTurretAxisY(speed_angle, tankMeshes)
-        // camera.alpha = -char1.getTurretTank().rotationQuaternion.toEulerAngles().y - Math.PI / 2 - char1.shape.rotationQuaternion.toEulerAngles().y
-        char1.rotateAxisY(speed_angle)
+    if (inputStates.rot_plus && !inputStates.rot_minus && !scene.char1.bullForce) {
+        scene.char1.rotateTurretAxisY(speed_angle)
+        // camera.alpha = -scene.char1.getTurretTank().rotationQuaternion.toEulerAngles().y - Math.PI / 2 - scene.char1.shape.rotationQuaternion.toEulerAngles().y
+        scene.char1.rotateAxisY(speed_angle)
     }
     // TOUNER LA TOURELLE
     if (inputStates.keyA) {
-        char1.rotateTurretAxisY(-speed_angle, tankMeshes)
-        // camera.alpha = -char1.getTurretTank().rotationQuaternion.toEulerAngles().y - Math.PI / 2 - char1.shape.rotationQuaternion.toEulerAngles().y
+        scene.char1.rotateTurretAxisY(-speed_angle)
+        // camera.alpha = -scene.char1.getTurretTank().rotationQuaternion.toEulerAngles().y - Math.PI / 2 - scene.char1.shape.rotationQuaternion.toEulerAngles().y
 
     }
     if (inputStates.keyD) {
-        char1.rotateTurretAxisY(speed_angle, tankMeshes)
-        // camera.alpha = -char1.getTurretTank().rotationQuaternion.toEulerAngles().y - Math.PI / 2 - char1.shape.rotationQuaternion.toEulerAngles().y
+        scene.char1.rotateTurretAxisY(speed_angle)
+        // camera.alpha = -scene.char1.getTurretTank().rotationQuaternion.toEulerAngles().y - Math.PI / 2 - scene.char1.shape.rotationQuaternion.toEulerAngles().y
     }
     // DEPLACEMENT
     if (inputStates.foreward) {
-        char1.moveTankForeward();
+        scene.char1.moveTankForeward();
         return;
     }
     if (inputStates.backward) {
-        char1.moveTankBackward();
+        scene.char1.moveTankBackward();
         return;
     }
     // destroy
     if (inputStates.keyX) {
-        char1.destroyTank(true)
+        scene.char1.destroyTank(true)
 
     }
     // destroy
     if (inputStates.keyL) {
         //smoke()
-        var smok = createSmoke(char1.shape)
+        var smok = createSmoke(scene.char1.shape)
         playSmoke(smok)
-        createFire(char1.shape);
+        createFire(scene.char1.shape);
     }
 }
 
-function init() {
+export function init() {
 
     scene.minimap = new MiniMap()
 
     window.onresize()
 
-    canvas = document.querySelector("#myCanvas");
+    // canvas = document.querySelector("#myCanvas");
 
     playing = 0;
 
@@ -214,24 +224,24 @@ function init() {
     //turret direction is responding to cursor movements
     window.addEventListener("mousemove", (evt) => {
         if (scene.menu.isInMenu()) return
-        if (evt.movementX > 0) char1.rotateTurretAxisY(Math.sqrt(evt.movementX) / 200)
-        else if (evt.movementX < 0) char1.rotateTurretAxisY(- (Math.sqrt(Math.abs(evt.movementX)) / 200))
-        if (evt.movementY > 0) char1.rotateTurretUpDown(false, Math.min(Math.sqrt(evt.movementY), 4))
-        else if (evt.movementY < 0) char1.rotateTurretUpDown(true, Math.min(Math.sqrt(Math.abs(evt.movementY)), 4))
+        if (evt.movementX > 0) scene.char1.rotateTurretAxisY(Math.sqrt(evt.movementX) / 200)
+        else if (evt.movementX < 0) scene.char1.rotateTurretAxisY(- (Math.sqrt(Math.abs(evt.movementX)) / 200))
+        if (evt.movementY > 0) scene.char1.rotateTurretUpDown(false, Math.min(Math.sqrt(evt.movementY), 4))
+        else if (evt.movementY < 0) scene.char1.rotateTurretUpDown(true, Math.min(Math.sqrt(Math.abs(evt.movementY)), 4))
     });
 
     canvas.onpointerdown = function () {
-        if (!scene.menu.isShown && !scene.menu.inOtherMenu() && !isLocked() && !(pointerLockChange != null && Date.now() - pointerLockChange < 1400)) pointerLock();
+        if (!scene.menu.isShown && !scene.menu.inOtherMenu() && !isLocked() && !(scene.pointerLockChange != null && Date.now() - scene.pointerLockChange < 1400)) pointerLock();
         else if (isLocked() && engine.activeRenderLoops.length == 1) {
             if (sceneInterval) clearInterval(sceneInterval);
             sceneInterval = setInterval(() => {
-                char1.addBullet()
+                scene.char1.addBullet()
             }, 10);
         }
     }
 
     canvas.onmouseup = () => {
-        clearInterval(sceneInterval); continueShoot = true;
+        clearInterval(sceneInterval);
     }
 
 
@@ -248,40 +258,39 @@ function init() {
     document.addEventListener('pointerlockchange', lockChangeAlert, false);
 
     // My part
-    startgame(level)
+    startgame(scene.level)
     anime();
 }
 
 //GAME OVER GO TO MENU
 
-function stopgame() {
+export function stopgame() {
     pausebackgroundMusic();
     playing = 0;
 }
 
 //DEBUT D'UNE NOUVELLE PARTIE
 
-function startgame(level, progress = true) {
+export function startgame(level, progress = true) {
 
     playing = 1;
 
-    barrels = new Array();
-    batteries = new Array();
-    walls = new Array();
-    delimiters = new Array();
-    chars = new Array();
-    charsAI = new Array();
-    charsAllies = new Array();
-    charsDestroyed = new Array();
+    barrels.length = 0;
+    batteries.length = 0;
+    walls.length = 0;
+    delimiters.length = 0;
+    chars.length = 0;
+    charsAI.length = 0;
+    charsAllies.length = 0;
+    charsDestroyed.length = 0;
 
-    //BULLETS AND MINES INIT
-    bullets = new Array();
-    grenades = new Array();
-    mines = new Array();
+    //BULLETS AND GRENADES INIT
+    bullets.length = 0;
+    grenades.length = 0;
 
+    bonuses.length = 0;
 
-    bonuses = new Array();
-
+    console.log(level, level_map);
     if (level < level_map.length) {
         draw_level_map(progress)
     }
@@ -304,13 +313,13 @@ function startgame(level, progress = true) {
 
 //BACKGROUND MUSIC
 
-function playBackgroundMusic() {
+export function playBackgroundMusic() {
     let audioPlayer = document.querySelector("#audioPlayer");
     audioPlayer.loop = true;
     audioPlayer.play();
 }
 
-function pausebackgroundMusic() {
+export function pausebackgroundMusic() {
     let audioPlayer = document.querySelector("#audioPlayer");
     if (audioPlayer) {
         audioPlayer.pause();
@@ -318,52 +327,51 @@ function pausebackgroundMusic() {
     }
 }
 
-function remove_all_objects(withPlayer = false, progress = true) {
+export function remove_all_objects(withPlayer = false, progress = true) {
     scene.blockfreeActiveMeshesAndRenderingGroups = true;
     let allElts = getAllMeshList(withPlayer)
-    if (level == 0 && progress) allElts.push(char1)
+    if (level == 0 && progress) allElts.push(scene.char1)
 
     allElts.forEach(e => e.dispose(true))
-    walls = [];
-    barrels = [];
-    batteries = [];
-    bullets = [];
-    grenades = [];
-    mines = [];
-    chars = [];
-    charsAI = [];
-    charsAllies = [];
-    charsDestroyed = [];
-    bonuses = [];
-    trees = [];
-    rocks = [];
-    houses = [];
-    delimiters = [];
-    relics = [];
+    walls.length = 0;
+    barrels.length = 0;
+    batteries.length = 0;
+    bullets.length = 0;
+    grenades.length = 0;
+    chars.length = 0;
+    charsAI.length = 0;
+    charsAllies.length = 0;
+    charsDestroyed.length = 0;
+    bonuses.length = 0;
+    trees.length = 0;
+    rocks.length = 0;
+    houses.length = 0;
+    delimiters.length = 0;
+    relics.length = 0;
 
     scene.blockfreeActiveMeshesAndRenderingGroups = false;
 }
 
 
-function getAllMeshList(withPlayer = false) {
-    return [...walls, ...barrels, ...batteries, ...bullets, ...grenades, ...mines, ...bonuses, ...trees, ...rocks, ...houses, ...delimiters, ...relics, ...charsAI, ...charsAllies, ...charsDestroyed].concat(withPlayer ? [char1] : [])
+export function getAllMeshList(withPlayer = false) {
+    return [...walls, ...barrels, ...batteries, ...bullets, ...grenades, ...bonuses, ...trees, ...rocks, ...houses, ...delimiters, ...relics, ...charsAI, ...charsAllies, ...charsDestroyed].concat(withPlayer ? [scene.char1] : [])
 }
 
 //ANIMATION
 
-function anime() {
+export function anime() {
 
     playing = 1;
     //MENU
     if (playing == 0) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.font = "50px Arial";
-        if (level >= 0) ctx.fillText('You reached level : ' + Math.min((level + 1), 5), 250, 200);
+        if (scene.level >= 0) ctx.fillText('You reached level : ' + Math.min((scene.level + 1), 5), 250, 200);
         ctx.fillText('Click the MOUSE or SPACE to start', 100, 350);
         if (inputStates.mouseclick || inputStates.SPACE) {
-            level = 0;
+            scene.level = 0;
             playBackgroundMusic();
-            startgame(level);
+            startgame(scene.level);
             inputStates.mouseclick = false;
             inputStates.SPACE = false;
         }
@@ -373,7 +381,7 @@ function anime() {
     if (playing == 2) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.font = "50px Arial";
-        ctx.fillText('You have beaten level : ' + level, 240, 100);
+        ctx.fillText('You have beaten level : ' + scene.level, 240, 100);
         ctx.fillText('Congratulations, you defeated the game!', 70, 200);
         ctx.fillText('Press SPACE', 340, 400);
         ctx.fillText('to go back to main menu', 250, 500);
@@ -388,27 +396,33 @@ function anime() {
     //window.requestAnimationFrame(anime);
 }
 
-var inputVitMult = document.getElementById("mutlvit")
+export var inputVitMult = document.getElementById("mutlvit")
 if (inputVitMult !== null) inputVitMult.oninput = function () { changeVitesseChar(inputVitMult.value) };
 
-var inputReloadMult = document.getElementById("multReload")
+export var inputReloadMult = document.getElementById("multReload")
 if (inputReloadMult !== null) inputReloadMult.oninput = function () { changeCadenceTir(inputReloadMult.value) };
 
-function changeCadenceTir(value) {
-    reloadMultUti = value;
+export function changeCadenceTir(value) {
+    reloadMultUti[0] = value;
 }
 
-let isLocked = () => document.pointerLockElement === canvas ||
+export let isLocked = () => document.pointerLockElement === canvas ||
     document.mozPointerLockElement === canvas
 
-let exitPointerLoc = () => {
-    pointerLockChange = Date.now()
-    document.exitPointerLock();
+export let exitPointerLoc = () => {
+    if (scene) {
+        scene.pointerLockChange = Date.now()
+        document.exitPointerLock();
+    }
 }
-let pointerLock = () => {
-    pointerLockChange = Date.now()
-    canvas.requestPointerLock();
+export let pointerLock = () => {
+    if (scene) {
+        scene.pointerLockChange = Date.now()
+        canvas.requestPointerLock();
+    }
 }
-let runRenderLoop = () => {
-    if (engine.activeRenderLoops.length == 0) engine.runRenderLoop(() => scene.render())
+export let runRenderLoop = () => {
+    if (scene) {
+        if (engine.activeRenderLoops.length == 0) engine.runRenderLoop(() => scene.render())
+    }
 }

@@ -68,9 +68,9 @@ function startTimer() {
 
   timerDom.classList.remove('hide')
 
-  level += 1;
+  scene.level += 1;
   remove_all_objects()
-  startgame(level);
+  startgame(scene.level);
   engine.stopRenderLoop()
 
   timerInterval = setInterval(() => {

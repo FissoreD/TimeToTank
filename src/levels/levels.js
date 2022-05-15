@@ -1,6 +1,29 @@
+import { shadowGenerator, scene, light1, listGrounds, listSkyboxes } from "../babylon_start/scene.js";
+import { Level } from "./level.js";
+import { levelObjectives } from "./levelObjectives.js";
+import { batteries, barrels, chars, cell_size, globalProgress, musicBackground, reloadMultUti, selected_bonuses, addedObtainableBonus, trees, bonuses, houses, rocks, relics, walls, charsAI, delimiters } from "../main/global_vars.js";
+import { Barrel } from "../game_objects/barrel.js";
+import { Char } from "../game_objects/char.js";
+import { Wall } from "../game_objects/wall.js";
+import { Battery } from "../game_objects/battery.js";
+import { CharBoss } from "../game_objects/charBoss.js";
+import { Bonus } from "../game_objects/bonus.js";
+import { Tree } from "../game_objects/tree.js";
+import { Rock } from "../game_objects/rock.js";
+import { House } from "../game_objects/house.js";
+import { Relic } from "../game_objects/egyptianRelic.js";
+import { guaranteedAI } from "../game_IA/guaranteedAI.js";
+import { DelimiterMesh } from "../game_objects/delimiterMesh.js";
+import { dome } from "../specialBonus/dome.js";
+import { ObjectEnum } from "../game_objects/objectEnum.js";
+import { BonusEnum } from "../game_objects/bonusEnum.js";
+import { Chrono } from "../tools/chrono.js";
+
 const BIOMES = ["Earth", "Sand", "Snow"]
-var biome;
-const level_map = [
+let current_level;
+
+export var biome = ["Earth"];
+export const level_map = [
     new Level({
         level:
             [
@@ -284,37 +307,35 @@ const level_map = [
         biome: "Snow"
     }),
 ]
-/** @type{Level} */
-let current_level_dico = level_map[0]
 
 /**
  * @param {number} lvl_number 
  */
-function draw_level_map(progress) {
+export function draw_level_map(progress) {
     setCurrentLevelDico()
 
     setCurrentBiome()
 
     setCurrentMusic()
 
-    let widthOffset = (cell_x_number - current_level.length) / 2
-    let heightOffset = (cell_y_number - current_level[0].length) / 2
+    let widthOffset = (scene.cell_x_number - current_level.length) / 2
+    let heightOffset = (scene.cell_y_number - current_level[0].length) / 2
 
-    document.getElementById("level").innerHTML = (level + 1) + "/" + level_map.length
+    document.getElementById("level").innerHTML = (scene.level + 1) + "/" + level_map.length
 
-    if (level == 0 && progress) {
-        if (char1) char1.dispose(true);
-        char1 = new Char("player", 0, 0, 0, 3, 800 * reloadMultUti, 40);
-        selected_bonuses = []
-        addedObtainableBonus = []
+    if (scene.level == 0 && progress) {
+        if (scene.char1) scene.char1.dispose(true);
+        scene.char1 = new Char("player", 0, 0, 0, 3, 800 * reloadMultUti[0], 40);
+        selected_bonuses.length = 0
+        addedObtainableBonus.length = 0
     }
 
-    camera.position =
-        char1.position
+    scene.camera.position =
+        scene.char1.position
             .add(new BABYLON.Vector3(40, 5, 40))
 
 
-    char1.dust.updateColor()
+    scene.char1.dust.updateColor()
 
     let setPlayerPosition = () => {
         for (var [l_index, line] of current_level.entries()) {
@@ -322,14 +343,14 @@ function draw_level_map(progress) {
                 if (ch == "P") {
                     var posX = (ch_index + 1) * cell_size + widthOffset;
                     var posY = (current_level.length - l_index) * cell_size + heightOffset;
-                    char1.shape.position = new BABYLON.Vector3(-width / 2 + posX, Char.height / 2 + 1
-                        , -height / 2 + posY)
-                    // char1 = new Char(ObjectEnum.Player, posX, posY, 0, 3 * speedMultUti, 800 * reloadMultUti, 40);
-                    chars.push(char1);
-                    // camera.target = char1.getTurretTank();
-                    char1.shape.rotate(BABYLON.Axis.Y, Math.PI / 2)
+                    scene.char1.shape.position = new BABYLON.Vector3(-scene.width / 2 + posX, Char.height / 2 + 1
+                        , -scene.height / 2 + posY)
+                    // scene.char1 = new Char(ObjectEnum.Player, posX, posY, 0, 3 * speedMultUti, 800 * reloadMultUti[0], 40);
+                    chars.push(scene.char1);
+                    // camera.target = scene.char1.getTurretTank();
+                    scene.char1.shape.rotate(BABYLON.Axis.Y, Math.PI / 2)
                     // camera.alpha -= Math.PI / 2
-                    char1.restoreHealth()
+                    scene.char1.restoreHealth()
                     return
                 }
             }
@@ -416,19 +437,19 @@ function draw_level_map(progress) {
         }
     }
 
-    tanksAIReady = true;
+    // tanksAIReady = true;
 
     // Creation de l'enceinte 
     // walls.push(new WallPerimeter(-width / 2, 0.5, 1, height + 2))
     // walls.push(new WallPerimeter(width / 2 + 1, 0.5, 1, height + 2))
     // walls.push(new WallPerimeter(0.5, height / 2 + 1, width, 1))
     // walls.push(new WallPerimeter(0.5, -height / 2, width, 1))
-    delimiters.push(new DelimiterMesh(-width / 2, 0.5, 2, height + 2))
-    delimiters.push(new DelimiterMesh(width / 2 + 1, 0.5, 2, height + 2))
-    delimiters.push(new DelimiterMesh(0.5, height / 2 + 2, width, 2))
-    delimiters.push(new DelimiterMesh(0.5, -height / 2, width, 2))
+    delimiters.push(new DelimiterMesh(-scene.width / 2, 0.5, 2, scene.height + 2))
+    delimiters.push(new DelimiterMesh(scene.width / 2 + 1, 0.5, 2, scene.height + 2))
+    delimiters.push(new DelimiterMesh(0.5, scene.height / 2 + 2, scene.width, 2))
+    delimiters.push(new DelimiterMesh(0.5, -scene.height / 2, scene.width, 2))
 
-    if (current_level_dico.lvlObjective == levelObjectives.batteryKillTanks) {
+    if (scene.current_level_dico.lvlObjective == levelObjectives.batteryKillTanks) {
         charsAI.forEach(c => {
             let d = new dome(c, true)
             d.addToChar()
@@ -438,14 +459,15 @@ function draw_level_map(progress) {
 }
 
 /** @type{{special_taken_bonuses: SpecialBonus[], normal_taken_bonuses: BonusEnum[], bonuses_onHearth: {[key: string]: BonusEnum[]}}[]} */
-const levelMemory = []
+export const levelMemory = []
 for (let index = 0; index < level_map.length; index++) {
     levelMemory.push({ special_taken_bonuses: [], normal_taken_bonuses: [], bonuses_onHearth: {} })
 }
 
 function setCurrentLevelDico() {
-    current_level_dico = level_map[level]
-    chronoLvl = (current_level_dico.lvlObjective == levelObjectives.chronoMission ? new Chrono(50000) : null)
+    scene.current_level_dico = level_map[scene.level]
+    let current_level_dico = scene.current_level_dico;
+    scene.chronoLvl = (current_level_dico.lvlObjective == levelObjectives.chronoMission ? new Chrono(50000) : null)
 
     if (current_level_dico.lvlObjective == levelObjectives.labyrinth) {
         shadowGenerator.getShadowMap().refreshRate = 0;
@@ -458,49 +480,49 @@ function setCurrentLevelDico() {
     level_map.forEach(e => e.resetValues())
     if (current_level_dico) {
         current_level = current_level_dico.level;
-        cell_x_number = current_level_dico.level.length;
-        cell_y_number = current_level_dico.level[0].length;
+        scene.cell_x_number = current_level_dico.level.length;
+        scene.cell_y_number = current_level_dico.level[0].length;
 
-        height = cell_x_number * cell_size;
-        width = cell_y_number * cell_size;
+        scene.height = scene.cell_x_number * cell_size;
+        scene.width = scene.cell_y_number * cell_size;
 
         // current_level_dico.resetValues()
     }
 
 
-    if ((level == 0 || current_level_dico.biome != level_map[level - 1].biome) && globalProgress) {
+    if ((scene.level == 0 || current_level_dico.biome != level_map[scene.level - 1].biome) && globalProgress[0]) {
         scene.menu.toDisplayScenario = true;
-        if (level != 0) scene.menu.show(false)
+        if (scene.level != 0) scene.menu.show(false)
     } else {
         document.getElementById('storyFullScreen').classList.add('hide')
     }
 
-    document.getElementsByClassName('level')[level].classList.remove('blocked')
+    document.getElementsByClassName('level')[scene.level].classList.remove('blocked')
 
 
-    if (level > 0 && !fromLevelChooser) {
-        document.getElementsByClassName('level')[level - 1].classList.add('done')
-        levelMemory[level].normal_taken_bonuses = selected_bonuses.map(e => e);
-        levelMemory[level].special_taken_bonuses = char1.specialBonuses.map(e => e);
+    if (scene.level > 0 && !window.fromLevelChooser) {
+        document.getElementsByClassName('level')[scene.level - 1].classList.add('done')
+        levelMemory[scene.level].normal_taken_bonuses = selected_bonuses.map(e => e);
+        levelMemory[scene.level].special_taken_bonuses = scene.char1.specialBonuses.map(e => e);
     }
 
-    if (fromLevelChooser && char1) {
-        fromLevelChooser = false
-        char1.dispose()
-        char1 = new Char("player", 0, 0, 0, 3, 800 * reloadMultUti, 40);
+    if (window.fromLevelChooser && scene.char1) {
+        window.fromLevelChooser = false
+        scene.char1.dispose()
+        scene.char1 = new Char("player", 0, 0, 0, 3, 800 * reloadMultUti[0], 40);
         BonusEnum.bonusEnumList.forEach(e => e.resetCounter())
         document.getElementById('specialBonus').innerHTML = ''
-        selected_bonuses = []
-        levelMemory[level].normal_taken_bonuses.forEach(e => e.addToChar())
-        levelMemory[level].special_taken_bonuses.forEach(e => e.addToChar(char1))
-    } else if (!fromLevelChooser && char1) {
-        levelMemory[level].bonuses_onHearth = {}
+        selected_bonuses.length = 0
+        levelMemory[scene.level].normal_taken_bonuses.forEach(e => e.addToChar())
+        levelMemory[scene.level].special_taken_bonuses.forEach(e => e.addToChar(scene.char1))
+    } else if (!window.fromLevelChooser && scene.char1) {
+        levelMemory[scene.level].bonuses_onHearth = {}
     }
 }
 
 function setCurrentBiome() {
-    biome = current_level_dico.biome;
-    document.getElementById("minimap").style.backgroundImage = `url('textures/${biome.toLowerCase()}y_minimap.png')`;
+    biome[0] = scene.current_level_dico.biome;
+    document.getElementById("minimap").style.backgroundImage = `url('textures/${biome[0].toLowerCase()}y_minimap.png')`;
     listGrounds.forEach(g => {
         g.position.y = -10
         g.receiveShadows = false
@@ -508,7 +530,7 @@ function setCurrentBiome() {
         g.checkCollision = false
         if (g.physicsImpostor) g.physicsImpostor.dispose()
     })
-    let currentGround = listGrounds[BIOMES.indexOf(biome)]
+    let currentGround = listGrounds[BIOMES.indexOf(biome[0])]
     currentGround.position.y = 0
     currentGround.receiveShadows = true
     currentGround.isVisible = true
@@ -517,7 +539,7 @@ function setCurrentBiome() {
         currentGround,
         BABYLON.PhysicsImpostor.HeightmapImpostor,
         { mass: 0 },
-        scene
+        scene.scene
     )
 
     listSkyboxes.forEach(s => {
@@ -528,20 +550,20 @@ function setCurrentBiome() {
 
 function setCurrentMusic() {
     // if (level == 0) return
-    biome = current_level_dico.biome;
-    musicBackground.pause()
-    if (biome == "Earth") {
-        musicBackground = new Audio('audio/warmusic-cut.mp3')
-        musicBackground.volume = 0.2
+    biome[0] = scene.current_level_dico.biome;
+    musicBackground[0].pause()
+    if (biome[0] == "Earth") {
+        musicBackground[0] = new Audio('audio/warmusic-cut.mp3')
+        musicBackground[0].volume = 0.2
     }
-    if (biome == "Sand") {
-        musicBackground = new Audio('audio/Ibn-Al-Noor.mp3')
-        musicBackground.volume = 0.2
+    if (biome[0] == "Sand") {
+        musicBackground[0] = new Audio('audio/Ibn-Al-Noor.mp3')
+        musicBackground[0].volume = 0.2
     }
-    if (biome == "Snow") {
-        musicBackground = new Audio('audio/GoT.mp3')
-        musicBackground.volume = 0.25
+    if (biome[0] == "Snow") {
+        musicBackground[0] = new Audio('audio/GoT.mp3')
+        musicBackground[0].volume = 0.25
     }
-    musicBackground.loop = true
-    musicBackground.play()
+    musicBackground[0].loop = true
+    musicBackground[0].play()
 }

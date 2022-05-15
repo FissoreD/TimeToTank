@@ -1,4 +1,18 @@
-class Char extends ObjectPos {
+import { ObjectPos } from "./objectPos.js";
+import { ObjectEnum } from "./objectEnum.js";
+import { scene } from "../babylon_start/scene.js";
+import { biome } from "../levels/levels.js";
+import { createSmoke, createDust, playSmoke, stopSmoke, createFire, tankExplosion } from "../babylon_start/particles.js";
+import { Healthbar } from "./healthBar.js";
+import { MoveAI } from "../game_IA/moveAI.js";
+import { remove } from "../tools/utils.js";
+import { playSoundWithDistanceEffect } from "../tools/utils.js";
+import { Bullet } from "./bullet.js";
+import { charsDestroyed, cell_size, impostorCharList } from "../main/global_vars.js";
+import { SPECIAL_BONUS_ID } from "../specialBonus/bonusSpecial.js";
+import { GrenadeObj } from "./grenadeObj.js";
+
+export class Char extends ObjectPos {
   static width = cell_size;
   static height = cell_size;
   static depth = cell_size;
@@ -26,24 +40,24 @@ class Char extends ObjectPos {
       case "boss": type = ObjectEnum.BossTank
         break;
 
-      case "normal": type = (biome == "Earth" ? ObjectEnum.EarthTank : (biome == "Sand" ? ObjectEnum.SandTank : ObjectEnum.SnowTank))
+      case "normal": type = (biome[0] == "Earth" ? ObjectEnum.EarthTank : (biome[0] == "Sand" ? ObjectEnum.SandTank : ObjectEnum.SnowTank))
         break;
       default: break;
     }
-    super(type, -width / 2 + x, Char.height / 2, -height / 2 + y, vitesse, angle, life);
+    super(type, -scene.width / 2 + x, Char.height / 2, -scene.height / 2 + y, vitesse, angle, life);
 
     this.getTurretTank().rotate(BABYLON.Axis.X, -0.01)
     this.getTurretTank().rotate(BABYLON.Axis.X, +0.01)
 
     if (type.name == ObjectEnum.Player.name) {
-      let camera1 = new BABYLON.FollowCamera("tankCamera", this.getTurretTank().position, scene, this.getTurretTank());
+      let camera1 = new BABYLON.FollowCamera("tankCamera", this.getTurretTank().position, scene.scene, this.getTurretTank());
       camera1.radius = 5 //3;
       camera1.heightOffset = 2//0;
       camera1.rotationOffset = 180 //-98;
       camera1.cameraAcceleration = .1;
       camera1.maxCameraSpeed = 4;
-      camera.dispose();
-      camera = camera1;
+      scene.camera.dispose();
+      scene.camera = camera1;
 
 
       this.regenStartDate = Date.now()
@@ -59,9 +73,9 @@ class Char extends ObjectPos {
     this.delayMinBetweenMines = 5000;
     this.bulletSpeed = bulletSpeed;
     this.bulletLife = bulletLife;
-    this.bulletDamage = bulletDamage + (biome == "Earth" ? 0 : (biome == "Sand" ? Math.floor(bulletDamage / 3) : Math.floor(bulletDamage * 2 / 3)))
+    this.bulletDamage = bulletDamage + (biome[0] == "Earth" ? 0 : (biome[0] == "Sand" ? Math.floor(bulletDamage / 3) : Math.floor(bulletDamage * 2 / 3)))
     this.inclinaisonTurretIncrement = inclinaisonTurretIncrement || 0.002;
-    this.health = health + (biome == "Earth" ? 0 : (biome == "Sand" ? Math.floor(health / 2) : health))
+    this.health = health + (biome[0] == "Earth" ? 0 : (biome[0] == "Sand" ? Math.floor(health / 2) : health))
     this.maxHealth = this.health
 
     //this.test = BABYLON.MeshBuilder.CreateSphere("test", { diameter: 0.1, segments: 4 }, scene);
@@ -92,7 +106,7 @@ class Char extends ObjectPos {
 
     this.charExploseSound = new Audio('audio/charExplosion.mp3');
     this.charExploseSound.volume = 0.4
-    
+
     this.vehicleExplosionSound = new Audio('audio/vehicleExplosion.mp3');
     this.vehicleExplosionSound.volume = 1
 

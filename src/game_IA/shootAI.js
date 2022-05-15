@@ -1,10 +1,13 @@
-let getCannonPoint = (tank) => new BABYLON.Vector3(
+import { createRay } from "../tools/utils.js";
+import { ObjectEnum } from "../game_objects/objectEnum.js";
+
+export let getCannonPoint = (tank) => new BABYLON.Vector3(
     tank.shape.position.x + tank.getTurretTank().getDirection(BABYLON.Axis.Z).x * 6,
     tank.shape.position.y + tank.getTurretTank().getDirection(BABYLON.Axis.Z).y * 6,
     tank.shape.position.z + tank.getTurretTank().getDirection(BABYLON.Axis.X).x * 6
 );
 
-class ShootAI {
+export class ShootAI {
     /**
      * @param {Char} tank 
      * @returns {BABYLON.Mesh} the mesh targeted

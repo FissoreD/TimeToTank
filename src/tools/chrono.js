@@ -1,4 +1,8 @@
-class Chrono {
+import { tankExplosion } from "../babylon_start/particles.js";
+import { scene } from "../babylon_start/scene.js";
+import { playSoundWithDistanceEffect } from "./utils.js";
+
+export class Chrono {
     constructor(cooldown) {
         this.startDate = Date.now()
         this.timeCooled = 0;
@@ -7,12 +11,12 @@ class Chrono {
     }
 
     update() {
-        if (char1.life <= 0 || this.finished) return
+        if (scene.char1.life <= 0 || this.finished) return
         this.timeCooled = Math.max(0, this.startDate + this.cooldown - Date.now());
         if (this.timeCooled <= 0) {
-            tankExplosion(char1.shape.position)
-            playSoundWithDistanceEffect(char1.vehicleExplosionSound, char1.shape)
-            char1.healthLoss(char1.maxHealth, true)
+            tankExplosion(scene.char1.shape.position)
+            playSoundWithDistanceEffect(scene.char1.vehicleExplosionSound, scene.char1.shape)
+            scene.char1.healthLoss(scene.char1.maxHealth, true)
             this.finished = true
         };
     }

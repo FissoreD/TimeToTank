@@ -1,10 +1,19 @@
-const lvlStatus = {
+import { barrels } from "../main/global_vars.js";
+import { scene } from "../babylon_start/scene.js";
+import { exitPointerLoc, pointerLock } from "../main/main.js";
+import { level_map } from "./levels.js";
+import { globalProgress, bonuses } from "../main/global_vars.js";
+import { remove_all_objects, startgame } from "../main/main.js";
+import { Bonus } from "../game_objects/bonus.js";
+import { applauseSound } from "../main/global_vars.js";
+
+export const lvlStatus = {
   DIE: 0,
   WIN: 1,
   NXT_LVL: 2
 };
 
-class Level {
+export class Level {
   stats = {
     "Char Killed": 0,
     "Bonus Obtained": 0,
@@ -195,11 +204,11 @@ class Level {
     //   tab.appendChild(line)
     // }
 
-    let tryAgain = (isAdventure && status == lvlStatus.DIE)
+    let tryAgain = (scene.isAdventure && status == lvlStatus.DIE)
 
     if (status == lvlStatus.NXT_LVL) {
       let nextLvlDescLine = document.createElement("tr")
-      let nextLvlDesc = createTd(level_map[level + 1].lvlObjective.description)
+      let nextLvlDesc = createTd(level_map[scene.level + 1].lvlObjective.description)
       //nextLvlDesc.classList.add('greenBg')
       nextLvlDesc.colSpan = 2
       // nextLvlDesc.style.fontSize = "x-large"
@@ -209,7 +218,7 @@ class Level {
     }
     if (tryAgain) {
       let nextLvlDescLine = document.createElement("tr")
-      let nextLvlDesc = createTd(level_map[level].lvlObjective.description)
+      let nextLvlDesc = createTd(level_map[scene.level].lvlObjective.description)
       nextLvlDesc.colSpan = 2
       nextLvlDesc.style.textShadow = "0 0 3px #000000, 0 0 3px #000000, 0 0 3px #000000, 0 0 3px #000000"
       nextLvlDescLine.appendChild(nextLvlDesc)
@@ -222,8 +231,8 @@ class Level {
     endCell.colSpan = 2;
     endCell.onclick = () => {
       if (tryAgain) {
-        char1.health = char1.maxHealth
-        char1.life += 1
+        scene.char1.health = scene.char1.maxHealth
+        scene.char1.life += 1
         scene.menu.inNextLevel = false;
         document.getElementById('endLevelStat').classList.add('hide');
         this.loadNextLevel(false);
@@ -248,18 +257,18 @@ class Level {
   }
 
   loadNextLevel(progress = true) {
-    globalProgress = progress
-    level += progress;
+    globalProgress[0] = progress
+    scene.level += progress;
     let notTakenBonus = []
     if (!progress) {
       notTakenBonus = bonuses.slice()
       // console.log("notTakenBonuses = ", notTakenBonus);
     }
     remove_all_objects(false, progress)
-    startgame(level, progress);
+    startgame(scene.level, progress);
     if (!progress) {
       // console.log("setting notTakenBonuses");
-      notTakenBonus.forEach(b => bonuses.push(new Bonus(b.position.x + width / 2, b.position.z + height / 2, b.isSpecial)))
+      notTakenBonus.forEach(b => bonuses.push(new Bonus(b.position.x + scene.width / 2, b.position.z + scene.height / 2, b.isSpecial)))
       // console.log("bonuses = ", bonuses);
     }
     // engine.stopRenderLoop()

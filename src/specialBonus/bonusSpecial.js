@@ -1,78 +1,82 @@
-const BONUS_TYPE = {
+import { addedObtainableBonus } from "../main/global_vars.js";
+import { scene } from "../babylon_start/scene.js";
+import { BonusEnum } from "../game_objects/bonusEnum.js";
+
+export const BONUS_TYPE = {
   PERMANENT: 1,
   ACTIVATION: 2,
   ONE_USE: 3
 };
 
-const SPECIAL_BONUS_ID = {
+export const SPECIAL_BONUS_ID = {
   CROSS_HAIR: {
     name: "Sniper laser",
     description: "Highlight enemies once target + Bullet are very fast every 3 seconds",
     image: "images/gunaims.png",
     keyListener: '1',
-    bonusLevelUp: function () { char1.specialBonuses.forEach(b => { if (b.name == "Sniper laser") b.delay /= 2 }) },
+    bonusLevelUp: function () { scene.char1.specialBonuses.forEach(b => { if (b.name == "Sniper laser") b.delay /= 2 }) },
   },
   MACHINE_GUN: {
     name: 'Machine gun',
     description: "The delay between bullets is really short and bullets are faster",
     image: "images/multiple_bullet.png",
     keyListener: '2',
-    bonusLevelUp: function () { char1.specialBonuses.forEach(b => { if (b.name == "Machine gun") b.delay /= 2 }) },
+    bonusLevelUp: function () { scene.char1.specialBonuses.forEach(b => { if (b.name == "Machine gun") b.delay /= 2 }) },
   },
   DOME: {
     name: "Shield",
     description: "Be protected by a 3-lifes dome",
     image: "images/shield.png",
     keyListener: '3',
-    bonusLevelUp: function () { char1.specialBonuses.forEach(b => { if (b.name == "Shield") b.delay /= 2 }) },
+    bonusLevelUp: function () { scene.char1.specialBonuses.forEach(b => { if (b.name == "Shield") b.delay /= 2 }) },
   },
   SPEED_TURBO: {
     name: "Speed Turbo",
     description: "Go faster for 3 seconds",
     image: "images/turbo.png",
     keyListener: '4',
-    bonusLevelUp: function () { char1.specialBonuses.forEach(b => { if (b.name == "Speed Turbo") b.delay /= 2 }) },
+    bonusLevelUp: function () { scene.char1.specialBonuses.forEach(b => { if (b.name == "Speed Turbo") b.delay /= 2 }) },
   },
   MIND_CONTROL: {
     name: "Mind Control",
     description: "Nearby tanks attack their allies for 10 seconds",
     image: "images/brain.png",
     keyListener: '5',
-    bonusLevelUp: function () { char1.specialBonuses.forEach(b => { if (b.name == "Mind Control") b.delay /= 2 }) },
+    bonusLevelUp: function () { scene.char1.specialBonuses.forEach(b => { if (b.name == "Mind Control") b.delay /= 2 }) },
   },
   TELEPORT: {
     name: "Teleport",
     description: "Teleport 5 meters in the direction your are looking",
     image: "images/teleportation.png",
     keyListener: '6',
-    bonusLevelUp: function () { char1.specialBonuses.forEach(b => { if (b.name == "Teleport") b.delay /= 2 }) },
+    bonusLevelUp: function () { scene.char1.specialBonuses.forEach(b => { if (b.name == "Teleport") b.delay /= 2 }) },
   },
   BULL_CHARGE: {
     name: "Bull Charge",
     description: "Charge forward and destroy ennemies and bullets on your way",
     image: "images/bull_charge.png",
     keyListener: '7',
-    bonusLevelUp: function () { char1.specialBonuses.forEach(b => { if (b.name == "Bull Charge") b.delay /= 2 }) },
+    bonusLevelUp: function () { scene.char1.specialBonuses.forEach(b => { if (b.name == "Bull Charge") b.delay /= 2 }) },
   },
   GRENADE: {
     name: "Grenade",
     description: "Throw a grenade which explose on collision",
     image: "images/grenade.png",
     keyListener: '8',
-    bonusLevelUp: function () { char1.specialBonuses.forEach(b => { if (b.name == "Grenade") b.delay /= 2 }) },
+    bonusLevelUp: function () { scene.char1.specialBonuses.forEach(b => { if (b.name == "Grenade") b.delay /= 2 }) },
   },
   ALLIES: {
     name: "Allies Intervention",
     description: "2 allies come down from the sky to help you",
     image: "images/parachute.png",
     keyListener: '9',
-    bonusLevelUp: function () { char1.specialBonuses.forEach(b => { if (b.name == "Allies Intervention") b.delay /= 2 }) },
+    bonusLevelUp: function () { scene.char1.specialBonuses.forEach(b => { if (b.name == "Allies Intervention") b.delay /= 2 }) },
   },
 }
 
 let listenerList = ['KeyE', 'KeyR', 'KeyF'];
 
-class SpecialBonus {
+export class SpecialBonus {
   /** @type{Char} */
   tank;
 
@@ -120,7 +124,7 @@ class SpecialBonus {
     if (char) this.tank = char
     this.keyListener = listenerList[this.tank.specialBonuses.length];
     let image = this.bonusType.image.split(".")[0] + "_up.png"
-    if (this.tank == char1) {
+    if (this.tank == scene.char1) {
       addedObtainableBonus.push(
         new BonusEnum(
           this.name + " level up",
@@ -156,7 +160,7 @@ class SpecialBonus {
   fullDispose() {
     this.hide();
     this.remove();
-    if (this.tank == char1) this.bg.remove();
+    if (this.tank == scene.char1) this.bg.remove();
   }
 
   update() {
@@ -211,7 +215,7 @@ class SpecialBonus {
     this.bg.appendChild(this.lvlBonus);
 
 
-    if (this.tank == char1) {
+    if (this.tank == scene.char1) {
       let sb = document.getElementsByClassName('specialBonus')[0]
       sb.appendChild(this.bg);
       sb.classList.remove('hide')
@@ -250,23 +254,5 @@ class SpecialBonus {
    */
   static updateAllThankBonuses(tank) {
     tank.specialBonuses.forEach(e => e.update());
-  }
-
-  /**
-   * @param {Char} tank 
-   * @returns 
-   */
-  static createSpecialBonusList(tank) {
-    return [
-      new crossHair(tank),
-      new MachineGun(tank),
-      new dome(tank),
-      new SpeedTurbo(tank),
-      new MindControl(tank),
-      new Teleport(tank),
-      new BullCharge(tank),
-      new Grenade(tank),
-      new Allies(tank),
-    ].filter(e => !tank.specialBonuses.map(e => e.name).includes(e.name));
   }
 }

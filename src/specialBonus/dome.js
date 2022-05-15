@@ -1,4 +1,9 @@
-class dome extends SpecialBonus {
+import { shieldEffect, shieldImpact } from "../babylon_start/particles.js";
+import { SpecialBonus, SPECIAL_BONUS_ID } from "./bonusSpecial.js";
+import { sceneBab } from "../babylon_start/scene.js";
+import { grenades, bullets } from "../main/global_vars.js";
+
+export class dome extends SpecialBonus {
 
     constructor(tank, isPermanent = false) {
         super(tank, SPECIAL_BONUS_ID.DOME, 15000, 15000, isPermanent);
@@ -8,10 +13,10 @@ class dome extends SpecialBonus {
     }
 
     createDome() {
-        this.dome = new BABYLON.MeshBuilder.CreateSphere("dome", { diameter: this.radius }, scene)
-        var domeMaterial = new BABYLON.StandardMaterial("domeMaterial", scene);
+        this.dome = new BABYLON.MeshBuilder.CreateSphere("dome", { diameter: this.radius }, sceneBab)
+        var domeMaterial = new BABYLON.StandardMaterial("domeMaterial", sceneBab);
         domeMaterial.diffuseColor = new BABYLON.Color3(0.05, 0.1, 0.3);
-        domeMaterial.emissiveTexture = new BABYLON.Texture("textures/dome.jpg", scene)
+        domeMaterial.emissiveTexture = new BABYLON.Texture("textures/dome.jpg", sceneBab)
         domeMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
         domeMaterial.backFaceCulling = false
         this.dome.material = domeMaterial

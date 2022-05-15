@@ -1,6 +1,11 @@
 
+import { wallTexture, wallDTexture, bulletImage } from "../main/global_vars.js"
+import { engine } from "../babylon_start/scene.js";
+import { runRenderLoop, init } from "../main/main.js";
 
-class ObjectEnum {
+var scene;
+
+export class ObjectEnum {
   // Create new instances of the same class as static attributes
 
   //Element of decor
@@ -88,9 +93,9 @@ class ObjectEnum {
         x.material.emissiveColor = new BABYLON.Color3(0.5, 0.5, 0.5)
       } else if (model == "egyptian_cat" || model == "egyptian_jackal" || model == "egyptian_moon") {
         x.material.emissiveColor = new BABYLON.Color3(0.5, 0.5, 0.5)
-      } else if (model == "military_box"){
+      } else if (model == "military_box") {
         x.material.emissiveColor = new BABYLON.Color3(0.4, 0.4, 0.4)
-      } else if (model == "rock" || model == "desert_rock"){
+      } else if (model == "rock" || model == "desert_rock") {
         x.material.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.3)
       }
       //x.forceSharedVertices();
@@ -130,7 +135,8 @@ class ObjectEnum {
     ObjectEnum.loadingDone();
   }
 
-  static initiate_all_models() {
+  static initiate_all_models(scene1) {
+    scene1 = scene;
     var list_obj = [
       this.Bullet, this.SnowTank, this.EarthTank, this.SandTank, this.MiniTank, this.BossTank,
       this.Barrel, this.Battery, this.Player, this.Wall, this.WallD, this.Bonus, this.SpecialBonus,
