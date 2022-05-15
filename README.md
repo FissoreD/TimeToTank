@@ -3,11 +3,11 @@
 ## <p  align="center">by *D.N.A. Production*<p>
 ***
 
-| <b>Trailer</b> | <b>Gameplay</b> |
+| <b>TRAILER</b> | <b>GAMEPLAY</b> |
 |:-------------------------:|:-------------------------:|
-|[![TRAILER](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE) | [![GAMEPLAY](https://img.youtube.com/vi/6_SWAfjujOU/0.jpg)](https://www.youtube.com/watch?v=6_SWAfjujOU)|
+|[![TRAILER](https://img.youtube.com/vi/63MywJ9FYEg/0.jpg)](https://www.youtube.com/watch?v=63MywJ9FYEg) | [![GAMEPLAY](https://img.youtube.com/vi/6_SWAfjujOU/0.jpg)](https://www.youtube.com/watch?v=6_SWAfjujOU)|
   
-[<b>CLICK HERE TO PLAY THE GAME</b>](https://noebernigaud.github.io/Tank3D/src/)
+# <p  align="center">[CLICK HERE TO PLAY THE GAME](https://noebernigaud.github.io/Tank3D/src/)</p>
   
 ***
 
