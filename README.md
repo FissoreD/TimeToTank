@@ -95,7 +95,7 @@ The next part was to improve the controls - up until now, the aim was donne with
 
 ## Bonuses
   
-[<img align="right" src="https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" width="200"/>](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+[<img align="right" src="https://img.youtube.com/vi/hYFZF-LxNEM/0.jpg" width="200"/>](https://www.youtube.com/watch?v=hYFZF-LxNEM)
 
 At this point, the game was starting to look like a complete game. We had gameplay with different levels and ennemies, a good-looking map, a rudimentary menu, and the tank felt pleasant to control. However, it was still lacking some fun gameplay and discovery factor. It was time to implement the bonus feature, which would make our game into a roguelike, very fitting of the theme "You are unique".
 
