@@ -6,6 +6,7 @@ import { Char } from "./char.js";
 import { scene, sceneBab } from "../babylon_start/scene.js";
 import { Bullet } from "./bullet.js";
 import { ObjectEnum } from "./objectEnum.js";
+import { remove } from "../tools/utils.js";
 
 export class GrenadeObj extends ObjectPos {
 
