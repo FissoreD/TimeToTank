@@ -364,7 +364,7 @@ export class Char extends ObjectPos {
   }
 
   applyBullForce() {
-    if (!this.bullForce || char1.life <= 0) return
+    if (!this.bullForce || scene.char1.life <= 0) return
     // this.physicsImpostor.applyForce(this.bullForce, this.shape.position)
     // this.physicsImpostor.setLinearVelocity(this.bullForce)
     this.moveTank(10, true)
@@ -408,16 +408,16 @@ function lights() {
   }
 
   gui.add(options, "Emissive", 0, 1).onChange(function (value) {
-    char1.shape.getChildMeshes().forEach(e => { if (e.material) e.material.emissiveColor = new BABYLON.Color3(value, value, value) })
+    scene.char1.shape.getChildMeshes().forEach(e => { if (e.material) e.material.emissiveColor = new BABYLON.Color3(value, value, value) })
   });
   gui.add(options, "Diffuse", 0, 1).onChange(function (value) {
-    char1.shape.getChildMeshes().forEach(e => { if (e.material) e.material.diffuseColor = new BABYLON.Color3(value, value, value) })
+    scene.char1.shape.getChildMeshes().forEach(e => { if (e.material) e.material.diffuseColor = new BABYLON.Color3(value, value, value) })
   });
   gui.add(options, "Specular", 0, 1).onChange(function (value) {
-    char1.shape.getChildMeshes().forEach(e => { if (e.material) e.material.specularColor = new BABYLON.Color3(value, value, value) })
+    scene.char1.shape.getChildMeshes().forEach(e => { if (e.material) e.material.specularColor = new BABYLON.Color3(value, value, value) })
   });
   gui.add(options, "Ambient", 0, 1).onChange(function (value) {
-    char1.shape.getChildMeshes().forEach(e => { if (e.material) e.material.ambientColor = new BABYLON.Color3(value, value, value) })
+    scene.char1.shape.getChildMeshes().forEach(e => { if (e.material) e.material.ambientColor = new BABYLON.Color3(value, value, value) })
   });
 
   // myMaterial.diffuseColor = new BABYLON.Color3(1, 0, 1);

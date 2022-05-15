@@ -2,6 +2,7 @@ import { exitPointerLoc, changeCadenceTir, isLocked, pointerLock, runRenderLoop 
 import { scene, canvas } from "./scene.js";
 import { bonusTookSound } from "../main/global_vars.js";
 import { globalProgress } from "../main/global_vars.js";
+import { BonusEnum } from "../game_objects/bonusEnum.js";
 
 import { selected_bonuses, addedObtainableBonus, chars, menuHoverSound, musicBackground } from "../main/global_vars.js";
 import { engine } from "./scene.js";

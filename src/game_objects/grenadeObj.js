@@ -4,6 +4,7 @@ import { createMaterial } from "../babylon_start/tool_babylon.js";
 import { walls, chars, barrels, grenades } from "../main/global_vars.js";
 import { Char } from "./char.js";
 import { scene } from "../babylon_start/scene.js";
+import { ObjectEnum } from "./objectEnum.js";
 
 export class GrenadeObj extends ObjectPos {
 

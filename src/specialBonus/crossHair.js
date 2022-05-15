@@ -2,6 +2,7 @@ import { SpecialBonus, SPECIAL_BONUS_ID } from "./bonusSpecial.js";
 import { getCannonPoint } from "../game_IA/shootAI.js";
 import { sceneBab } from "../babylon_start/scene.js";
 import { ShootAI } from "../game_IA/shootAI.js";
+import { chars } from "../main/global_vars.js";
 
 export class crossHair extends SpecialBonus {
 
