@@ -56,8 +56,8 @@ class Menu {
             if (this.toDisplayScenario) {
                 let text = [
                     `European Island - 1944 A.C.<br>
-                    You are in the second world war and try to stop <they>insanous villain</they> <br>
-                    from change the course of the war for their profit. <br>
+                    You are in the second world war and have to stop <they>insanous villain</they> <br>
+                    from changing the course of the war for their profit. <br>
                     This is your first mission ! Be <we> brave</we>`,
                     `Egypt - 544 B.C.<br>
                     You have passed the first stage of <we>your</we> journey and now <we>you</we> enter the Egyptian world, <br> where <we>you</we> have to collect the Egyptian statues away from <they>enemies</they>.<br> <we>Good Luck!</we>`,
