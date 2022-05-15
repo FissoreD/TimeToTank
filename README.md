@@ -83,7 +83,7 @@ The opponents' AI was then deployed, as well as multiple level objectives. One o
 
 Later on, we built levels with specific missions, such as timed levels, levels where you would have to find some items, or ennemies that could only be damaged once the player fullfil a condition. This variety in the gameplay and objectives allows the game to be less repetitive, and keep players on their toes.
 
-We also introduced the different biomes (earth, sand, and snow) to make the visual experience more diverse, and give each biome their own identity. A fun thing about the biomes is that they actually all are loaded right at the start of the game - the 2 that are not currently used are below, invisible and uninteractible. We move the biomes up and down depending on which one we need, and render only the one we're using. It kind of works like a theatre piece, where the different scenes are hidden behind the curtains waiting for their turn to be displayed.
+We also introduced the different biomes (earth, sand, and snow) to make the visual experience more diverse, and give each biome their own identity. A fun thing about the biomes is that they actually all are loaded right at the start of the game - the two that are not currently used are below, invisible and uninteractible. We move the biomes up and down depending on which one we need, and render only the one we're using. It kind of works like a theatre piece, where the different scenes are hidden behind the curtains waiting for their turn to be displayed.
   
 ***
 
@@ -101,7 +101,7 @@ At this point, the game was starting to look like a complete game. We had gamepl
 
 Special bonuses were a particularly fun stage of the development, as they made the game a lot more enjoyable. While they took a lot of time to implement, the whole engine we already built was making the whole process a lot easier, giving more space to our imagination and to testing.
 
-With 9 Special Bonuses, 5 Normal ones, and 9 Normal Bonuses associated to their special bonuses there are approximatively 5000 possible (3 parmis 9 x (7 normal bonus opportunities x 8 possible bonus)) different tanks that can be built through game. This makes the game a lot more interesting to re-play, and give sense to the theme "you are unique", as the tank you are playing by the end of the game is likely unique across all games played and all players.
+With 3 choices among the 9 different "Special" Bonuses, and 11 choices among the 5 generic "Normal" Bonuses and "Special" Bonuses level-up, there are more than 1200000 possible different tanks that can be built through a game. This makes the game a lot more interesting to re-play, and give sense to the theme "you are unique", as the tank you are playing by the end of the game is very likely unique across all games played and all players.
   
 ***
 
