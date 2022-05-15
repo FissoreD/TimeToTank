@@ -25,13 +25,13 @@ export class CharBoss extends Char {
 
         if (damage < this.health) {
             if (this.nbDmgBeforeShield <= 0) {
-                var char = new Char("mini", scene.width / 2 + this.shape.position.x + 2, scene.heitht / 2 + this.shape.position.y - 2, 0, 1, 1000, 45, 2, 1, 3, 3);
+                var char = new Char("mini", scene.width / 2 + this.shape.position.x + 2, scene.height / 2 + this.shape.position.y - 2, 0, 1, 1000, 45, 2, 1, 3, 3);
                 charsAI.push(char);
                 char.setStrategy(new guaranteedAI(char))
                 chars.push(char);
                 char.applyStrategy()
 
-                var char2 = new Char("mini", scene.width / 2 + this.shape.position.x - 2, scene.heitht / 2 + this.shape.position.y + 2, 0, 1, 1000, 45, 2, 1, 3, 3);
+                var char2 = new Char("mini", scene.width / 2 + this.shape.position.x - 2, scene.height / 2 + this.shape.position.y + 2, 0, 1, 1000, 45, 2, 1, 3, 3);
                 charsAI.push(char2);
                 char2.setStrategy(new guaranteedAI(char2))
                 chars.push(char2);

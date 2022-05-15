@@ -44,7 +44,7 @@ export class Char extends ObjectPos {
         break;
       default: break;
     }
-    super(type, -scene.width / 2 + x, Char.height / 2, -scene.heitht / 2 + y, vitesse + ((type.name == ObjectEnum.Player.name) ? 0 : (biome == "Earth" ? 0 : (biome == "Sand" ? vitesse / 4 : vitesse / 3))), angle, life);
+    super(type, -scene.width / 2 + x, Char.height / 2, -scene.height / 2 + y, vitesse + ((type.name == ObjectEnum.Player.name) ? 0 : (biome == "Earth" ? 0 : (biome == "Sand" ? vitesse / 4 : vitesse / 3))), angle, life);
 
     this.getTurretTank().rotate(BABYLON.Axis.X, -0.01)
     this.getTurretTank().rotate(BABYLON.Axis.X, +0.01)
