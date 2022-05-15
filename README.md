@@ -1,5 +1,5 @@
 ***
-# <p  align="center">[Tank 3D Game](https://noebernigaud.github.io/Tank3D/src/) <font size="4">with [*Babylon.js*](https://www.babylonjs.com/)</font><p>
+# <p  align="center">[Tank 3D Game](https://fissored.github.io/Time-To-Tank/) <font size="4">with [*Babylon.js*](https://www.babylonjs.com/)</font><p>
 ## <p  align="center">by *D.N.A. Production*<p>
 ***
 
@@ -7,7 +7,7 @@
 |:-------------------------:|:-------------------------:|
 |[![TRAILER](https://img.youtube.com/vi/63MywJ9FYEg/0.jpg)](https://www.youtube.com/watch?v=63MywJ9FYEg) | [![GAMEPLAY](https://img.youtube.com/vi/6_SWAfjujOU/0.jpg)](https://www.youtube.com/watch?v=6_SWAfjujOU)|
   
-# <p  align="center">[CLICK HERE TO PLAY THE GAME](https://noebernigaud.github.io/Tank3D/src/)</p>
+# <p  align="center">[CLICK HERE TO PLAY THE GAME](https://fissored.github.io/Time-To-Tank/)</p>
   
 ***
 
@@ -90,6 +90,8 @@ We also introduced the different biomes (earth, sand, and snow) to make the visu
 ## Controls
 
 The next part was to improve the controls - up until now, the aim was donne with the keyboard's arrow keys. You can still do it now, but we wanted to also give to the player the possibility to aim with their mouse, as it would feel much more natural, dynamic, and precise. Requesting pointerlock to capture the mouse into the game was tricky as navigators have strict standards regarding this, and we also wanted to give back the mouse to the player in menus, but we were eventually successful in its implementation.
+
+For the tank deplacement, the game uses the classic ZQSD (or WASD on Querty). Firing bullets is done either by pressing Space or by clicking with the mouse. For special bonuses, a key is displayed beside their icon to indicate what to press to use them, among E, R, and F (Azerty).
   
 ***
 
