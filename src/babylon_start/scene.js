@@ -64,7 +64,7 @@ class Scene {
     this.char1 = undefined;
 
     scene = this;
-    // engine.displayLoadingUI();
+    engine.displayLoadingUI();
     this.scene = this.createScene();
     sceneBab = this.scene;
     this.menu = new Menu()
