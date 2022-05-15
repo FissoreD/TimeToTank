@@ -143,6 +143,17 @@ class Scene {
         //   c.test.position = p
         // })
 
+        batteries.forEach(b => {
+          if (b.shape.position.y <= w.position.y + 0.2) {
+            b.isDestroyed = true
+            b.destroy()
+            current_level_dico.addBatteryDestroyed()
+            if (batteries.length <= 0) {
+              charsAI.forEach(c => c.specialBonuses.forEach(e => e.isPermanent = false))
+            }
+          }
+        })
+
         getAllMeshList(true).forEach(obj => {
           let outOfBound = (obj) => {
             return obj.position && (
@@ -244,18 +255,6 @@ class Scene {
             setTimeout(() => {
               if (!c.shape.isDisposed()) c.dispose(true, true)
             }, 5000)
-          }
-        })
-
-
-        batteries.forEach(b => {
-          if (b.shape.position.y <= w.position.y + 0.2) {
-            b.isDestroyed = true
-            b.destroy()
-            current_level_dico.addBatteryDestroyed()
-            if (batteries.length <= 0) {
-              charsAI.forEach(c => c.specialBonuses.forEach(e => e.isPermanent = false))
-            }
           }
         })
 

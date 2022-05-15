@@ -62,7 +62,7 @@ class Menu {
                     `Egypt - 544 B.C.<br>
                     You have passed the first stage of <we>your</we> journey and now <we>you</we> enter the Egyptian world, <br> where <we>you</we> have to collect the Egyptian statues away from <they>enemies</they>.<br> <we>Good Luck!</we>`,
                     `Antartica - 980 A.C.<br>
-                    This is the last stage of you mission, there are still some <they>bad tank</they> went in Antarctica wanting to melt the ice and build chemical weapon with old virus blocked in the Ice. <br>
+                    This is the last stage of your mission. Some <they>bad guys</they> went in Antarctica wanting to melt the ice to build chemical weapons with an old virus blocked in the Ice. <br>
                     <we>Win</we> this last mission and the world will be a <we>better place</we>.`
                 ]
                 let idx = ["Earth", "Sand", "Snow"].indexOf(current_level_dico.biome)

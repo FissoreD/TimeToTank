@@ -374,7 +374,7 @@ function draw_level_map(progress) {
                 //     char.applyStrategy()
                 //break;
                 case '@':
-                    var char = new CharBoss("boss", posX, posY, 0, 1, 2000, 30, 2, 1, 30, 10);
+                    var char = new CharBoss("boss", posX, posY, 0, 1, 2000, 30, 2, 1, 30);
                     charsAI.push(char);
                     char.setStrategy(new guaranteedAI(char, true, true))
                     chars.push(char);

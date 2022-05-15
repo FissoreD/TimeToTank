@@ -48,6 +48,7 @@ let levelObjectives = {
       () => bonuses.length + current_level_dico.getBonusObtained()]],
     msg: [
       "You must collect bonuses to complete this stage!",
+      "The grey walls can be destroyed by firing on them.",
       "The minimap on top-right of the screen can be really useful!"
     ]
   },

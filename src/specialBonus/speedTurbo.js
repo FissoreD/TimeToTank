@@ -14,7 +14,7 @@ class SpeedTurbo extends SpecialBonus {
             super.activate()
             createTurboParticles(this.tank.shape, this.bonusStartedDelay)
             this.oldSpeed = this.tank.speedNorme;
-            this.tank.speedNorme = this.oldSpeed + 5;
+            this.tank.speedNorme = this.oldSpeed + 6;
         }
     }
 }
