@@ -164,6 +164,9 @@ export class ObjectEnum {
         setTimeout(() => {
           document.getElementsByClassName('loadingBarMain')[0].classList.add('hide')
           engine.hideLoadingUI()
+          Array.from(document.getElementsByTagName('body')[0].children).forEach(element => {
+            element.classList.remove('bruteHide')
+          });
           runRenderLoop()
           init()
         }, 1000);
