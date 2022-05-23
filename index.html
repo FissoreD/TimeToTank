@@ -80,6 +80,12 @@
     <script src="./src/babylon_start/scene.js" type="module"></script>
 
     <link rel="shortcut icon" href="images/tankGreen.png">
+
+    <style>
+        .bruteHide {
+            opacity: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -142,7 +148,7 @@
 
         <div id="timer" style="display: none;"></div>
 
-        <div class="loadingBarMain">
+        <div id="loadingBarMain" class="loadingBarMain">
             <div class="loadingBarChild" style="width:0%"></div>
         </div>
         <br>
@@ -209,6 +215,13 @@
             </div>
             <div id="backButton" class="backButton">Back</div>
         </div>
+
+        <script>
+            Array.from(document.getElementsByTagName('body')[0].children).forEach(element => {
+                if (element.id != "loadingBarMain" && element.id != "firstFullScreen")
+                    element.classList.add('bruteHide')
+            });
+        </script>
     </body>
 
 </html>
