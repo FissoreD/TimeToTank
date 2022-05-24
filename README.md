@@ -1,5 +1,5 @@
 ***
-# <p  align="center">[Tank 3D Game](https://fissored.github.io/Time-To-Tank/) <font size="4">with [*Babylon.js*](https://www.babylonjs.com/)</font><p>
+# <p  align="center">[Tank 3D Game](https://fissored.github.io/TimeToTank/) <font size="4">with [*Babylon.js*](https://www.babylonjs.com/)</font><p>
 ## <p  align="center">by *D.N.A. Production*<p>
 ***
 <p align="center"><img src="https://zupimages.net/up/22/20/cczi.png" alt="Time to Tank" width="600" /></p>
@@ -8,7 +8,7 @@
 |:-------------------------:|:-------------------------:|
 |[![TRAILER](https://img.youtube.com/vi/63MywJ9FYEg/0.jpg)](https://www.youtube.com/watch?v=63MywJ9FYEg)<br>Click the image to see the video | [![GAMEPLAY](https://img.youtube.com/vi/6_SWAfjujOU/0.jpg)](https://www.youtube.com/watch?v=6_SWAfjujOU)<br>Click the image to see the video|
   
-# <p  align="center">[CLICK HERE TO PLAY THE GAME](https://fissored.github.io/Time-To-Tank/)</p>
+# <p  align="center">[CLICK HERE TO PLAY THE GAME](https://fissored.github.io/TimeToTank/)</p>
   
 ***
 
