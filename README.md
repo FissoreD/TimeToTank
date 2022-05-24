@@ -2,7 +2,7 @@
 # <p  align="center">[Tank 3D Game](https://fissored.github.io/Time-To-Tank/) <font size="4">with [*Babylon.js*](https://www.babylonjs.com/)</font><p>
 ## <p  align="center">by *D.N.A. Production*<p>
 ***
-<div style="text-align:center"><img src="https://zupimages.net/up/22/20/cczi.png" alt="Time to Tank" width="600" /></div>
+<p align="center"><img src="https://zupimages.net/up/22/20/cczi.png" alt="Time to Tank" width="600" /></p>
 
 | <b>TRAILER</b> | <b>GAMEPLAY</b> |
 |:-------------------------:|:-------------------------:|
