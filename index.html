@@ -127,7 +127,7 @@
             <div id="roguelike" class='button main'
                 onclick="scene.isAdventure = false; scene.menu.displayIntro(true);pointerLock()"
                 onmouseenter="scene.menu.soundHover()">
-                <span>Roguelike Mode</span>
+                <span>Hardcore Mode</span>
             </div>
             <div id="continue" class='button hide'
                 onclick="if (scene.pointerLockChange != null && Date.now() - scene.pointerLockChange < 1400) { console.log('exit pointer lock too fast!')} else {scene.menu.show(false); pointerLock();}"
